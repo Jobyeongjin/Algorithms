@@ -9,8 +9,8 @@ print(-a)
 # 입력 : 문자 1개
 # 출력 : 그 다음 문자
 x = input()
-y = ord(x) + 1
-z = chr(y)
+y = ord(x) + 1  # 특정한 문자를 아스키 코드 값으로 변환
+z = chr(y)  # 아스키 코드 값을 문자로 변환
 
 print(z)
 
@@ -49,7 +49,7 @@ print(int(a) * b)
 # 입력 : 공백으로 구분된 정수 2개
 # 출력 : 거듭제곱한 값
 x, y = input().split()
-z = int(x)**int(y)
+z = int(x) ** int(y)
 
 print(z)
 
@@ -57,7 +57,7 @@ print(z)
 # 입력 : 공백으로 구분된 실수 2개
 # 출력 : 거듭제곱한 값
 x, y = input().split()
-z = float(x)**float(y)
+z = float(x) ** float(y)
 
 print(z)
 
@@ -65,7 +65,7 @@ print(z)
 # 입력 : 공백으로 구분된 정수 2개
 # 출력 : 나눈 몫
 x, y = input().split()
-z = int(x)//int(y)
+z = int(x) // int(y)
 
 print(z)
 
@@ -82,7 +82,7 @@ print(z)
 # 출력 : 소수점 세 번째에서 반올림한 값
 a = float(input())
 
-print(round(a, 2))
+print(round(a, 2))  # round 반올림 함수로, (값, 반올림 자리)
 
 # 43.
 # 입력 : 공백으로 구분된 실수 2개
