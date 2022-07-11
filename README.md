@@ -13,6 +13,7 @@
 > - [25 ~ 26번 : 값 변환](./codeup/int.py)
 > - [32 ~ 47번 : 산술 연산](./codeup/arithmetic.py)
 > - [48 ~ 51번 : 비교 연산](./codeup/compare.py)
+> - [52 ~ 64번 : 논리 연산](./codeup/logic.py)
 
 <br />
 
