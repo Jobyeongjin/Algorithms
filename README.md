@@ -8,8 +8,9 @@
 
 ### **코드업**
 
-> - [1 ~ 8번 출력](./codeup/print.py)
-> - [9 ~ 입출력]()
+> - [1 ~ 8번 : 출력](./codeup/print.py)
+> - [9 ~ 24번 : 입출력](./codeup/input.py)
+> - [25 ~ 26번 : 값 변환](./codeup/int.py)
 
 <br />
 
