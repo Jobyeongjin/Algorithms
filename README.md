@@ -14,6 +14,7 @@
 > - [32 ~ 47번 : 산술 연산](./codeup/arithmetic.py)
 > - [48 ~ 51번 : 비교 연산](./codeup/compare.py)
 > - [52 ~ 64번 : 논리 연산](./codeup/logic.py)
+> - [65 ~ 70번 : 선택 구조](./codeup/choice.py)
 
 <br />
 
