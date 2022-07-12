@@ -15,6 +15,7 @@
 > - [48 ~ 51번 : 비교 연산](./codeup/compare.py)
 > - [52 ~ 64번 : 논리 연산](./codeup/logic.py)
 > - [65 ~ 70번 : 선택 구조](./codeup/choice.py)
+> - [71 ~ 76번 : 반복 구조](./codeup/repetition.py)
 
 <br />
 
