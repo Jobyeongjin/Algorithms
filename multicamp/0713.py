@@ -49,6 +49,28 @@ for i in word:
 
 print(result)
 
+# 또는
+word = 'apple'
+result = ''
+
+for char in 'apple':
+    if char != 'a':
+        result = result + char
+
+print(result)
+
+# 또는
+word = 'apple'
+result = ''
+
+for i in word:
+    if i == 'a':
+        continue
+    else:
+        result = result + i
+
+print(result)
+
 
 # 13. 문자열 word가 주어질 때, 해당 단어를 역순으로 뒤집은 값
 # 입력 : apple
@@ -61,13 +83,23 @@ for i in word:  # 문자열 word를 순차적으로 돌리기
 
 print(result)
 
+# 또는
+print(word[::-1])
+print(''.join(reversed(word)))
+
+# 선호하는 방식 💡
+word = 'apple'
+
+for i in range(len(word)):
+    print(word[len(word)-i-1], end='')
+
 
 # 예제 1. 숫자 n을 받아 세제곱한 결과를 반환하는 함수 cube를 정의하고, cube를 호출해 12의 세제곱 결과는?
 # 입력 : -
 # 출력 : 1728
 def cube(n):  # 큐브라는 함수 정의
     a = n ** 3  #
-    return a  # a 값을 내보내기
+    return a  # a 값을 내보내기  🚨 불필요한 a 설정
 
 
 result = cube(12)  # 큐브에 12 입력하고, 나온 결과값은 result에
@@ -84,4 +116,4 @@ def rectangle(a, b):
 
 
 result = rectangle(20, 30)
-print(result)
+print(result)  # 🚨  불필요한 result 설정
