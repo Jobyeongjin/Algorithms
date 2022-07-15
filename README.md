@@ -25,6 +25,14 @@
 > - [0712](./multicamp/0712.py)
 > - [0713](./multicamp/0713.py)
 > - [0714](./multicamp/0714.py)
+> - [0715 < 프로젝트 >]()
+>   - [00 : 텍스트 데이터 출력하기](./multicamp/project/0715/00.py)
+>   - [01 : 총 과일 갯수 기록하기](./multicamp/project/0715/01.py)
+>   - [02 : 베리로 끝나는 과일 갯수와 목록 가져오기](./multicamp/project/0715/02.py)
+>   - [03 : 과일 이름과 등장 횟수 기록하기](./multicamp/project/0715/03.py)
+>   - [04 : 영화 단일 정보](./multicamp/project/0715/04.py)
+>   - [05 : 영화 단일 정보 - 응용](./multicamp/project/0715/05.py)
+>   - [06 : 영화 다중 정보 - 활용](./multicamp/project/0715/06.py)
 
 <br />
 
