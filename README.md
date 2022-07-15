@@ -25,7 +25,7 @@
 > - [0712](./multicamp/0712.py)
 > - [0713](./multicamp/0713.py)
 > - [0714](./multicamp/0714.py)
-> - [0715 < 프로젝트 >]()
+> - [0715 💡 프로젝트 💡]()
 >   - [00 : 텍스트 데이터 출력하기](./multicamp/project/0715/00.py)
 >   - [01 : 총 과일 갯수 기록하기](./multicamp/project/0715/01.py)
 >   - [02 : 베리로 끝나는 과일 갯수와 목록 가져오기](./multicamp/project/0715/02.py)
