@@ -105,3 +105,72 @@ print('%.2f MB' % a)
 
 
 # 86.
+# 입력 : 언제까지 합을 계산할지, 정수 1개
+# 출력 : 순서대로 계속 더하다가 그 합이 정수보다 커지거나 같은 경우까지의 합
+a = int(input())
+result = 0
+i = 1
+
+while result < a:
+    result = result + i
+    i = i + 1
+
+print(result)
+
+
+# 87.
+# 입력 : 정수(1~100) 1개
+# 출력 : 1부터 입력한 정수보다 작거나 같을 때까지 1씩 증가, 3의 배수는 뺴기
+a = int(input())
+
+for i in range(1, a+1):
+    if i % 3 == 0:
+        continue
+    print(i, end=' ')
+
+
+# 88. 수 나열하기
+# 입력 : 시작 값(a), 등차 값(d), 몇 번째 수 인지를 의미하는 정수(n), 공백을 두고 입력
+# 출력 : n번째 수
+a, d, n = map(int, input().split())
+x = a
+
+for i in range(2, n+1):
+    x += d
+
+print(x)
+
+
+# 89. 수 나열하기
+# 입력 : 시작 값(a), 등비 값(r), 몇 번째 인지를 의미하는 정수(n), 공백을 두고(모두 0~10)
+# 출력 : n번째 수
+a, r, n = map(int, input().split())
+
+for i in range(1, n):
+    a = a * r
+
+print(a)
+
+
+# 90. 수 나열하기
+# 입력 : 시작 값(a), 곱할 값(m), 더할 값(d), 몇 번째 인지를 나타내는 정수(n), 공백을 두고(a, m, d는 -50~ 50, n은 10d이하 자연수)
+# 출력 : n번째 수
+a, m, d, n = map(int, input().split())
+
+for i in range(1, n):
+    a = a * m+d
+
+print(a)
+
+
+# 91. 함께 문제 푸는 날
+# 입력 : 같은 날 동시에 가입한 인원 3명이 규칙적으로 방문하는 방문 주기가 공백을 두고 입력 단, 입력값 100이하
+# 출력 : 3명이 다시 모두 함께 방문해 문제를 풀어보는 날
+a, b, c = map(int, input().split())
+
+x = 0
+while True:
+    x = x + 1
+    if x % a == 0 and x % b == 0 and x % c == 0:
+        print(x)
+        break
