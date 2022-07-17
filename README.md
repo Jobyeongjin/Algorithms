@@ -39,6 +39,7 @@
 ### **백준**
 
 > - [입출력과 사칙연산](./baekjoon/print.py)
+> - [조건문](./baekjoon/if.py)
 
 <br />
 
