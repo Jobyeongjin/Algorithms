@@ -126,3 +126,21 @@ for i in word:
 # 출력 부분
 for key in result:
     print(key, result[key])
+
+
+# 19. 숫자의 길이 구하기
+# 문제 : 양의 정수 number가 주어질 때, 숫자의 길이를 구하기
+#       양의 정수 number를 문자열로 변경하는 str() 사용 금지
+# 입력 : 123
+# 출력 : 3
+
+n = int(input())
+
+result = 0
+
+while n:
+    # n을 10으로 나눈 몫
+    n //= 10
+    result += 1
+
+print(result)

@@ -6,7 +6,17 @@
 
 <br />
 
-### **멀캠**
+#### 알고리즘 문제풀이 사이트
+
+- [코드업](https://codeup.kr/)
+- [백준](https://acmicpc.net/)
+- [프로그래머스](https://programmers.co.kr/)
+- [SWEA](https://swexpertacademy.main/main.do)
+- [해커랭크](https://hackerrank.com/)
+
+<br />
+
+### **멀캠수료과정**
 
 > - [0712](./multicamp/0712.py)
 > - [0713](./multicamp/0713.py)
@@ -19,6 +29,7 @@
 >   - [04 : 영화 단일 정보](./multicamp/project/0715/04.py)
 >   - [05 : 영화 단일 정보 - 응용](./multicamp/project/0715/05.py)
 >   - [06 : 영화 다중 정보 - 활용](./multicamp/project/0715/06.py)
+> - [0718 🚨 오류 해결 🚨](./multicamp/error.py)
 
 <br />
 
@@ -42,11 +53,3 @@
 > - [조건문](./baekjoon/if.py)
 
 <br />
-
-#### 알고리즘 문제풀이 사이트
-
-- [코드업](https://codeup.kr/)
-- [백준](https://acmicpc.net/)
-- [프로그래머스](https://programmers.co.kr/)
-- [SWEA](https://swexpertacademy.main/main.do)
-- [해커랭크](https://hackerrank.com/)
