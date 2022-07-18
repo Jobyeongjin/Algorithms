@@ -2,6 +2,7 @@
 # 입력 : apple
 # 출력 : 1
 
+import math
 word = 'apple'
 result = 0
 
@@ -138,9 +139,24 @@ n = int(input())
 
 result = 0
 
+# while n != 0: 이랑 같다!
+# 0이 되면 거짓이 되기 때문에 반복문 종료
 while n:
     # n을 10으로 나눈 몫
     n //= 10
     result += 1
 
 print(result)
+
+
+# str을 사용
+n = int(input())
+
+print(len(str(n)))
+
+
+# math 모듈 이용
+
+n = int(input())
+
+print(math.log(n, 10) + 1)
