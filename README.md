@@ -11,7 +11,7 @@
 - [코드업](https://codeup.kr/)
 - [백준](https://acmicpc.net/)
 - [프로그래머스](https://programmers.co.kr/)
-- [SWEA](https://swexpertacademy.main/main.do)
+- [SWEA](https://swexpertacademy.com/main/main.do)
 - [해커랭크](https://hackerrank.com/)
 
 <br />
@@ -51,5 +51,10 @@
 
 > - [입출력과 사칙연산](./baekjoon/print.py)
 > - [조건문](./baekjoon/if.py)
+> - [반복문](./baekjoon/for.py)
 
 <br />
+
+### **SWEA**
+
+> - [D1](./swea/d1.py)
