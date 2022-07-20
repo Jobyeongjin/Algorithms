@@ -31,6 +31,7 @@
 >   - [06 : 영화 다중 정보 - 활용](./multicamp/project/0715/06.py)
 > - [0718 🚨 오류 해결 🚨](./multicamp/error.py)
 > - [0719](./multicamp/0719.py)
+> - [0720](./multicamp/0720.py)
 
 <br />
 
