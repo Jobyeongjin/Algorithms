@@ -32,6 +32,7 @@
 > - [0718 🚨 오류 해결 🚨](./multicamp/error.py)
 > - [0719](./multicamp/0719.py)
 > - [0720](./multicamp/0720.py)
+> - [0721](./multicamp/0721.py)
 
 <br />
 
