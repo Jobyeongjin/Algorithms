@@ -33,6 +33,13 @@
 > - [0719](./multicamp/0719.py)
 > - [0720](./multicamp/0720.py)
 > - [0721](./multicamp/0721.py)
+> - [0722 💡 프로젝트 💡]()
+>   - [00 : API 문서와 requests 활용](./multicamp/project/0722/00.py)
+>   - [01 : 인기 영화 조회](./multicamp/project/0722/01.py)
+>   - [02 : 특정 조건에 맞는 인기 영화 조회](./multicamp/project/0722/02.py)
+>   - [03 : 특정 조건에 맞는 인기 영화 조회 (2)](./multicamp/project/0722/03.py)
+>   - [04 : 영화 조회 및 추천 영화 조회](./multicamp/project/0722/04.py)
+>   - [05 : 출연진 및 연출진 데이터 조회](./multicamp/project/0722/05.py)
 
 <br />
 
