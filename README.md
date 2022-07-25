@@ -40,6 +40,7 @@
 >   - [03 : 특정 조건에 맞는 인기 영화 조회 (2)](./multicamp/project/0722/03.py)
 >   - [04 : 영화 조회 및 추천 영화 조회](./multicamp/project/0722/04.py)
 >   - [05 : 출연진 및 연출진 데이터 조회](./multicamp/project/0722/05.py)
+> - [0725](./multicamp/0725.py)
 
 <br />
 
