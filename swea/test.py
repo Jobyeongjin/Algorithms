@@ -6,9 +6,7 @@ sys.stdin = open("input.txt", "r")
 # 문제풀이는 여기에
 
 
-n, x = map(int, input().split())
-a = list(map(int, input().split()))
+n = int(input())
 
-for i in a:
-    if i < x:
-        print(i, end=' ')
+for i in range(1, n + 1):
+    print('#', end='')
