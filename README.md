@@ -63,6 +63,7 @@
 > - [입출력과 사칙연산](./baekjoon/print.py)
 > - [조건문](./baekjoon/if.py)
 > - [반복문](./baekjoon/for.py)
+> - [1차원 배열](./baekjoon/arr.py)
 
 <br />
 
