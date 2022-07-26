@@ -5,14 +5,18 @@ sys.stdin = open("input.txt", "r")
 
 # 문제풀이는 여기에
 
-t = int(input())
+n = int(input())
 
-for tc in range(1, t + 1):
-    n = list(map(int, input().split()))
+for _ in range(n):
+    score = list(map(int, input().split()))
+    average = sum(score[1:]) / score[0]
 
-    result = 0
-    for i in n:
-        if i % 2 != 0:
-            result += i
+    cnt = 0
+    for i in score[1:]:
+        if i > average:
+            cnt += 1
 
-    print(f'#{tc} {result}')
+    per = (cnt / score[0]) * 100
+
+    # round 함수는 사용불가, 40.0%는 소숫점 표기가 안됨 🚨
+    print('{:.3f}%'.format(per))
