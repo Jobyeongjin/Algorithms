@@ -43,6 +43,7 @@
 > - [0725](./multicamp/0725.py) [/ 0725](./multicamp/0725_.py)
 > - [0726](./multicamp/0726.py)
 > - [0727](./multicamp/0727.py)
+> - [0728](./multicamp/0728.py)
 
 <br />
 
