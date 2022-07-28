@@ -28,7 +28,7 @@ for i in range(1, n + 1):
     a = list(map(int, str(i)))
     sum_ = i + sum(a)
 
-    ifsum_ == n:
+    if sum_ == n:
         result = i
         break
 

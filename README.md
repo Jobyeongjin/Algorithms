@@ -42,6 +42,7 @@
 >   - [05 : 출연진 및 연출진 데이터 조회](./multicamp/project/0722/05.py)
 > - [0725](./multicamp/0725.py) [/ 0725](./multicamp/0725_.py)
 > - [0726](./multicamp/0726.py)
+> - [0727](./multicamp/0727.py)
 
 <br />
 
