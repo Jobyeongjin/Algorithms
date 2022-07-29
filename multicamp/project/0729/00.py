@@ -1,10 +1,4 @@
-# 파일 불러오기
-from os import sep
-import sys
-
-sys.stdin = open("input.txt", "r")
-
-# 문제풀이는 여기에
+# 최빈수 구하기
 
 t = int(input())
 
