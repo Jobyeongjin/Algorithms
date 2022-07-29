@@ -6,16 +6,16 @@ sys.stdin = open("input.txt", "r")
 
 # 문제풀이는 여기에
 
-n = int(input())
+alpha = input().upper()
+alpha_set = list(set(alpha))
 
-hansu = 0
-for i in range(1, n + 1):
+cnt_ = []
+for i in alpha_set:
+    cnt = alpha.count(i)
+    cnt_.append(cnt)
 
-    if i < 100:
-        hansu += 1
-    else:
-        ns = list(map(int, str(i)))
-        if ns[0] - ns[1] == ns[1] - ns[2]:
-            hansu += 1
-
-print(hansu)
+max_ = max(cnt_)
+if cnt_.count(max_) >= 2:
+    print('?')
+else:
+    print(alpha_set[cnt_.index(max_)])

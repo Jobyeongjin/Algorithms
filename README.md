@@ -76,6 +76,7 @@
 > - [반복문](./baekjoon/for.py)
 > - [1차원 배열](./baekjoon/arr.py)
 > - [함수](./baekjoon/function.py)
+> - [문자열](./baekjoon/str.py)
 
 <br />
 
