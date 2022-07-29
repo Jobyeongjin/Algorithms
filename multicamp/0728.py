@@ -125,6 +125,25 @@ for _ in range(n):
 for i in sorted(check_list.keys(), reverse=True):
     print(i)
 
+# 또는
+n = int(input())
+
+logs = dict()
+for i in range(n):
+    key, value = input().split()
+    logs[key] = value
+
+list_ = []
+for key in logs:
+    if logs[key] == 'enter':
+        list_.append(key)
+
+list_.sort(reverse=True)
+
+for name in list_:
+    print(name)
+
+
 # 베스트셀러 🐳
 # 문제 : 오늘 하루 동안 팔린 책의 제목이 입력으로 들어왔을 때,
 #       가장 많이 팔린 책의 제목을 출력하는 프로그램을 작성하시오.
