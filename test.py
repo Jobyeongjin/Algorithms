@@ -6,16 +6,18 @@ sys.stdin = open("input.txt", "r")
 
 # 문제풀이는 여기에
 
-alpha = input().upper()
-alpha_set = list(set(alpha))
 
-cnt_ = []
-for i in alpha_set:
-    cnt = alpha.count(i)
-    cnt_.append(cnt)
+t = int(input())
 
-max_ = max(cnt_)
-if cnt_.count(max_) >= 2:
-    print('?')
-else:
-    print(alpha_set[cnt_.index(max_)])
+cnt = t
+for tc in range(1, t + 1):
+    word = input()
+
+    for i in range(len(word) - 1):
+        if word[i] == word[i + 1]:
+            pass
+        elif word[i] in word[i + 1:]:
+            cnt -= 1
+            break
+
+print(cnt)

@@ -1,1 +1,5 @@
-Mississipi
+4
+aba
+abab
+abcabc
+a
