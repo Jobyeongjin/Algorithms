@@ -77,6 +77,7 @@
 > - [1차원 배열](./baekjoon/arr.py)
 > - [함수](./baekjoon/function.py)
 > - [문자열](./baekjoon/str.py)
+> - [기본 수학 1](./baekjoon/math.py)
 
 <br />
 
