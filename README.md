@@ -66,6 +66,7 @@
 > - [65 ~ 70번 : 선택 구조](./codeup/choice.py)
 > - [71 ~ 76번 : 반복 구조](./codeup/repetition.py)
 > - [77 ~ 91번 : 기초 종합](./codeup/total.py)
+> - [풀이 모음 💼](./codeup/replay.py)
 
 <br />
 
