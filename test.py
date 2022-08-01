@@ -6,23 +6,21 @@ sys.stdin = open("input.txt", "r")
 # 문제풀이는 여기에
 
 
-n = int(stdin.readline())
+n = int(input())
+m = int(input())
 
-people = {}
-# 참가자 입력
-for _ in range(n):
-    name = stdin.readline()
-    if name in people:
-        people[name] += 1
-    else:
-        people[name] = 1
+sosu_list = []
+for num in range(n, m + 1):
+    if num != 1:
+        check = True
+        for i in range(2, num):
+            if num % i == 0:
+                check = False
+                break
+        if check:
+            sosu_list.append(num)
 
-# 완주자 입력
-for i in range(n - 1):
-    name = stdin.readline()
-    if people[name] == 1:
-        del people[name]
-    elif name in people:
-        people[name] -= 1
-
-print(*people)
+if len(sosu_list) > 0:
+    print(sum(sosu_list), min(sosu_list), sep='\n')
+else:
+    print(-1)

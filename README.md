@@ -80,6 +80,7 @@
 > - [함수](./baekjoon/function.py)
 > - [문자열](./baekjoon/str.py)
 > - [기본 수학 1](./baekjoon/math.py)
+> - [기본 수학 2](./baekjoon/math02.py)
 
 <br />
 
