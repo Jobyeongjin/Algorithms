@@ -32,3 +32,31 @@ for tc in range(1, 11):
 
     print(f'#{tc}', end=' ')
     print(*data[:10])
+
+# 또는
+
+t = 10
+
+for tc in range(1, t + 1):
+    origin_len = int(input())
+    origin_list = list(map(int, input().split()))
+
+    command_len = int(input())
+    command_list = input().split()
+
+    i = 0
+
+    while i < len(command_list):
+        command = command_list[i]
+        if command == 'I':
+            x = int(command_list[i + 1])
+            y = int(command_list[i + 2])
+
+            number_list = command_list[i + 3: i + 3 + y]
+
+            for number in number_list[::-1]:
+                origin_list.insert(x, int(number))
+
+        i = i + 1
+
+    print(f'#{tc}' * origin_list[:10])

@@ -1,7 +1,4 @@
 # 파일 불러오기
-import base64
-from calendar import c
-from os import sep
 import sys
 
 sys.stdin = open("input.txt", "r")
@@ -9,22 +6,23 @@ sys.stdin = open("input.txt", "r")
 # 문제풀이는 여기에
 
 
-# n 킬로그램 설탕 배달
-# 3킬로 봉지, 5킬로 봉지
-# 봉지의 최소 개수, 없으면 -1
+n = int(stdin.readline())
 
+people = {}
+# 참가자 입력
+for _ in range(n):
+    name = stdin.readline()
+    if name in people:
+        people[name] += 1
+    else:
+        people[name] = 1
 
-t = int(input())
+# 완주자 입력
+for i in range(n - 1):
+    name = stdin.readline()
+    if people[name] == 1:
+        del people[name]
+    elif name in people:
+        people[name] -= 1
 
-for tc in range(t):
-    k = int(input())  # 층수
-    n = int(input())  # 호수
-
-    # people 리스트에 1 ~ n까지 수
-    people = [i for i in range(1, n + 1)]  # 0층
-
-    for _ in range(k):
-        for j in range(1, n):
-            people[j] += people[j - 1]  # 아래층 인덱스 값 더하기
-
-    print(people[-1])
+print(*people)
