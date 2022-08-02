@@ -53,6 +53,7 @@
 >   - [신용카드 만들기 2](./multicamp/project/0729/06.py)
 >   - [암호문 1](./multicamp/project/0729/07.py)
 > - [0801](./multicamp/0801.py)
+> - [0802](./multicamp/0802.py)
 
 <br />
 
