@@ -448,7 +448,7 @@ for i in range(1, t + 1):
     print(f'{i} {distance}')
 
 
-# 1970. 쉬운 거스름돈
+# 1970. 쉬운 거스름돈 💡
 
 # 돈 리스트
 coins = [50000, 10000, 5000, 1000, 500, 100, 50, 10]
@@ -469,3 +469,62 @@ for tc in range(1, t + 1):
     print(f'#{tc}')
     # 리스트를 문자열로 변환하는 join 함수 사용
     print(' '.join(list(map(str, result))))
+
+
+# 1945. 간단한 소인수분해 💡
+# 문제 : N=2a x 3b x 5c x 7d x 11e
+#       N이 주어질 때 a, b, c, d, e 를 출력하라.
+
+# 소인수분해 💭
+# - 자연수를 소인수들의 곱으로 표현하는 것
+# - 나누기를 거꾸로, 수와 몫을 소수로 나눔, 계속 반복해서 나온 소인수들을 곱하기
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n = int(input())
+
+    a = 0
+    b = 0
+    c = 0
+    d = 0
+    e = 0
+    while n != 1:
+        if n % 2 == 0:
+            a += 1
+            n = n / 2
+        elif n % 3 == 0:
+            b += 1
+            n = n / 3
+        elif n % 5 == 0:
+            c += 1
+            n = n / 5
+        elif n % 7 == 0:
+            d += 1
+            n = n / 7
+        elif n % 11 == 0:
+            e += 1
+            n = n / 11
+
+    print(f'#{tc} {a} {b} {c} {d} {e}')
+
+
+# 간단한 압축 풀기 💡
+# 문제 : 원본 문서는 너비가 10인 여러 줄의 문자열로 이루어져 있다. 문자열은 마지막 줄을 제외하고 빈 공간 없이 알파벳으로 채워져 있고 마지막 줄은 왼쪽부터 채워져 있다.
+#       이 문서를 압축한 문서는 알파벳과 그 알파벳의 연속된 개수로 이루어진 쌍들이 나열되어 있다. (예 : A 5    AAAAA)
+#       압축된 문서를 입력 받아 원본 문서를 만드는 프로그램을 작성하시오.
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n = int(input())
+
+    word = ''
+    for i in range(1, n + 1):
+        n, m = input().split()
+        word += n * int(m)
+
+    print(f'#{tc}')
+
+    for i in range(0, len(word), 10):  # 0부터 문자길이까지, 10칸씩 (0, 10, 20)
+        print(word[i:i + 10])
