@@ -1,8 +1,7 @@
-7
-ENTER
-pjshwa
-chansol
-chogahui05
-ENTER
-pjshwa
-chansol
+6
+8 4
+13 19
+8 10
+18 18
+8 25
+13 16
