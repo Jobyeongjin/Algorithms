@@ -528,3 +528,68 @@ for tc in range(1, t + 1):
 
     for i in range(0, len(word), 10):  # 0부터 문자길이까지, 10칸씩 (0, 10, 20)
         print(word[i:i + 10])
+
+
+# 1948. 날짜 계산기 💡
+# 문제 : 월 일로 이루어진 날짜를 2개 입력 받아, 두 번째 날짜가 첫 번째 날짜의 며칠째인지 출력하는 프로그램을 작성하라.
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    m1, d1, m2, d2 = map(int, input().split())
+
+    days = {1: 31, 2: 28, 3: 31, 4: 30, 5: 31, 6: 30,
+            7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31}
+
+    result = 0
+    for i in range(m1, m2):
+        if i == m1:
+            result += days[i] - d1 + 1
+        else:
+            result += days[i]
+
+    result += d2
+
+    print(f'#{tc} {result}')
+
+
+# 1959. 두 개의 숫자열 🚨 💡
+# 문제 : 서로 마주보는 숫자들을 곱한 뒤 모두 더할 때 최댓값을 구하라.
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n, m = map(int, input().split())
+    a = list(input().split())
+    b = list(input().split())
+
+    max_value = 0
+    for i in range(abs(n - m) + 1):
+
+        value = 0
+        for j in range(min(n, m)):
+            if len(a) > len(b):
+                value += int(a[j + i]) * int(b[j])
+            elif len(a) < len(b):
+                value += int(a[j]) * int(b[j + i])
+            else:
+                value += int(a[j]) * int(b[j])
+
+        if value > max_value:
+            max_value = value
+
+    print(f'#{tc} {max_value}')
+
+
+# 1966. 숫자를 정렬하자 💡
+# 문제 : 숫자열을 오름차순으로 정렬
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n = int(input())
+    numbers = list(map(int, input().split()))
+
+    numbers.sort()
+    print(f'#{tc}', end=' ')
+    print(*numbers)
