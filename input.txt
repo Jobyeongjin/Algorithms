@@ -1,4 +1,3 @@
-3
-89 92 77
-89 92 63
-89 63 77
+2
+I am happy today
+We want to win the first prize
