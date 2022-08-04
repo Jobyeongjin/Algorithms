@@ -57,6 +57,32 @@ for i in range(n):
 
     print(total)  # 각각의 플레이어 점수
 
+# 또는
+n = int(input())
+
+list_ = [list(map(int, input().split())) for _ in range(n)]
+
+score_list = [0] * n
+
+col_list = []
+for x in range(3):
+    col = []
+    for y in range(n):
+        col.append(list_[y][x])
+
+    col_list.append(col)
+
+socre_list = [0] * n
+for x in range(3):
+    col = col_list[x]
+    for y in range(n):
+        score = col[y]
+        if col.count(score) == 1:
+            score_list[y] += score
+
+for i in score_list:
+    print(i)
+
 
 # 2차원 배열의 합 🐳
 # 문제 : 2차원 배열에 저장되어 있는 수의 합 구하기
@@ -77,6 +103,30 @@ for _ in range(int(input())):
                 hap += stack[i][j]
 
     print(hap)
+
+# 또는
+input = sys.stdin.readline
+
+n, m = map(int, input().split())
+
+list_ = [list(map(int, input().split())) for _ in range(n)]
+
+z = int(input())
+
+for i in range(z):
+    i, j, x, y = map(int, input().split())
+
+    i -= 1
+    j -= 1
+    x -= 1
+    y -= 1
+
+    sum_ = 0
+    for r in range(i, x + 1):
+        for c in range(j, y + 1):
+            sum_ += list_[r][c]
+
+    print(sum_)
 
 
 # 하얀 칸 🐳

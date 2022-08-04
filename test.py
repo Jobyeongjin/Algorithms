@@ -8,18 +8,27 @@ input = stdin.readline
 # 문제풀이는 여기에
 
 
-coins = [50000, 10000, 5000, 1000, 500, 100, 50, 10]
+n = int(input())
 
-t = int(input())
+list_ = [list(map(int, input().split())) for _ in range(n)]
 
-for tc in range(1, t + 1):
-    n = int(input())
+score_list = [0] * n
 
-    result = []
-    for coin in coins:
-        a = n // coin
-        result.append(a)
-        n -= a * coin
+col_list = []
+for x in range(3):
+    col = []
+    for y in range(n):
+        col.append(list_[y][x])
 
-    print(f'#{tc}')
-    print(*list(map(str, result)))
+    col_list.append(col)
+
+socre_list = [0] * n
+for x in range(3):
+    col = col_list[x]
+    for y in range(n):
+        score = col[y]
+        if col.count(score) == 1:
+            score_list[y] += score
+
+for i in score_list:
+    print(i)
