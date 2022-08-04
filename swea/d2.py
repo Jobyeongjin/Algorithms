@@ -129,17 +129,11 @@ for tc in range(1, t + 1):
 t = int(input())
 
 for tc in range(1, t + 1):
-    # 문자열인 a
-    a = input()
+    word = input()
 
-    # 만일 a랑 거꾸로 한 a가 같다면
-    if a == a[::-1]:
-        # 결과는 1
+    result = 0
+    if word == word[::-1]:
         result = 1
-    # else를 안쓰고 결과값을 애초에 0으로 설정할 수도 있다!
-    else:
-        # 그게 아니라면 0
-        result = 0
 
     print(f'#{tc} {result}')
 
@@ -330,19 +324,34 @@ for tc in range(1, t + 1):
     # 리스트로 접근
     n = list(map(int, input().split()))
 
-    # 순차적으로 정렬
     n.sort()
-    # 최소값은 첫번째 원소
-    min = n[0]
-    # 최대값은 마지막 원소
-    max = n[-1]
-    # 최솟값, 최댓값 삭제
-    n.remove(min)
-    n.remove(max)
-    # 총 합과 총 길이(원소 개수) 나누기
+    min_ = n[0]
+    max_ = n[-1]
+
+    n.remove(min_)
+    n.remove(max_)
     result = sum(n) / len(n)
-    # round() 함수로 소숫점 제거
+
     print(f'#{tc} {round(result)}')
+
+# 또는
+t = int(input())
+
+for tc in range(1, t + 1):
+    numbers = list(map(int, input().split()))
+
+    max_, min_ = max(numbers), min(numbers)
+
+    arr = []
+    for i in numbers:
+        if i == max_ or i == min_:
+            i = 0
+        else:
+            arr.append(i)
+
+    result = round(sum(arr) / len(arr))
+
+    print(f'#{tc} {result}')
 
 
 # 1983. 조교 성적 매기기 💡
@@ -362,25 +371,21 @@ t = int(input())
 for tc in range(1, t + 1):
     # 학생 수 n, 학점이 궁금한 학생 번호 k
     n, k = map(int, input().split())
-    # 학생들의 총점 리스트
-    data = []
-    # 평점
+
     RANK = ['A+', 'A0', 'A-', 'B+', 'B0', 'B-', 'C+', 'C0', 'C-', 'D0']
 
+    total_score = []  # 학생들의 총점 리스트
     for i in range(n):
-        # 시험 및 과제 점수
         a, b, c = map(int, input().split())
-        # 총점 구하기
         sum = (a * 0.35) + (b * 0.45) + (c * 0.20)
-        data.append(sum)
-    # 구하고자 하는 학생 점수
-    score = data[k - 1]
-    # 내림차순으로 정렬
-    data.sort(reverse=True)
-    # 구하고자 하는 학생의 점수를 인덱스로 접근하고
+        total_score.append(sum)
+
+    student = total_score[k - 1]
+    total_score.sort(reverse=True)
+    # 구하고자 하는 학생의 점수를 인덱스로 접근
     # 동일한 평점을 부여받은 10명의 학생들은 나누기
-    result = data.index(score) // (n//10)
-    # 해당 랭크 출력
+    result = total_score.index(student) // (n // 10)
+
     print(f'#{tc} {RANK[result]}')
 
 
@@ -593,3 +598,35 @@ for tc in range(1, t + 1):
     numbers.sort()
     print(f'#{tc}', end=' ')
     print(*numbers)
+
+
+# 2001. 파리 퇴치 💡
+# 문제 : 해당 영역에 존재하는 파리를 촤대한 많이 잡기
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n, m = map(int, input().split())
+
+    arr = [list(map(int, input().split())) for _ in range(n)]
+
+    fly = []
+    for i in range(n - 1):
+        for j in range(n - 1):
+
+            total = 0
+            # 파리 잡기
+            for x in range(m):
+                for y in range(m):
+                    if i + x in range(n) and j + y in range(n):
+                        total += arr[i + x][j + y]
+
+            fly.append(total)
+
+    # 최대값 구하기
+    max_ = fly[0]
+    for i in fly:
+        if i > max_:
+            max_ = i
+
+    print(f'#{tc} {max_}')
