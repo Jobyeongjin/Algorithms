@@ -2,7 +2,7 @@ import sys
 
 sys.stdin = open("_조교의성적매기기.txt")
 
-#
+# 조교의 성적 매기기
 
 t = int(input())
 

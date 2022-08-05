@@ -2,7 +2,7 @@ import sys
 
 sys.stdin = open("_암호생성기.txt")
 
-#
+# 3. 암호생성기
 
 for _ in range(10):
     t = int(input())

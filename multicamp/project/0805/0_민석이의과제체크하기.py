@@ -2,7 +2,7 @@ import sys
 
 sys.stdin = open("_민석이의과제체크하기.txt")
 
-#
+# 민석이의 과제 체크하기
 t = int(input())
 
 for tc in range(1, t + 1):

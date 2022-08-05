@@ -2,7 +2,7 @@ import sys
 
 sys.stdin = open("_괄호짝짓기.txt")
 
-#
+# 괄호 짝짓기
 
 for tc in range(1, 11):
     n = int(input())

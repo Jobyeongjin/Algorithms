@@ -56,7 +56,7 @@
 > - [0802](./multicamp/0802.py)
 > - [0803](./multicamp/0803.py)
 > - [0804](./multicamp/0804.py)
-> - [0805 💡 모의고사 💡]()
+> - [0805 💡 모의고사 💡](./multicamp/project/0805/total.py)
 >   - [민석이의 과제 체크하기](./multicamp/project/0805/0_민석이의과제체크하기.py)
 >   - [조교의 성적 매기기](./multicamp/project/0805/1_조교의성적매기기.py)
 >   - [임호생성기](./multicamp/project/0805/2_암호생성기.py)

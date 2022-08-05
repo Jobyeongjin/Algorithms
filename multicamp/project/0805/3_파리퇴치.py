@@ -2,7 +2,7 @@ import sys
 
 sys.stdin = open("_파리퇴치.txt")
 
-#
+# 4. 파리퇴치
 
 t = int(input())
 
