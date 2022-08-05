@@ -44,7 +44,7 @@
 > - [0726](./multicamp/0726.py)
 > - [0727](./multicamp/0727.py)
 > - [0728](./multicamp/0728.py)
-> - [0729 💡 코딩테스트 💡]()
+> - [0729 💡 모의고사 💡]()
 >   - [최빈수 구하기](./multicamp/project/0729/00.py)
 >   - [소득불균형](./multicamp/project/0729/01.py)
 >   - [문자열의 거울상](./multicamp/project/0729/02.py)
@@ -56,6 +56,13 @@
 > - [0802](./multicamp/0802.py)
 > - [0803](./multicamp/0803.py)
 > - [0804](./multicamp/0804.py)
+> - [0805 💡 모의고사 💡]()
+>   - [민석이의 과제 체크하기](./multicamp/project/0805/0_민석이의과제체크하기.py)
+>   - [조교의 성적 매기기](./multicamp/project/0805/1_조교의성적매기기.py)
+>   - [임호생성기](./multicamp/project/0805/2_암호생성기.py)
+>   - [파리퇴치](./multicamp/project/0805/3_파리퇴치.py)
+>   - [어디에 단어가 들어갈 수 있을까](./multicamp/project/0805/4_어디에단어가들어갈수있을까.py)
+>   - [괄호 짝짓기](./multicamp/project/0805/5_괄호짝짓기.py)
 
 <br />
 
