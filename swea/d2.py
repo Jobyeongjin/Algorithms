@@ -7,6 +7,7 @@
 #       (t는 테스트 케이스의 번호를 의미하며 1부터 시작한다.)
 
 # 테스트 케이스 t
+from base64 import b64decode
 t = int(input())
 
 # 테스트 케이스만큼 반복
@@ -630,3 +631,74 @@ for tc in range(1, t + 1):
             max_ = i
 
     print(f'#{tc} {max_}')
+
+
+# 1285. 아름이의 돌 던지기 💡
+# - C문제지만 파이썬으로 구현해보기
+# 문제 : 최대한 0에 가까운 위치에 돌을 던지고, 0과 돌의 거리 차이와 몇 명인지를 구하기
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    n = int(input())
+    stone = map(int, input().split())
+
+    value = [abs(i) for i in stone]  # 절대값 리스트 생성
+    min_ = min(value)  # 0이랑 제일 가까운 건 결국 최소값
+
+    cnt = 0
+    for i in value:  # 같은 수가 있는지 확인
+        if i == min_:
+            cnt += 1
+
+    print(f'#{tc} {min_} {cnt}')
+
+
+# 1928. Base64 Decoder
+# 문제 : 입력으로 Base64 Encoding 된 String 이 주어졌을 때, 해당 String 을 Decoding 하여, 원문을 출력하는 프로그램을 작성
+
+# from base64 import b64decode
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    word = input()
+    answer = b64decode(word).decode('UTF-8')
+
+    print(f'#{tc} {answer}')
+
+
+# 1954. 달팽이 숫자 🚨
+# 문제 : 시계방향으로 달팽이 숫자 만들기
+
+t = int(input())
+# 우 하 좌 상
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1, 0]
+
+for tc in range(1, t + 1):
+    n = int(input())
+
+    snail = [[0] * n for _ in range(n)]
+    # 초기 좌표 및 회전 방향 0
+    x, y = 0, 0
+    rotate = 0
+
+    for i in range(1, n * n + 1):
+        snail[x][y] = i  # 순차적으로 좌표 입력
+        x += dx[rotate]
+        y += dy[rotate]
+        # 좌표가 리스트 범위 밖이거나 이미 값이 부여된 경우
+        if not 0 <= x < n or not 0 <= y < n or snail[x][y] != 0:
+            x -= dx[rotate]
+            y -= dy[rotate]
+            rotate = (rotate + 1) % 4
+            x += dx[rotate]
+            y += dy[rotate]
+
+    print(f'#{tc}')
+
+    for i in range(n):
+        for j in range(n):
+            print(snail[i][j], end=' ')
+        print()
