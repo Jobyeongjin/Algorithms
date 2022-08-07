@@ -10,10 +10,20 @@ input = sys.stdin.readline
 
 # 문제풀이는 여기에
 
-N = int(input())
 
-members = [list(input().split()) for _ in range(N)]
-members.sort(key=lambda x: int(x[0]))
+N, M = map(int, input().split())
 
-for i in members:
-    print(i[0], i[1])
+
+id = {}
+name = {}
+for i in range(1, N + 1):
+    pokemon = input().strip()
+    id[i] = pokemon
+    name[pokemon] = i
+
+for _ in range(M):
+    quest = input().strip()
+    if quest in name:
+        print(name[quest])
+    else:
+        print(id[int(quest)])
