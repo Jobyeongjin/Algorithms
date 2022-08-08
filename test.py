@@ -13,7 +13,6 @@ input = sys.stdin.readline
 
 N, M = map(int, input().split())
 
-
 id = {}
 name = {}
 for i in range(1, N + 1):

@@ -72,3 +72,25 @@ for i in range(1, t + 1):
             result[j][k] = sum_
 
     print(f'#{i} {max(map(max, result))}')
+
+
+# 또는
+t = int(input())
+
+for tc in range(1, t + 1):
+    N, M = map(int, input().split())
+    grid = [list(map(int, input().split())) for _ in range(N)]
+
+    fly = 0
+    for i in range(N - M + 1):
+        for j in range(N - M + 1):
+
+            total = 0
+            for x in range(i, i + M):
+                for y in range(j, j + M):
+                    total += grid[x][y]
+
+            if total > fly:
+                fly = total
+
+    print(f'#{tc} {fly}')
