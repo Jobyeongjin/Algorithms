@@ -1,32 +1,5 @@
-26 5
-Bulbasaur
-Ivysaur
-Venusaur
-Charmander
-Charmeleon
-Charizard
-Squirtle
-Wartortle
-Blastoise
-Caterpie
-Metapod
-Butterfree
-Weedle
-Kakuna
-Beedrill
-Pidgey
-Pidgeotto
-Pidgeot
-Rattata
-Raticate
-Spearow
-Fearow
-Ekans
-Arbok
-Pikachu
-Raichu
-25
-Raichu
-3
-Pidgey
-Kakuna
+4 6
+101111
+101010
+101011
+111011

@@ -63,6 +63,7 @@
 >   - [파리퇴치](./multicamp/project/0805/3_파리퇴치.py)
 >   - [어디에 단어가 들어갈 수 있을까](./multicamp/project/0805/4_어디에단어가들어갈수있을까.py)
 >   - [괄호 짝짓기](./multicamp/project/0805/5_괄호짝짓기.py)
+> - [0808](./multicamp/0808.py)
 
 <br />
 
