@@ -224,6 +224,39 @@ for y in range(N):
 if answer == 0:
     print(answer)
 
+# 또는
+N = 19
+board = [list(map(int, input().split())) for _ in range(N)]
+# 좌상 좌 우상 우
+dx = [-1, 0, 1, 1]
+dy = [1, 1, 1, 0]
+
+for i in range(N):
+    for j in range(N):
+        if board[i][j] != 0:
+            for m in range(4):
+                cnt = 1
+                nx = i + dx[m]
+                ny = j + dy[m]
+
+                while 0 <= nx < 19 and 0 <= ny < 19 and board[nx][ny] == board[i][j]:
+                    cnt += 1
+
+                    if cnt == 5:
+                        if 0 <= i - dx[m] < 19 and 0 <= j - dy[m] < 19 and board[i - dx[m]][j - dy[m]] == board[i][j]:
+                            break
+                        if 0 <= nx + dx[m] < 19 and 0 <= ny + dy[m] < 19 and board[nx + dx[m]][ny + dy[m]] == board[i][j]:
+                            break
+
+                        print(board[i][j])
+                        print(i + 1, j + 1)
+                        sys.exit(0)
+
+                    nx += dx[m]
+                    ny += dy[m]
+
+print(0)
+
 
 # 미로 탐색 🐳 🚨
 # 문제 : 지나야 하는 최소의 칸 수 구하기
