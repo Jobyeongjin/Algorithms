@@ -1,4 +1,5 @@
 from collections import deque
+from collections import Counter
 
 
 def pprint(list_):
@@ -80,7 +81,22 @@ print(*queue)
 # 가장 많은 글자 🐳 🚨
 # 문제 : 문장에서 가장 많이 나오는 글자 찾기
 
-# 값은 동일하지만 실패
+S = input().replace('\n', '').replace(' ', '')
+list_ = Counter(S).most_common()
+char = []
+freq = []
+
+for c, f in list_:
+    freq.append(f)
+
+for i in range(freq.count(freq[0])):
+    char.append(list_[i][0])
+
+char.sort()
+
+print(*char, sep='')
+
+# 또는
 alpha = {
     'a': 0,
     'b': 0,
@@ -111,7 +127,7 @@ alpha = {
 }
 
 for _ in range(14):
-    page = input().strip()
+    page = input().replace('\n', '').replace(' ', '')  # 🚨 입력에서 문제가 있었음
 
     for i in page:  # 입력받은 문자열 하나씩 딕셔너리에 있는지 확인
         if i in alpha:
@@ -219,9 +235,66 @@ for i in range(R - 1):  # 인덱스 벗어나지 않게 설정
 
 print(all, one, two, three, four, sep='\n')
 
+# 또는
+R, C = map(int, input().split())
+
+parking = [list(input()) for _ in range(R)]
+delta = ((0, 0), (1, 0), (0, 1), (1, 1))
+truck = []
+crush = [0, 0, 0, 0, 0]
+
+for r in range(R - 1):
+    for c in range(C - 1):
+        for x, y in delta:
+            truck.append(parking[r + x][c + y])
+
+        if truck.count('#') == 0:
+            crush[truck.count('X')] += 1
+
+        truck.clear()
+
+print(*crush, sep='\n')
+
 
 # 바이러스 🐳 🚨
 # 문제 : 바이러스에 걸린 컴퓨터와 인접한 컴퓨터의 개수 구하기
+
+V = int(input())
+E = int(input())
+
+JOIN = [[] for _ in range(V + 1)]
+visited = []
+for _ in range(E):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+
+def DFS(v):
+    # 깊이우선탐색
+    visited.append(v)
+    for i in range(len(JOIN[v])):
+        if JOIN[v][i] not in visited:
+            DFS(JOIN[v][i])
+
+    return
+
+
+def BFS(v):
+    # 너비우선탐색
+    queue = deque()
+    queue.append(v)
+    visited.append(v)
+    while queue:
+        p = queue.popleft()
+        for i in range(len(JOIN[p])):
+            if JOIN[p][i] not in visited:
+                queue.append(JOIN[p][i])
+                visited.append(JOIN[p][i])
+
+
+BFS(1)
+print(visited)
 
 
 # 값은 동일하지만 실패
