@@ -1,3 +1,8 @@
+from collections import deque
+import sys
+
+input = sys.stdin.readline
+
 # R2 🐳
 # 문제 : R1 + R2, 두 수의 평균 S, S와 R1이 주어질 때 R2 구하기
 
@@ -152,10 +157,104 @@ answer = paper.split(word)  # 구분자를 순차적으로 나눔
 print(len(answer) - 1)
 
 
-# 오목 🐳
+# 오목 🐳 🚨
 # 문제 : 오목, 검은색이 이기면 1, 흰색일 경우 2, 승부가 안났으면 0
 #      가장 왼쪽에 있는 바둑알의 가로줄 번호, 세로줄 번호 출력
 
+# 우 하 우상 우하
+dx = [0, 1, -1, 1]
+dy = [1, 0, 1, 1]
+BLACK = 1
+WHITE = 2
+N = 19
 
-# 미로 탐색 🐳
+# 오목판 입력
+board = []
+for _ in range(N):
+    row = list(map(int, input().split()))
+    board.append(row)
+# 무승부가 발생했을 때 출력하기 위한 값
+answer = 0
+# 이중 반복문
+for y in range(N):
+    for x in range(N):
+        # 검은색돌이나 흰색돌일때만 델타 탐색을 수행
+        if board[y][x] == 1 or board[y][x] == 2:
+            # 델타 탐색
+            for d in range(4):
+                # 방향이 바뀔 때마다 동일한 색의 돌의 개수 초기화
+                cnt = 1
+                # 다음 좌표 탐색
+                ny = y + dy[d]
+                nx = x + dx[d]
+
+                while True:
+                    # 인덱스 조건, 범위를 벗어나면 탈출
+                    if not(-1 < ny < N and -1 < nx < N):
+                        break
+                    # 같은색 돌인지 확인, 다른 색 돌이면 탈출
+                    if board[ny][nx] != board[y][x]:
+                        break
+                    # 같은 값이고 범위를 벗어나지 않으면 같은 색 돌의 수 + 1
+                    cnt += 1
+                    # 같은 방향으로 다음 좌표를 탐색
+                    ny = y + dy[d]
+                    nx = x + dx[d]
+
+                if cnt == 5:
+                    # 이전 좌표
+                    # 기준 좌표(y, x)에서 델타 값을 마이너스
+                    prev_y = y - dy[d]
+                    prev_x = x - dx[d]
+                    # 육목인지 판단
+                    # 조건 1. 이전좌표가 범위를 벗어나면 오목
+                    # if not -1 < prev_y < N and -1 < prev_x < N:
+                    # 조건 2. 기준 좌표의 값과 이전 좌표의 값이 다르면 오목
+                    # if board[y][x] != board[prev_y][prev_x]:
+
+                    # 조건 1과 조건 2를 만족하면 오목이 완성
+                    if not (-1 < prev_y < N and -1 < prev_x < N) or board[y][x] != board[prev_y][prev_x]:
+                        # 현재 돌 색 출력
+                        print(board[y][x])
+                        # 현재 돌의 좌표를 출력
+                        print(y + 1, x + 1)
+                        # 승패가 결정났기 때문에 answer 값 출력 X
+                        answer = board[y][x]
+
+if answer == 0:
+    print(answer)
+
+
+# 미로 탐색 🐳 🚨
 # 문제 : 지나야 하는 최소의 칸 수 구하기
+
+def bfs(x, y):
+    q = deque([(0, 0)])
+
+    while q:
+        x, y = q.popleft()
+
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+                continue
+
+            if grid[nx][ny] == 0:
+                continue
+
+            if grid[nx][ny] == 1:
+                grid[nx][ny] = grid[x][y] + 1
+                q.append((nx, ny))
+
+    return grid[N - 1][M - 1]
+
+
+N, M = map(int, input().split())
+grid = [list(map(int, input().strip())) for _ in range(N)]
+# 상 하 좌 우
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
+
+print(bfs(0, 0))

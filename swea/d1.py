@@ -21,6 +21,12 @@ t = int(input())
 for i in range(0, t + 1):
     print(t - i, end=' ')
 
+# 또는
+N = int(input())
+numbers = [i for i in range(N + 1)]
+numbers.sort(reverse=True)
+print(*numbers)
+
 
 # 2071. 평균값 구하기
 # 입력 : 가장 첫 줄에는 테스트 케이스의 개수 T가 주어지고, 그 아래로 각 테스트 케이스가 주어짐
