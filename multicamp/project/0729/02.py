@@ -29,6 +29,9 @@ for tc in range(1, t + 1):
 
     arr = ''
     reverse_ = alpha[::-1]
-
+    # 딕셔너리를 선언하고 arr에 해당 값 추가
     d = {'b': 'd', 'd': 'b', 'p': 'q', 'q': 'p'}
-    arr += d.get(i)
+    for i in reverse_:
+        arr += d.get(i)
+
+    print(f'#{tc} {arr}')

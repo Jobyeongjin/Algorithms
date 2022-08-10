@@ -25,3 +25,22 @@ for tc in range(1, t + 1):
     for i in range(10):
         if (total + i) % 10 == 0:  # 최종 더한 값에서 10으로 나눴을 때 떨어지는 수라면 출력
             print(f'#{tc} {i}')
+
+
+# 또는
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    card = list(input().split())
+
+    total = 0
+    for i in range(len(card)):
+        if i % 2 == 0:
+            total += int(card[i]) * 2
+        else:
+            total += int(card[i])
+
+    for i in range(10):
+        if (total + i) % 10 == 0:
+            print(f'#{tc} {i}')
