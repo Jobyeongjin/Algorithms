@@ -15,29 +15,33 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
+T = int(input())
 N, M = map(int, input().split())
+J = int(input())
 
-JOIN = [[] for _ in range(N + 1)]
-for _ in range(M):
+JOIN = [[] for _ in range(T + 1)]  # 인접 리스트 생성
+for i in range(J):
     v1, v2 = map(int, input().split())
     JOIN[v1].append(v2)
     JOIN[v2].append(v1)
 
-visited = [0] * (N + 1)
+visited = [0] * (T + 1)  # 방문 여부 확인
+
+print(JOIN)
 
 
 def DFS(v):
-    visited[v] = 1
+    print(v)
+    for i in JOIN[v]:  # 확인하고 싶은 수와 인접한 수 반복
+        if visited[i] == 0:
+            visited[i] = visited[v] + 1  # 인접 정점 = 확인 정점의 인덱스 값 + 1
+            print(visited[i], visited[v])
+            DFS(i)
 
-    for d in JOIN[v]:
-        if not visited[d]:
-            DFS(d)
 
+DFS(N)  # 확인하고 싶은 수 N
 
-cnt = 0
-for i in range(1, N + 1):
-    if not visited[i]:
-        DFS(i)
-        cnt += 1
-
-print(cnt)
+if visited[M] > 0:
+    print(visited[M])
+else:
+    print(-1)
