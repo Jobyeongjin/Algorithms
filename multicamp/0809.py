@@ -139,6 +139,30 @@ for i in alpha:  # 딕셔너리 키 반복
     if alpha[i] == answer:  # 밸류 값이 동일하다면 출력
         print(i, end='')
 
+# 또는
+
+dict_ = {}  # 문자를 카운팅하는 로직
+while True:
+    try:
+        input_ = input()
+        input_ = input_.replace(' ', '')
+
+        for char in input_:  # 문자 개수 카운팅
+            if char not in dict_:
+                dict_[char] = 1
+            else:
+                dict_[char] += 1
+
+    except:
+        break
+# 딕셔너리 정렬
+sorted_dict = sorted(dict_.items(), key=lambda x: (-x[1], x[0]))
+
+max_ = sorted_dict[0][1]
+for char, count in sorted_dict:
+    if max_ == count:
+        print(char)
+
 
 # 가장 큰 금민수 🐳-
 # 문제 : 4와 7로 이루어진 가장 큰 수 구하기
@@ -151,6 +175,25 @@ while True:  # 입력받은 값을 거꾸로 체크하면서 4와 7의 총 개�
         break
 
     N -= 1
+
+# 또는
+
+N = int(input())
+
+max_ = 4  # 초기값 설정
+for number in range(N + 1):
+    string_number = str(number)
+
+    for char_number in string_number:
+        # 각 자릿수가 4 또는 7이 아니면 반복하지 않는다
+        if not (char_number == '4' or char_number == '7'):
+            break
+    # for문이 정상적으로 다 완료되면 else를 실행
+    # break를 만나지 않으면 실행
+    else:
+        max_ = int(string_number)  # 최대값 갱신
+
+print(max_)
 
 
 # 무방향 그래프 표현하기 🐳
@@ -282,7 +325,7 @@ for r in range(R):
             nr = r + dr[d]
             nc = c + dc[d]
             # 조건 1. 범위를 벗어나지 않는다.
-            if not (-1 < nc < R and -1 < nc < C):
+            if not (-1 < nr < R and -1 < nc < C):
                 break
             # 조건 2. 탐색 좌표에 빌딩이 있으면 안된다.
             if parking[nr][nc] == BUILDING:
