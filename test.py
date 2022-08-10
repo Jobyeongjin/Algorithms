@@ -15,42 +15,47 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-N = 19
-board = [list(map(int, input().split())) for _ in range(N)]
+dr = [0, 1, 1]
+dc = [1, 1, 0]
+BUILDING = "#"
+CAR = "X"
+VOID = "."
 
-dx = [0, 1, -1, 1]
-dy = [1, 0, 1, 1]
-answer = 0
-for y in range(N):
-    for x in range(N):
-        if board[y][x] == 1 or board[y][x] == 2:
-            for d in range(4):
-                cnt = 1
+R, C = list(map(int, input().split()))
 
-                ny = y + dy[d]
-                nx = x + dx[d]
+list_ = []
+for _ in range(R):
+    # 숫자 X 문자 O
+    # 공백 X
+    temp_list = list(input())
+    list_.append(temp_list)
 
-                while True:
-                    if not(-1 < ny < N and -1 < nx < N):
-                        break
+break_count_list = [0] * 5
 
-                    if board[ny][nx] != board[y][x]:
-                        break
+for r in range(R):
+    for c in range(C):
+        break_count = 0
 
-                    cnt += 1
+        if list_[r][c] == BUILDING:
+            continue
 
-                    ny = y + dy[d]
-                    nx = x + dx[d]
+        if list_[r][c] == CAR:
+            break_count += 1
 
-                if cnt == 5:
-                    prev_y = y - dy[d]
-                    prev_x = x - dx[d]
+        for d in range(3):
+            next_r = r + dr[d]
+            next_c = c + dc[d]
 
-                    if not (-1 < prev_y < N and -1 < prev_x < N) or board[y][x] != board[prev_y][prev_x]:
-                        print(board[y][x])
+            if not (-1 < next_r < R and -1 < next_c < C):
+                break
 
-                        print(y + 1, x + 1)
-                        answer = board[y][x]
+            if list_[next_r][next_c] == BUILDING:
+                break
 
-if answer == 0:
-    print(answer)
+            if list_[next_r][next_c] == CAR:
+                break_count += 1
+        else:
+            break_count_list[break_count] += 1
+
+for count in break_count_list:
+    print(count)

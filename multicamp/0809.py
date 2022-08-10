@@ -255,6 +255,49 @@ for r in range(R - 1):
 
 print(*crush, sep='\n')
 
+# 또는
+
+# 우 우하 하
+dr = [0, 1, 1]
+dc = [1, 1, 0]
+BUILDING = '#'
+CAR = 'X'
+VOID = '.'
+
+R, C = list(map(int, input().split()))
+parking = [list(input()) for _ in range(R)]
+
+break_count = [0] * 5
+for r in range(R):
+    for c in range(C):
+        cnt = 0
+        # 조건 1. 기준 좌표가 빌딩이면 안된다.
+        if parking[r][c] == BUILDING:
+            continue
+        # 조건 2. 기준 좌표가 차라면 부순 횟수 + 1
+        if parking[r][c] == CAR:
+            cnt += 1
+        # 델타탐색
+        for d in range(3):
+            nr = r + dr[d]
+            nc = c + dc[d]
+            # 조건 1. 범위를 벗어나지 않는다.
+            if not (-1 < nc < R and -1 < nc < C):
+                break
+            # 조건 2. 탐색 좌표에 빌딩이 있으면 안된다.
+            if parking[nr][nc] == BUILDING:
+                break
+            # 조건 3. 탐색 좌표에 차가 있다면 키운팅
+            if parking[nr][nc] == CAR:
+                cnt += 1
+        # break를 만나지 않고 반복문이 끝났다면
+        # 혜빈이가 정상적으로 주차를 했다는 뜻
+        else:
+            break_count[cnt] += 1
+
+for count in break_count:
+    print(count)
+
 
 # 바이러스 🐳 🚨
 # 문제 : 바이러스에 걸린 컴퓨터와 인접한 컴퓨터의 개수 구하기

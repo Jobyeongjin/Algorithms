@@ -19,3 +19,16 @@ for tc in range(1, t + 1):
             list_ += 'p'
 
     print(f'#{tc} {list_}')
+
+# 또는
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    alpha = list(input())
+
+    arr = ''
+    reverse_ = alpha[::-1]
+
+    d = {'b': 'd', 'd': 'b', 'p': 'q', 'q': 'p'}
+    arr += d.get(i)
