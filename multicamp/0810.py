@@ -1,6 +1,7 @@
 # 삼각형 외우기 🐳
 # 문제 : 삼각형의 종류 구분하기
 
+from collections import deque
 import sys
 angle = [int(input()) for _ in range(3)]
 
@@ -127,6 +128,35 @@ for i in visited:
 
 print(total - 1)  # 1번은 제외하고 출력
 
+# 또는
+
+N = int(input())
+M = int(input())
+
+graph = [[] for _ in range(N + 1)]  # 인접 리스트 생성
+for _ in range(M):
+    u, v = map(int, input().split())
+    graph[u].append(v)
+    graph[v].append(u)
+
+visited = [False] * (N + 1)  # 방문 여부 확인
+stack = []
+
+visited[1] = True  # 초기값 설정
+stack.append(1)
+
+cnt = 0
+while stack:
+    cur = stack.pop()  # 스택의 요소를 빼가면서 인접 요소들 방문 처리
+
+    for adj in graph[cur]:  # 인접 요소 반복
+        if visited[adj] == False:  # 만일 방문한 적이 없다면
+            visited[adj] = True  # 방문 처리
+            stack.append(adj)  # 스택에 추가
+            cnt += 1  # 카운팅
+
+print(cnt)
+
 
 # 연결 요소의 개수 🐳
 # 문제 : 연결 요소의 개수 구하기
@@ -149,7 +179,7 @@ visited = [0] * (N + 1)  # 방문 여부 확인
 def DFS(v):
     visited[v] = 1  # 방문 처리
 
-    for d in JOIN[v]:  # 방문한 수와 인접한 수 반복
+    for d in JOIN[v]:  # 방문한 수의 인접한 수 반복
         if not visited[d]:  # 동일한 코드, if visited[d] == 0:
             DFS(d)
 
@@ -159,6 +189,43 @@ for i in range(1, N + 1):  # [1, 2, 3, 4, 5, 6]
     if not visited[i]:
         DFS(i)
         cnt += 1  # DFS가 끝나면 카운팅
+
+print(cnt)
+
+# 또는
+
+N, M = map(int, input().split())
+
+JOIN = [[] for _ in range(N + 1)]  # 인접 리스트 생성
+for _ in range(M):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+stack = []
+visited = [False] * (N + 1)  # 방문 여부 확인
+# [[], [2, 5], [1, 5], [4], [3, 6], [2, 1], [4]]
+
+
+def DFS(v):
+    visited[v] = True  # 방문 처리
+    stack.append(v)  # 스택에 추가
+
+    while stack:  # 스택에 비어있을 때까지 반복
+        cur = stack.pop()  # 스택에서 제거
+
+        for adj in JOIN[cur]:  # 제거한 수의 인접 요소들 반복
+
+            if not visited[adj]:  # 인접 요소가 방문 리스트에 없다면
+                visited[adj] = True  # 방문 처리
+                stack.append(adj)  # 스택에 추가
+
+
+cnt = 0
+for i in range(1, N + 1):
+    if visited[i] == False:  # 방문 리스트가 비어있다면
+        DFS(i)
+        cnt += 1  # DFS를 종료하면서 카운팅
 
 print(cnt)
 
@@ -193,6 +260,78 @@ if visited[M] > 0:
 else:
     print(-1)
 
+# 또는
+
+
+def BFS(v):  # 너비우선탐색
+    queue = deque()
+    queue.append(v)  # 큐에 추가
+
+    while queue:
+        cur = queue.popleft()  # 큐에서 제거
+
+        for adj in JOIN[cur]:  # 인접한 수 반복하기
+            if visited[adj] == 0:  # 인접한 수가 방문 리스트에 없다면
+                visited[adj] = visited[cur] + 1  # 인접 정점을 확인한 정점의 인덱스 값에서 + 1
+                queue.append(adj)  # 큐에 추가
+
+
+N = int(input())  # 전체 인원
+x, y = map(int, input().split())  # 촌수가 궁금한 두 사람
+M = int(input())  # 관계의 수
+
+visited = [0] * (N + 1)  # 방문 여부를 확인할 리스트
+
+JOIN = [[] for _ in range(N + 1)]  # 인접 리스트 생성
+for _ in range(M):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+BFS(x)  # 촌수가 궁금한 x의 BFS 시작
+
+print(visited[y] if visited[y] != 0 else -1)
+# 방문 리스트에 있는 요소 값을 출력
+# 단, 0이 아니면 출력하고, 아니면 0이라면 -1을 출력
+
 
 # 섬의 개수 🚨 🐳
-# 문제 :
+# 문제 : 가로, 세로 또는 대각선으로 연결된 섬의 개수 구하기
+
+while True:
+    W, H = map(int, input().split())
+
+    if W == 0 and H == 0:  # 입력값에서 0 0 은 제외
+        break
+
+    MAPS = [list(map(int, input().split())) for _ in range(H)]  # 이차원 리스트 생성
+
+    dy = [-1, -1, -1, 0, 0, 1, 1, 1]  # 8방위 좌표 설정
+    dx = [-1, 0, 1, -1, 1, -1, 0, 1]
+
+    cnt = 0
+
+    def DFS(i, j):
+        stack = []
+        stack.append((i, j))  # 스택에 좌표 추가
+
+        while stack:  # 스택이 빌 때까지 반복
+            (y, x) = stack.pop()  # 스택에서 제거하면서 변수로 설정
+            MAPS[y][x] = 0  # 탐색을 했으니 바다로 초기화
+
+            for d in range(8):  # 8방위 좌표 탐색
+                ny = y + dy[d]
+                nx = x + dx[d]
+
+                if -1 < ny < H and -1 < nx < W:  # 범위를 벗어나지 않으면서
+                    if MAPS[ny][nx] == 1:  # 땅이라면
+                        stack.append((ny, nx))  # 스택에 좌표 추가
+
+        return 1  # 하나의 섬을 완료하고 1을 리턴하면서 카운팅
+
+    for i in range(H):  # 완전탐색
+        for j in range(W):
+            if MAPS[i][j] == 1:  # 섬이라면 DFS 실행
+                cnt += DFS(i, j)
+
+    print(cnt)
