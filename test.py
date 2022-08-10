@@ -15,47 +15,29 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-dr = [0, 1, 1]
-dc = [1, 1, 0]
-BUILDING = "#"
-CAR = "X"
-VOID = "."
+N, M = map(int, input().split())
 
-R, C = list(map(int, input().split()))
+JOIN = [[] for _ in range(N + 1)]
+for _ in range(M):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
 
-list_ = []
-for _ in range(R):
-    # 숫자 X 문자 O
-    # 공백 X
-    temp_list = list(input())
-    list_.append(temp_list)
+visited = [0] * (N + 1)
 
-break_count_list = [0] * 5
 
-for r in range(R):
-    for c in range(C):
-        break_count = 0
+def DFS(v):
+    visited[v] = 1
 
-        if list_[r][c] == BUILDING:
-            continue
+    for d in JOIN[v]:
+        if not visited[d]:
+            DFS(d)
 
-        if list_[r][c] == CAR:
-            break_count += 1
 
-        for d in range(3):
-            next_r = r + dr[d]
-            next_c = c + dc[d]
+cnt = 0
+for i in range(1, N + 1):
+    if not visited[i]:
+        DFS(i)
+        cnt += 1
 
-            if not (-1 < next_r < R and -1 < next_c < C):
-                break
-
-            if list_[next_r][next_c] == BUILDING:
-                break
-
-            if list_[next_r][next_c] == CAR:
-                break_count += 1
-        else:
-            break_count_list[break_count] += 1
-
-for count in break_count_list:
-    print(count)
+print(cnt)
