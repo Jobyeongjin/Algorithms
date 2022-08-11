@@ -138,3 +138,205 @@ while True:
                 cnt += DFS(i, j)
 
     print(cnt)
+
+# 또는
+
+while True:
+    W, H = map(int, input().split())
+
+    if W == 0 and H == 0:  # 입력값에서 0은 제외
+        break
+
+    MAPS = [list(map(int, input().split())) for _ in range(H)]  # 인접 리스트 생성
+
+    dy = [-1, -1, -1, 0, 0, 1, 1, 1]  # 8방위 델타 좌표
+    dx = [-1, 0, 1, -1, 1, -1, 0, 1]
+
+    cnt = 0
+    for i in range(H):  # 이중 반복문으로 완전 탐색
+        for j in range(W):
+            if MAPS[i][j] == 1:  # 좌표에서 1을 만나면
+                stack = []
+                stack.append((i, j))  # 스택에 좌표 추가
+
+                while stack:  # 스택에 빌 때까지 반복
+                    (y, x) = stack.pop()  # 스택에서 좌표 제거 후 변수에 저장
+                    if MAPS[y][x] == 1:
+                        MAPS[y][x] = 0  # 좌표 초기화
+
+                        for k in range(8):  # 델타 탐색
+                            ny = y + dy[k]  # 다음 좌표는 기존 좌표 + 델타 좌표
+                            nx = x + dx[k]
+
+                            if -1 < ny < H and -1 < nx < W:  # 구역을 벗어나지 않게 설정
+                                if MAPS[ny][nx] == 1:  # 다음 좌표가 1이라면
+                                    stack.append((ny, nx))  # 스택에 좌표 추가
+                # 반복문이 끝나면 카운팅 / 섬의 개수
+                cnt += 1
+
+    print(cnt)
+
+
+# 로봇 🚨 🐳
+
+M, CC = map(int, input().split())  # 11 14
+area = [['.' for _ in range(M)] for _ in range(M)]
+
+RR, RC = M - 1, 0
+area[RR][RC] = 'R'
+vector = [0, 1]
+
+for _ in range(CC):
+    command, number = input().strip('\n').split()
+    number = int(number)
+
+    if command == 'MOVE':
+        nr = RR + (vector[0] * number)
+        nc = RC + (vector[1] * number)
+
+        if not (0 <= nr < M and 0 <= nc < M):
+            print(-1)
+            break
+
+        area[RR][RC], area[nr][nc] = area[nr][nc], area[RR][RC]
+        RR, RC = nr, nc
+
+    elif command == 'TURN':
+        if number == 0:
+            vector[0], vector[1] = (
+                0 * vector[0]) + (-1 * vector[1]), (1 * vector[0]) + (0 * vector[1])
+        elif number == 1:
+            vector[0], vector[1] = (
+                0 * vector[0]) + (1 * vector[1]), (-1 * vector[0]) + (0 * vector[1])
+        else:
+            print(-1)
+            break
+
+    else:
+        print(-1)
+        break
+
+else:
+    RX = RC
+    RY = (M - 1) - RR
+    print(RX, RY)
+
+# 또는
+
+M, N = map(int, input().split())
+
+y, x = 0, 0
+dir_ = 0
+dir_m = [(0, 1), (-1, 0), (0, -1), (1, 0)]
+
+result = True
+for i in range(N):
+    order, num = input().split()
+    num = int(num)
+
+    if order == 'MOVE':
+        ny = y + dir_m[dir_][0] * num
+        nx = x + dir_m[dir_][1] * num
+        if -1 < ny < M and -1 < nx < M:
+            y = ny
+            x = nx
+        else:
+            result = False
+
+    elif order == 'TURN':
+        if num == 0:
+            dir_ -= 1
+            if dir_ < 0:
+                dir_ = 3
+        elif num == 1:
+            dir_ += 1
+            if dir_ == 4:
+                dir_ = 0
+
+if result:
+    print(x, y)
+else:
+    print(-1)
+
+
+# 그림 🚨 🐳
+
+N, M = map(int, input().split())
+PAINT = [list(map(int, input().split())) for _ in range(N)]  # 인접 리스트 생성
+
+visited = [[0 for _ in range(M)] for _ in range(N)]  # 방문 리스트 생성
+DELTA = ((0, 1), (1, 0), (-1, 0), (0, -1))  # 델타 좌표
+
+
+def DFS(r, c):
+    area = 0  # 그림 안에 1을 카운팅
+    stack = list()
+    stack.append((r, c))  # 스택에 좌표 추가
+
+    while stack:
+        pr, pc = stack.pop()  # 스택에서 좌표 제거 후 변수에 저장
+
+        if visited[pr][pc] == 0 and PAINT[pr][pc] == 1:  # 방문 좌표가 0이면서 그림 좌표가 1이라면
+            visited[pr][pc] = 1  # 방문 처리 후 카운팅
+            area += 1
+
+        for dr, dc in DELTA:  # 델타 탐색
+            nr = pr + dr  # 다음 좌표 = 기존 좌표 + 델타 좌표
+            nc = pc + dc
+
+            if 0 <= nr < N and 0 <= nc < M:  # 구역을 벗어나지 않게 설정
+                if visited[nr][nc] == 0 and PAINT[nr][nc] == 1:  # 방문 좌표가 0이면서 그림 좌표가 1이라면
+                    stack.append((nr, nc))  # 스택에 좌표 추가
+
+    return area
+
+
+result = []
+for i in range(N):  # 이중 반복문으로 완전 탐색
+    for j in range(M):
+        if visited[i][j] == 0 and PAINT[i][j] == 1:  # 방문 좌표가 0이고 그림의 좌표가 1이라면
+            result.append(DFS(i, j))  # DFS 실행
+
+print(len(result))  # 총 그림의 수
+# 가장 큰 그림의 1의 개수, 만일 총 그림의 개수가 0인 경우 가장 넓은 그림의 넓이는 0
+print(max(result)) if len(result) != 0 else print(0)
+
+
+# 또는
+
+N, M = map(int, input().split())
+
+PAPER = [list(map(int, input().split())) for _ in range(N)]  # 인접리스트 생성
+
+dy = [-1, 0, 0, 1]  # 4방향 델타 좌표 생성
+dx = [0, -1, 1, 0]
+
+area = 0  # 총 그림의 개수
+one_list = []  # 1의 개수를 담을 리스트
+for i in range(N):  # 이중 반복문으로 완전탐색
+    for j in range(M):
+        if PAPER[i][j] == 1:  # 탐색 중 1을 만나면
+            stack = []
+            stack.append((i, j))  # 스택에 좌표 추가
+
+            cnt = 0
+            while stack:  # 스택이 빌 때까지
+                (y, x) = stack.pop()  # 스택에서 좌표 제거 후 변수에 저장
+
+                if PAPER[y][x] == 1:  # 좌표가 1이라면
+                    cnt += 1  # 방문 처리 후 초기화
+                    PAPER[y][x] = 0
+
+                    for k in range(4):  # 델타 탐색
+                        ny = y + dy[k]  # 다음 좌표 = 기존 좌표 + 델타 좌표
+                        nx = x + dx[k]
+
+                        if -1 < ny < N and -1 < nx < M:  # 구역을 벗어나지 않게 설정
+                            if PAPER[ny][nx] == 1:  # 다음 좌표가 1이라면
+                                stack.append((ny, nx))  # 스택에 좌표 추가
+            # 반복문이 끝나고
+            area += 1  # 그림의 수 카운팅
+            one_list.append(cnt)  # 1의 개수 추가
+
+print(area)  # 그림의 수
+print(max(one_list))  # 그림의 넓이가 큰 그림의 1의 개수

@@ -66,6 +66,7 @@
 > - [0808](./multicamp/0808.py)
 > - [0809](./multicamp/0809.py)
 > - [0810](./multicamp/0810.py)
+> - [0811](./multicamp/0811.py)
 
 <br />
 
