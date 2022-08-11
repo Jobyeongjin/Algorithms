@@ -229,6 +229,26 @@ for i in range(1, N + 1):
 
 print(cnt)
 
+# 또는
+
+N, M = map(int, input().split())
+
+JOIN = [[] for _ in range(N + 1)]  # 인접 리스트 생성
+for _ in range(M):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+stack = []
+visited = [False] * (N + 1)  # 방문 여부 확인
+
+answer = 0
+for number in range(1, N + 1):
+    if not visited[number]:
+        '''
+
+        '''
+
 
 # 촌수계산 🐳
 # 문제 : 여러 사람에 대한 관계가 주어질 때, 두사람 간의 촌수 구하기
@@ -293,6 +313,42 @@ BFS(x)  # 촌수가 궁금한 x의 BFS 시작
 print(visited[y] if visited[y] != 0 else -1)
 # 방문 리스트에 있는 요소 값을 출력
 # 단, 0이 아니면 출력하고, 아니면 0이라면 -1을 출력
+
+# 또는
+
+N = int(input())  # 전체 인원
+START, END = list(map(int, input().split()))  # 촌수가 궁금한 두 사람
+M = int(input())  # 관계의 수
+
+visited = [False] * (N + 1)  # 방문 여부를 확인할 이차원 리스트 생성
+
+visited[START] = True  # DFS를 시작하기 위한 기본값 설정
+stack = []
+stack.append((START, 0))  # 튜플 형태로 입력 (시작값, 촌수를 확인할 인덱스 값)
+
+
+JOIN = [[] for _ in range(N + 1)]  # 인접 리스트 생성
+for _ in range(M):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+answer = -1  # 정답을 확인할 변수
+
+while len(stack) != 0:  # 스택이 빌 때까지 반복
+    number, count = stack.pop()  # 스택에서 기본값 제거
+    cur = JOIN[number]  # 인접 리스트의 인접한 정점을 변수에 저장
+
+    if number == END:  # 원하는 촌수까지 도달하면 끝
+        answer = count  # 카운팅한 값을 정답에 저장
+        break
+
+    for adj in cur:  # 인접한 정점들의 순환
+        if not visited[adj]:  # 인접한 정점이 방문하지 않았다면
+            stack.append((adj, count + 1))  # 스택에 추가
+            visited[adj] = True  # 방문 처리
+
+print(answer)
 
 
 # 섬의 개수 🚨 🐳
