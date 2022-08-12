@@ -229,26 +229,6 @@ for i in range(1, N + 1):
 
 print(cnt)
 
-# 또는
-
-N, M = map(int, input().split())
-
-JOIN = [[] for _ in range(N + 1)]  # 인접 리스트 생성
-for _ in range(M):
-    v1, v2 = map(int, input().split())
-    JOIN[v1].append(v2)
-    JOIN[v2].append(v1)
-
-stack = []
-visited = [False] * (N + 1)  # 방문 여부 확인
-
-answer = 0
-for number in range(1, N + 1):
-    if not visited[number]:
-        '''
-
-        '''
-
 
 # 촌수계산 🐳
 # 문제 : 여러 사람에 대한 관계가 주어질 때, 두사람 간의 촌수 구하기
