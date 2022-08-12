@@ -67,6 +67,13 @@
 > - [0809](./multicamp/0809.py)
 > - [0810](./multicamp/0810.py)
 > - [0811](./multicamp/0811.py)
+> - [0812 💡 모의고사 💡](./multicamp/project/0812/0812.py)
+>   - [반반](./multicamp/project/0812/반반.py)
+>   - [모음이 보이지 않는 사람](./multicamp/project/0812/모음이보이지않는사람.py)
+>   - [퍼펙트 셔플](./multicamp/project/0812/퍼펙트셔플.py)
+>   - [Flatten](./multicamp/project/0812/Flatten.py)
+>   - [창용마을 무리의 개수](./multicamp/project/0812/창용마을무리의개수.py)
+>   - [등산로 조성](./multicamp/project/0812/등산로조성.py)
 
 <br />
 

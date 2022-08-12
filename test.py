@@ -16,58 +16,41 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = list(map(int, input().split()))
+def DFS(i, graph_list, visited_list, component_list):
+    stack = list()
+    comp = list()  # 인접 정점을 저장할 리스트
+    stack.append(i)
 
-graph = []
-for _ in range(n):  # 인접 리스트 생성
-    graph.append(list(map(int, input().split())))
+    while stack:  # 스택이 빌 때까지 반복
+        P = stack.pop()  # 스택에서 제거하면서 변수로 저장
 
-visited = []
-for _ in range(n):  # 방문 처리할 이차원 리스트 생성
-    visited_list = [False] * m
-    visited.append(visited_list)
+        if not visited_list[P]:  # 방문하지 않았다면
+            visited_list[P] = True  # 방문 처리
+            comp.append(P)
 
-dy = [-1, 0, 0, 1]  # 4방향 델타 좌표 생성
-dx = [0, -1, 1, 0]
+        for n in graph_list[P]:  # 인접 정점들 순회
+            if not visited_list[n]:  # 방문하지 않았다면
+                stack.append(n)  # 스택에 추가
 
-paint_cnt = 0
-paint_size = []
-for y in range(n):  # 이중 반복문으로 완전 탐색
-    for x in range(m):
-        if not visited[y][x] and graph[y][x] == 1:  # 방문 좌표가 0이면서 그림 좌표가 1이라면
-            ''''
-            DFS
-            '''
-            stack = []
-            stack.append([y, x])  # 스택에 좌표 추가
-            visited[y][x] = True  # 방문 처리
+    component_list.append(comp)
 
-            paint_cnt += 1
-            size = 0
-            while len(stack) != 0:
-                py, px = stack.pop()  # 스택에서 제거 후 변수에 저장
-                size += 1  # 그림 안에 1의 개수
 
-                for d in range(4):  # 델타 탐색
-                    ny = py + dy[d]  # 다음 좌표 = 기존 좌표 + 델타 좌표
-                    nx = px + dx[d]
+T = int(input())
 
-                    if not (-1 < ny < n and -1 < nx < m):  # 범위가 벗어나지 않으면서
-                        continue
+for tc in range(1, T + 1):
+    V, E = map(int, input().split())  # 마을 사람의 수, 서로 알고 있는 관계의 수
 
-                    if visited[ny][nx] == True:  # 벙문 처리를 했다면
-                        continue
+    visited = [False for _ in range(V + 1)]  # 방문을 확인할 리스트 생성
 
-                    if graph[ny][nx] != 1:  # 그림 좌표가 1이 아니라면
-                        continue
+    GRAPH = [[] for _ in range(V + 1)]  # 인접 리스트 생성
+    for _ in range(E):
+        v1, v2 = map(int, input().split())
+        GRAPH[v1].append(v2)
+        GRAPH[v2].append(v1)
 
-                    stack.append((ny, nx))  # 스택에 다음 좌표 추가
-                    visited[ny][nx] = True  # 다음 좌표를 방문 처리
+    connected_component = []  # 인접 정점들끼리 묶는 리스트
+    for v in range(1, V + 1):
+        if not visited[v]:  # 방문하지 않았다면 DFS 실행
+            DFS(v, GRAPH, visited, connected_component)
 
-            paint_size.append(size)
-
-if len(paint_size) != 0:
-    print(paint_cnt)
-    print(max(paint_size))
-else:
-    print(0)
+    print(f'#{tc} {len(connected_component)}')
