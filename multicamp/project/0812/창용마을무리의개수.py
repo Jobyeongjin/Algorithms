@@ -1,3 +1,5 @@
+from collections import deque
+
 # 창용마을 무리의 개수
 
 T = int(input())
@@ -136,3 +138,39 @@ for tc in range(1, T + 1):
             DFS(v, GRAPH, visited, connected_component)
 
     print(f'#{tc} {len(connected_component)}')
+
+
+# 또는
+
+
+T = int(input())
+
+for tc in range(1, T + 1):
+    N, M = map(int, input().split())
+
+    graph = [[] for _ in range(N + 1)]  # 관계를 나타내는 인접 리스트 생성
+    for _ in range(M):
+        A, B = map(int, input().split())
+        graph[A].append(B)
+        graph[B].append(A)
+
+    visited = [False] * (N + 1)  # 방문 처리할 리스트
+
+    queue = deque()  # 너비우선탐색
+    group = 0
+    for i in range(1, N + 1):
+        if not visited[i]:  # 방문하지 않았다면
+            queue.append(i)  # 큐에 추가
+            visited[i] = True  # 방문 처리
+
+            while queue:  # 큐가 끝나면 한 무리 완성
+                v = queue.popleft()
+
+                for adj in graph[v]:  # 인접 정점 순회
+                    if not visited[adj]:  # 방문하지 않았다면
+                        visited[adj] = True  # 방문 처리
+                        queue.append(adj)  # 다시 반복
+
+            group += 1  # 반복문이 끝나면 카운팅
+
+    print(f'#{tc} {group}')

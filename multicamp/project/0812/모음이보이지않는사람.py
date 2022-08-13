@@ -62,3 +62,18 @@ for tc in range(1, T + 1):
     S = S.replace('u', '')
 
     print(f'#{tc} {S}')
+
+
+# 또는
+
+
+T = int(input())
+
+for tc in range(1, T + 1):
+    word = input()
+    aeiou = ['a', 'e', 'i', 'o', 'u']
+
+    for letter in aeiou:  # 리스트의 개수만큼 반복💡
+        word = word.replace(letter, '')
+
+    print(f'#{tc} {word}')

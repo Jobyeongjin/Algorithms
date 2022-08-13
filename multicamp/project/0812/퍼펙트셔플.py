@@ -36,6 +36,7 @@ for tc in range(1, T + 1):
 
 # 또는
 
+
 T = int(input())
 
 for tc in range(1, T + 1):
@@ -59,6 +60,7 @@ for tc in range(1, T + 1):
 
 
 # 또는
+
 
 for tc in range(1, int(input()) + 1):
     N = int(input())
@@ -84,4 +86,26 @@ for tc in range(1, int(input()) + 1):
             print(B[i], end=' ')
 
         print(A[-1], end=' ')  # A의 마지막 요소 출력
+    print()
+
+
+# 또는
+
+
+T = int(input())
+
+for tc in range(1, T + 1):
+    N = int(input())
+    BOX = list(map(str, input().split()))
+
+    ONE = BOX[:(N + 1) // 2]
+    TWO = BOX[(N + 1) // 2:]
+
+    print(f'#{tc}', end=' ')
+
+    for j in range(len(TWO)):  # 짧은 리스트 길이 기준, 순서대로 출력
+        print(ONE[j], TWO[j], end=' ')
+
+    if N % 2 == 1:  # 리스트에 남아있다면, 남은 마지막 요소 출력
+        print(ONE[-1], end=' ')
     print()

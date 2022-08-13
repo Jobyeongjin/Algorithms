@@ -66,3 +66,22 @@ for tc in range(1, 11):  # 위랑 풀이는 동일하지만
         BOX[BOX.index(min(BOX))] += 1
 
     print(f'#{tc} {max(BOX) - min(BOX)}')
+
+
+# 또는
+
+
+for tc in range(1, 11):
+    N = int(input())
+    BOX = list(map(int, input().split()))
+
+    for _ in range(N):
+        if len(set(BOX)) == 1:  # 이미 평탄화된 상태라면
+            print(f'#{tc} 0')
+            break
+
+        BOX[BOX.index(max(BOX))] -= 1  # 평탄화, 가장 큰 수는 내리고
+        BOX[BOX.index(min(BOX))] += 1  # 가장 작은 수는 올리기
+
+    else:
+        print(f'#{tc} {max(BOX) - min(BOX)}')

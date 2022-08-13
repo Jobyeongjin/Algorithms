@@ -1,5 +1,4 @@
 # 파일 불러오기
-from audioop import reverse
 from collections import deque
 from collections import Counter
 import sys
@@ -16,41 +15,53 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-def DFS(i, graph_list, visited_list, component_list):
-    stack = list()
-    comp = list()  # 인접 정점을 저장할 리스트
-    stack.append(i)
+delta = ((-1, 0), (1, 0), (0, -1), (0, 1))
 
-    while stack:  # 스택이 빌 때까지 반복
-        P = stack.pop()  # 스택에서 제거하면서 변수로 저장
 
-        if not visited_list[P]:  # 방문하지 않았다면
-            visited_list[P] = True  # 방문 처리
-            comp.append(P)
+def DFS(r, c, limit, length):
+    global MAX_L
 
-        for n in graph_list[P]:  # 인접 정점들 순회
-            if not visited_list[n]:  # 방문하지 않았다면
-                stack.append(n)  # 스택에 추가
+    if visited[r][c] == 1:
+        return
 
-    component_list.append(comp)
+    visited[r][c] = 1
+
+    for dr, dc in delta:
+        nr, nc = r + dr, c + dc
+
+        if not (-1 < nr < N and -1 < nc < N):
+            continue
+
+        if visited[nr][nc] == 1:
+            continue
+
+        if MAP[nr][nc] < MAP[r][c]:
+            DFS(nr, nc, limit, length + 1)
+
+        elif MAP[nr][nc] >= MAP[r][c] and limit > 0:
+            for i in range(1, K + 1):
+                MAP[nr][nc] -= i
+
+                if MAP[nr][nc] < MAP[r][c]:
+                    DFS(nr, nc, limit - 1, length + 1)
+                MAP[nr][nc] += i
+
+    MAX_L = max(MAX_L, length)
+    visited[r][c] = 0
 
 
 T = int(input())
 
 for tc in range(1, T + 1):
-    V, E = map(int, input().split())  # 마을 사람의 수, 서로 알고 있는 관계의 수
+    N, K = map(int, input().split())
+    MAP = [list(map(int, input().split())) for _ in range(N)]
+    visited = [[0 for _ in range(N)] for _ in range(N)]
+    HIGH = max(map(max, MAP))
+    MAX_L = 0
 
-    visited = [False for _ in range(V + 1)]  # 방문을 확인할 리스트 생성
+    for i in range(N):
+        for j in range(N):
+            if MAP[i][j] == HIGH:
+                DFS(i, j, 1, 1)
 
-    GRAPH = [[] for _ in range(V + 1)]  # 인접 리스트 생성
-    for _ in range(E):
-        v1, v2 = map(int, input().split())
-        GRAPH[v1].append(v2)
-        GRAPH[v2].append(v1)
-
-    connected_component = []  # 인접 정점들끼리 묶는 리스트
-    for v in range(1, V + 1):
-        if not visited[v]:  # 방문하지 않았다면 DFS 실행
-            DFS(v, GRAPH, visited, connected_component)
-
-    print(f'#{tc} {len(connected_component)}')
+    print(f'#{tc} {MAX_L}')
