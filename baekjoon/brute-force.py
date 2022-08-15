@@ -85,10 +85,10 @@ print(min(cnt))
 
 N = int(input())
 
-TITLE = 666  # 문자형으로 입력
+TITLE = 666
 cnt = 0
-while True:  # 666부터 무한 반복
-    if '666' in str(TITLE):  # 문자형 반복문에서 '666' 이 나온다면 카운팅
+while True:
+    if '666' in str(TITLE):  # 문자형 타이틀에서 '666' 이 나온다면 카운팅
         cnt += 1
 
     if cnt == N:  # 카운팅이 N만큼 나왔다면 출력하고 종료
