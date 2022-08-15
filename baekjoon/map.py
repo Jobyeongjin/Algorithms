@@ -1,4 +1,4 @@
-# 숫자 카드 🐳
+'''숫자 카드 🐳'''
 # 문제 : 상근이가 가지고 있는 카드인지 아닌지 구별하기
 
 N = int(input())
@@ -47,7 +47,7 @@ for item in stack:
 print(*answer)
 
 
-# 숫자 카드 2 🐳
+'''숫자 카드 2 🐳'''
 # 문제 : 상근이가 몇 개의 카드를 가지고 있는지 구하기
 
 # 정답과 같지만 시간초과
@@ -85,7 +85,7 @@ for i in range(M):
         print(0, end=' ')
 
 
-# 문자열 집합 🐳
+'''문자열 집합 🐳'''
 # 문제 : 주어진 집합문자에 입력 문자가 총 몇 개인지 구하기
 
 N, M = map(int, input().split())
@@ -100,7 +100,7 @@ for _ in range(M):
 print(cnt)
 
 
-# 나는야 포켓몬 마스터 이다솜 🐳
+'''나는야 포켓몬 마스터 이다솜 🐳'''
 # 문제 : 도감에 있는 포켓몬 이름과 번호 구하기
 
 # 인덱스로 접근하려다가 실패
@@ -132,3 +132,16 @@ for _ in range(M):
         print(name[quest])
     else:
         print(id[int(quest)])
+
+
+'''서로 다른 부분 문자열의 개수 🐳'''
+
+S = input()
+
+answer = set()  # 중복 값을 제거할 셋
+for i in range(len(S)):  # 완전 탐색
+    for j in range(i, len(S)):
+        temp = S[i:j + 1]  # 한 글자씩 추가하면서 슬라이싱
+        answer.add(temp)
+
+print(len(answer))
