@@ -2,6 +2,7 @@
 from collections import deque
 from collections import Counter
 import sys
+import math
 
 sys.stdin = open("input.txt", "r")
 
@@ -15,17 +16,10 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-N = int(input())
+R = int(input())
 
-TITLE = 666  # 문자형 타이틀
-cnt = 0
-while True:
-    print(TITLE)
-    if '666' in str(TITLE):
-        cnt += 1
+UCLID = R * R * math.pi
+TAXI = 2 * R * R
 
-    if cnt == N:
-        print(TITLE)
-        break
-
-    TITLE += 1
+print(round(UCLID, 6))
+print(round(TAXI, 6))
