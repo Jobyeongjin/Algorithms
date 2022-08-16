@@ -16,10 +16,32 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-R = int(input())
+N = int(input())
 
-UCLID = R * R * math.pi
-TAXI = 2 * R * R
+stack = []
+for _ in range(N):
+    S = input().split()
 
-print(round(UCLID, 6))
-print(round(TAXI, 6))
+    if S[0] == 'push':
+        stack.append(S[1])
+
+    elif S[0] == 'pop':
+        if not stack:
+            print(-1)
+        else:
+            print(stack.pop())
+
+    elif S[0] == 'size':
+        print(len(stack))
+
+    elif S[0] == 'empty':
+        if stack:
+            print(0)
+        else:
+            print(1)
+
+    elif S[0] == 'top':
+        if stack:
+            print(stack[-1])
+        else:
+            print(-1)

@@ -107,6 +107,7 @@
 > - [정렬](./baekjoon/lineup.py)
 > - [집합과 맵](./baekjoon/map.py)
 > - [기하](./baekjoon/giha.py)
+> - [스택](./baekjoon/stack.py)
 
 <br />
 
