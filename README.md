@@ -74,6 +74,8 @@
 >   - [Flatten](./multicamp/project/0812/Flatten.py)
 >   - [창용마을 무리의 개수](./multicamp/project/0812/창용마을무리의개수.py)
 >   - [등산로 조성](./multicamp/project/0812/등산로조성.py)
+> - [그외 💭]()
+>   - [기초 능력](./multicamp/base.py)
 
 <br />
 

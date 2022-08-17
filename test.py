@@ -16,32 +16,11 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-N = int(input())
+ALPHA = ['a', 'e', 'i', 'o', 'u']
+for T in range(1, int(input()) + 1):
+    S = input().strip()
 
-stack = []
-for _ in range(N):
-    S = input().split()
+    for i in ALPHA:
+        S = S.replace(i, '')
 
-    if S[0] == 'push':
-        stack.append(S[1])
-
-    elif S[0] == 'pop':
-        if not stack:
-            print(-1)
-        else:
-            print(stack.pop())
-
-    elif S[0] == 'size':
-        print(len(stack))
-
-    elif S[0] == 'empty':
-        if stack:
-            print(0)
-        else:
-            print(1)
-
-    elif S[0] == 'top':
-        if stack:
-            print(stack[-1])
-        else:
-            print(-1)
+    print(f'#{T} {S}')
