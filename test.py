@@ -16,11 +16,20 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-ALPHA = ['a', 'e', 'i', 'o', 'u']
-for T in range(1, int(input()) + 1):
-    S = input().strip()
+N = int(input())
+CARD = list(map(int, input().split()))
+M = int(input())
+CHECK = list(map(int, input().split()))
 
-    for i in ALPHA:
-        S = S.replace(i, '')
+dic = {}
+for i in CARD:
+    if i in dic:
+        dic[i] += 1
+    else:
+        dic[i] = 1
 
-    print(f'#{T} {S}')
+for i in range(M):
+    if CHECK[i] in dic:
+        print(dic[CHECK[i]], end=' ')
+    else:
+        print(0, end=' ')

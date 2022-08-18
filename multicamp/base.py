@@ -184,3 +184,193 @@ for T in range(1, int(input()) + 1):
         S = S.replace(i, '')
 
     print(f'#{T} {S}')
+
+
+"""📝 크로아티아 알파벳"""
+
+CROATIA = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
+
+S = input()
+
+for i in CROATIA:
+    S = S.replace(i, '*')
+
+print(len(S))
+
+
+"""📝 뒤집힌 덧셈"""
+
+X, Y = map(str, input().split())
+X, Y = X[::-1], Y[::-1]
+
+print(int(str(int(X) + int(Y))[::-1]))
+
+
+"""📝 상수"""
+
+X, Y = map(str, input().split())
+X, Y = int(X[::-1]), int(Y[::-1])
+
+print(X if X > Y else Y)
+
+
+"""📝 숫자의 합"""
+
+N = int(input())
+
+print(sum(list(map(int, input()))))
+
+
+"""📝 분해합"""
+
+N = int(input())
+
+answer = 0
+for i in range(1, N + 1):
+    LIST = list(map(int, str(i)))
+    SUM = i + sum(LIST)
+
+    if SUM == N:
+        answer = i
+        break
+
+print(answer)
+
+
+"""📝 숫자의 개수"""
+
+A = int(input())
+B = int(input())
+C = int(input())
+
+N = list(str(A * B * C))
+
+arr = [0] * 10
+
+for i in N:
+    arr[int(i)] += 1
+
+print(*[j for j in arr], sep='\n')
+
+
+"""📝 새로운 불면증 치료법 🚨"""
+
+for T in range(1, int(input()) + 1):
+    N = int(input())
+
+    CHECK = [0] * 10
+    cnt = 0
+    while True:
+        if 0 not in CHECK:
+            break
+        else:
+            cnt += 1
+            S = str(N * cnt)
+            for i in range(len(S)):
+                CHECK[int(S[i])] = True
+
+    print(f'#{T} {S}')
+
+
+"""📝 초심자의 회문 검사"""
+
+for T in range(1, int(input()) + 1):
+    S = input().strip()
+
+    if S == S[::-1]:
+        print(f'#{T} 1')
+    else:
+        print(f'#{T} 0')
+
+
+"""학📝 점계산"""
+
+SCORE = {
+    'A+': 4.3,
+    'A0': 4.0,
+    'A-': 3.7,
+    'B+': 3.3,
+    'B0': 3.0,
+    'B-': 2.7,
+    'C+': 2.3,
+    'C0': 2.0,
+    'C-': 1.7,
+    'D+': 1.3,
+    'D0': 1.0,
+    'D-': 0.7,
+    'F': 0.0
+}
+
+print(SCORE[input()])
+
+
+"""📝 알파벳을 숫자로 변환"""
+
+S = input()
+
+for i in S:
+    answer = ord(i) - 64
+
+    print(answer, end=' ')
+
+
+"""📝 다이얼"""
+
+S = list(input())
+
+ALPHA = ['ABC', 'DEF', 'GHI', 'JKL', 'MNO', 'PQRS', 'TUV', 'WXYZ']
+
+time = 0
+for i in S:
+    for j in ALPHA:
+        if i in j:
+            time += ALPHA.index(j) + 3
+
+print(time)
+
+
+"""📝 개수 세기"""
+
+N = int(input())
+L = list(map(int, input().split()))
+C = int(input())
+
+print(L.count(C))
+
+
+"""📝 단어 공부"""
+
+WORD = input().upper()
+S = list(set(WORD))
+
+CHECK = []
+for i in S:
+    cnt = WORD.count(i)
+    CHECK.append(cnt)
+
+MAX = max(CHECK)
+if CHECK.count(MAX) >= 2:
+    print('?')
+else:
+    print(S[CHECK.index(MAX)])
+
+
+"""📝 숫자 카드 2"""
+
+N = int(input())
+CARD = list(map(int, input().split()))
+M = int(input())
+CHECK = list(map(int, input().split()))
+
+dic = {}
+for i in CARD:
+    if i in dic:
+        dic[i] += 1
+    else:
+        dic[i] = 1
+
+for i in range(M):
+    if CHECK[i] in dic:
+        print(dic[CHECK[i]], end=' ')
+    else:
+        print(0, end=' ')
