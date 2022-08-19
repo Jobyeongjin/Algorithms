@@ -374,3 +374,171 @@ for i in range(M):
         print(dic[CHECK[i]], end=' ')
     else:
         print(0, end=' ')
+
+
+"""📝 베스트셀러"""
+
+BOOK = {}
+for i in range(int(input())):
+    S = input().strip()
+    if S in BOOK:
+        BOOK[S] += 1
+    else:
+        BOOK[S] = 1
+
+MAX = max(BOOK.values())
+
+TITLE = [i for i in BOOK if MAX == BOOK[i]]
+TITLE.sort()
+
+print(TITLE[0])
+
+
+"""📝 파일 정리"""
+
+dic = {}
+for i in range(int(input())):
+    _, B = input().strip().split('.')
+    if B in dic:
+        dic[B] += 1
+    else:
+        dic[B] = 1
+
+dic = sorted(dic.items())
+
+for i in dic:
+    print(*i)
+
+
+"""📝 최빈수 구하기"""
+
+for T in range(1, int(input()) + 1):
+    N = int(input())
+    SCORE = list(map(int, input().split()))
+
+    board = [0] * 101
+    for i in SCORE:
+        board[i] += 1
+
+    MAX = max(board)
+
+    answer = 0
+    for i in range(len(board)):
+        if board[i] == MAX:
+            if i > answer:
+                answer = i
+
+    print(f'#{T} {answer}')
+
+# 또는
+
+for T in range(1, int(input()) + 1):
+    N = int(input())
+    SCORE = list(map(int, input().split()))
+
+    dic = {}
+    for i in SCORE:
+        if i in dic:
+            dic[i] += 1
+        else:
+            dic[i] = 1
+
+    MAX = max(dic.values())
+
+    for k, v in dic.items():
+        if v == MAX:
+            print(f'#{T} {k}')
+
+
+"""📝 회사에 있는 사람"""
+
+dic = {}
+for T in range(int(input())):
+    P, C = input().split()
+    dic[P] = C
+
+names = []
+for k, v in dic.items():
+    if v == 'enter':
+        names.append(k)
+    else:
+        continue
+
+names.sort(reverse=True)
+for i in names:
+    print(i)
+
+# 또는
+
+dic = {}
+for T in range(int(input())):
+    P, C = input().split()
+
+    if C == 'enter':
+        dic[P] = C
+    else:
+        if dic[P]:
+            del dic[P]
+
+for i in sorted(dic, reverse=True):
+    print(i)
+
+
+"""📝 차집합"""
+
+a, b = map(int, input().split())
+A = set(map(int, input().split()))
+B = set(map(int, input().split()))
+C = set(A - B)
+
+print(len(C))
+print(*sorted(C))
+
+
+"""📝 나머지"""
+
+answer = []
+for _ in range(10):
+    N = int(input())
+    answer.append(N % 42)
+
+print(len(set(answer)))
+
+
+"""📝 듣보잡"""
+
+N, M = map(int, input().split())
+R = set([input().strip() for _ in range(N)])
+S = set([input().strip() for _ in range(M)])
+C = set(R & S)
+
+print(len(C))
+print(*sorted(C), sep='\n')
+
+
+"""📝 피시방 알바"""
+
+N = int(input())
+P = set(map(int, input().split()))
+
+if P == N:
+    print(0)
+else:
+    print(N - len(P))
+
+
+"""📝 OX퀴즈"""
+
+for _ in range(int(input())):
+    S = list(input().strip())
+
+    total = []
+    cnt = 0
+    for i in S:
+        if i == 'O':
+            cnt += 1
+            total.append(cnt)
+        else:
+            cnt = 0
+
+    print(sum(total))

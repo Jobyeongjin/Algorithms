@@ -16,20 +16,16 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-N = int(input())
-CARD = list(map(int, input().split()))
-M = int(input())
-CHECK = list(map(int, input().split()))
+for _ in range(int(input())):
+    S = list(input().strip())
 
-dic = {}
-for i in CARD:
-    if i in dic:
-        dic[i] += 1
-    else:
-        dic[i] = 1
+    total = []
+    cnt = 0
+    for i in S:
+        if i == 'O':
+            cnt += 1
+            total.append(cnt)
+        else:
+            cnt = 0
 
-for i in range(M):
-    if CHECK[i] in dic:
-        print(dic[CHECK[i]], end=' ')
-    else:
-        print(0, end=' ')
+    print(sum(total))
