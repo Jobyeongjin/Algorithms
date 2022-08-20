@@ -16,16 +16,12 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-for _ in range(int(input())):
-    S = list(input().strip())
+S = [list(map(int, input().split())) for _ in range(int(input()))]
 
-    total = []
-    cnt = 0
-    for i in S:
-        if i == 'O':
-            cnt += 1
-            total.append(cnt)
-        else:
-            cnt = 0
+for i in S:
+    RANK = 1
+    for j in S:
+        if i[0] < j[0] and i[1] < j[1]:
+            RANK += 1
 
-    print(sum(total))
+    print(RANK, end=' ')

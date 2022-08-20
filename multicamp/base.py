@@ -542,3 +542,170 @@ for _ in range(int(input())):
             cnt = 0
 
     print(sum(total))
+
+
+"""📝 오르막길"""
+
+N = int(input())
+S = list(map(int, input().split()))
+
+start = S[0]
+save = 0
+high = 0
+
+for i in S:
+    if start < i:
+        high += i - start
+    if start >= i:
+        save = max(save, high)
+        high = 0
+
+    start = i
+
+print(max(high, save))
+
+
+"""📝 슈퍼마리오"""
+
+mushroom = [int(input()) for _ in range(10)]
+
+score = 0
+for i in range(10):
+    prev = score
+    score += mushroom[i]
+    if score >= 100:
+        under = 100 - prev
+        over = score - 100
+        if over <= under:
+            print(score)
+            break
+        else:
+            print(prev)
+            break
+else:
+    print(score)
+
+# 또는
+
+mushroom = [int(input()) for _ in range(10)]
+
+result = 0
+score = 0
+for i in mushroom:
+    score += i
+    if abs(score - 100) <= abs(result - 100):
+        result = score
+
+print(result)
+
+# 또는
+
+mushroom = [int(input()) for _ in range(10)]
+
+v1 = 0
+v2 = 0
+score = 0
+for i in mushroom:
+    score += i
+    if score > 100:
+        v1 = score - 100
+        v2 = 100 - (score - i)
+        break
+
+if v1 == v2:
+    print(score)
+elif v1 > v2:
+    print(score - i)
+elif v1 < v2:
+    print(score)
+
+
+"""📝 문자열 반복"""
+
+for _ in range(int(input())):
+    N, S = input().split()
+
+    answer = [i * int(N) for i in S]
+
+    print(*answer, sep='')
+
+
+"""카드놀이"""
+
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+
+a, b = 0, 0
+for i in range(10):
+    if A[i] > B[i]:
+        a += 3
+    elif A[i] < B[i]:
+        b += 3
+    else:
+        a += 1
+        b += 1
+
+print(a, b)
+
+if a > b:
+    print('A')
+elif a < b:
+    print('B')
+elif a == b == 10:
+    print('D')
+else:
+    for i in range(1, 11):
+        if A[-i] > B[-i]:
+            print('A')
+            break
+        elif A[-i] < B[-i]:
+            print('B')
+            break
+        else:
+            continue
+
+
+"""📝 세로읽기"""
+
+S = [input().strip() for _ in range(5)]
+
+for i in range(15):
+    for j in range(5):
+        if i < len(S[j]):
+            print(S[j][i], end='')
+
+
+"""📝 음양더하기"""
+
+
+def solution(absolutes, signs):
+    result = 0
+
+    for i in range(len(signs)):
+        if signs[i]:
+            result += absolutes[i]
+        else:
+            result -= absolutes[i]
+
+    return result
+
+
+"""📝 나는 요리사다"""
+
+SCORE = [sum(list(map(int, input().split()))) for _ in range(5)]
+MAX = max(SCORE)
+
+print(SCORE.index(MAX) + 1, MAX)
+
+
+"""📝 덩치"""
+
+S = [list(map(int, input().split())) for _ in range(int(input()))]
+
+for i in S:
+    RANK = 1
+    for j in S:
+        if i[0] < j[0] and i[1] < j[1]:
+            RANK += 1
+
+    print(RANK, end=' ')
