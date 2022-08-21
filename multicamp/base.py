@@ -630,7 +630,7 @@ for _ in range(int(input())):
     print(*answer, sep='')
 
 
-"""카드놀이"""
+"""📝 카드놀이"""
 
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
@@ -709,3 +709,119 @@ for i in S:
             RANK += 1
 
     print(RANK, end=' ')
+
+
+"""📝 직사각형 네개의 합집합의 면적 구하기"""
+
+NOTE = [[0 for _ in range(101)] for _ in range(101)]
+
+for _ in range(4):
+    x1, y1, x2, y2 = map(int, input().split())
+
+    for x in range(x1, x2):
+        for y in range(y1, y2):
+            NOTE[x][y] = 1
+
+answer = 0
+for row in NOTE:
+    answer += sum(row)
+
+print(answer)
+
+
+"""📝 2차원 배열의 합 🚨"""
+
+# 시간초과코드
+
+N, M = map(int, input().split())
+
+ARR = [list(map(int, input().split())) for _ in range(N)]
+
+Z = int(input())
+
+for i in range(Z):
+    i, j, x, y = map(int, input().split())
+
+    i -= 1
+    j -= 1
+    x -= 1
+    y -= 1
+
+    answer = 0
+    for r in range(i, x + 1):
+        for c in range(j, y + 1):
+            answer += ARR[r][c]
+
+    print(answer)
+
+# 정답코드
+
+N, M = map(int, input().split())
+arr = [list(map(int, input().split())) for _ in range(N)]
+
+K = int(input())
+dp = [[0] * (M + 1) for _ in range(N + 1)]
+
+for i in range(1, N + 1):
+    for j in range(1, M + 1):
+        dp[i][j] = arr[i-1][j-1] + dp[i][j-1] + dp[i-1][j] - dp[i-1][j-1]
+
+for _ in range(K):
+    i, j, x, y = map(int, input().split())
+    print(dp[x][y] - dp[x][j-1] - dp[i-1][y] + dp[i-1][j-1])
+
+
+"""📝 블랙잭"""
+
+N, M = map(int, input().split())
+
+CARD = list(map(int, input().split()))
+
+answer = 0
+for i in range(N - 2):
+    for j in range(i + 1, N - 1):
+        for k in range(j + 1, N):
+            total = CARD[i] + CARD[j] + CARD[k]
+
+            if answer < total <= M:
+                answer = total
+            if total == M:
+                answer = total
+
+print(answer)
+
+
+"""📝 문서 검색"""
+
+WORD = input().strip()
+C = input().strip()
+
+N = len(C)
+i = 0
+cnt = 0
+while i < len(WORD):
+    if WORD[i: i + N] == C:
+        cnt += 1
+        i += N
+    else:
+        i += 1
+
+print(cnt)
+
+# 또는
+
+WORD = input().strip()
+C = input().strip()
+
+answer = WORD.split(C)
+
+print(len(answer) - 1)
+
+# 또는
+
+WORD = input().strip()
+C = input().strip()
+
+answer = WORD.count(C)
+
+print(answer)

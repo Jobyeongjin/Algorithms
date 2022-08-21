@@ -16,12 +16,17 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-S = [list(map(int, input().split())) for _ in range(int(input()))]
+WORD = input().strip()
+C = input().strip()
 
-for i in S:
-    RANK = 1
-    for j in S:
-        if i[0] < j[0] and i[1] < j[1]:
-            RANK += 1
+N = len(C)
+i = 0
+cnt = 0
+while i < len(WORD):
+    if WORD[i: i + N] == C:
+        cnt += 1
+        i += N
+    else:
+        i += 1
 
-    print(RANK, end=' ')
+print(cnt)
