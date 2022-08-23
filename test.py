@@ -16,19 +16,30 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-for tc in range(1, int(input()) + 1):
-    N = int(input())
-    DECK = input().split()
-    cut = N - N // 2
+T = int(input())
+N, M = map(int, input().split())
+K = int(input())
 
-    one = deque(DECK[:cut])
-    two = deque(DECK[cut:])
+JOIN = [[] for _ in range(T + 1)]
 
-    answer = []
-    while one or two:
-        if one:
-            answer.append(one.popleft())
-        if two:
-            answer.append(two.popleft())
+for _ in range(K):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
 
-    print(f'#{tc} {" ".join(answer)}')
+visited = [0] * (T + 1)
+
+
+def DFS(v):
+    for i in JOIN[v]:
+        if not visited[i]:
+            visited[i] = visited[v] + 1
+            DFS(i)
+
+
+DFS(N)
+
+if visited[M] > 0:
+    print(visited[M])
+else:
+    print(-1)

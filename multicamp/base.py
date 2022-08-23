@@ -901,3 +901,34 @@ for i in range(1, n + 1):
         cnt += 1
 
 print(cnt)
+
+
+"""📝 촌수계산"""
+
+T = int(input())
+N, M = map(int, input().split())
+K = int(input())
+
+JOIN = [[] for _ in range(T + 1)]
+
+for _ in range(K):
+    v1, v2 = map(int, input().split())
+    JOIN[v1].append(v2)
+    JOIN[v2].append(v1)
+
+visited = [0] * (T + 1)
+
+
+def DFS(v):
+    for i in JOIN[v]:
+        if not visited[i]:
+            visited[i] = visited[v] + 1
+            DFS(i)
+
+
+DFS(N)
+
+if visited[M] > 0:
+    print(visited[M])
+else:
+    print(-1)
