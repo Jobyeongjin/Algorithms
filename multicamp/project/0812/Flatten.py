@@ -6,14 +6,14 @@ for tc in range(1, T + 1):
     BOX = list(map(int, input().split()))  # 박스 리스트
 
     for _ in range(N):  # 입력으로 주어진 총 이동수만큼 반복
-        MAX = max(BOX)  # 가장 큰 수
-        MIN = min(BOX)  # 가장 작은 수
+        max_ = max(BOX)  # 가장 큰 수
+        min_ = min(BOX)  # 가장 작은 수
 
-        I_MAX = BOX.index(MAX)  # 해당 인덱스 구하기
-        I_MIN = BOX.index(MIN)
+        i_max = BOX.index(max_)  # 해당 인덱스 구하기
+        i_min = BOX.index(min_)
 
-        BOX[I_MAX] -= 1  # 해당 인덱스 요소 값에서 큰 값은 빼주고 작은 값은 더해준다
-        BOX[I_MIN] += 1
+        BOX[i_max] -= 1  # 해당 인덱스 요소 값에서 큰 값은 빼주고 작은 값은 더해준다
+        BOX[i_min] += 1
 
     print(f'#{tc} {max(BOX) - min(BOX)}')
 
