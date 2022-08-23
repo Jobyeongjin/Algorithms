@@ -863,3 +863,41 @@ for i in visited:
         answer += 1
 
 print(answer)
+
+
+"""📝 연결 요소의 개수"""
+
+n, m = map(int, input().split())
+
+join = [[] for _ in range(n + 1)]
+
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    join[v1].append(v2)
+    join[v2].append(v1)
+
+visited = [0] * (n + 1)
+stack = []
+
+
+def DFS(v):
+    visited[v] = 1
+    stack.append(v)
+
+    while stack:
+        cur = stack.pop()
+
+        for d in join[cur]:
+            if not visited[d]:
+                visited[d] = 1
+                stack.append(d)
+
+
+visited[0] = 1
+cnt = 0
+for i in range(1, n + 1):
+    if not visited[i]:
+        DFS(i)
+        cnt += 1
+
+print(cnt)
