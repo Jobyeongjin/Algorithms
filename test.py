@@ -16,30 +16,44 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-T = int(input())
 N, M = map(int, input().split())
-K = int(input())
+PAINT = [list(map(int, input().split())) for _ in range(N)]
 
-JOIN = [[] for _ in range(T + 1)]
+visited = [[0 for _ in range(M)] for _ in range(N)]
+delta = ((0, 1), (1, 0), (-1, 0), (0, -1))
 
-for _ in range(K):
-    v1, v2 = map(int, input().split())
-    JOIN[v1].append(v2)
-    JOIN[v2].append(v1)
-
-visited = [0] * (T + 1)
+pprint(PAINT)
+pprint(visited)
 
 
-def DFS(v):
-    for i in JOIN[v]:
-        if not visited[i]:
-            visited[i] = visited[v] + 1
-            DFS(i)
+def DFS(r, c):
+    area = 0
+    stack = []
+    stack.append((r, c))
+
+    while stack:
+        pr, pc = stack.pop()
+
+        if visited[pr][pc] == 0 and PAINT[pr][pc] == 1:
+            visited[pr][pc] = 1
+            area += 1
+
+        for dr, dc in delta:
+            nr = pr + dr
+            nc = pc + dc
+
+            if -1 < nr < N and -1 < nc < M:
+                if visited[nr][nc] == 0 and PAINT[nr][nc] == 1:
+                    stack.append((nr, nc))
+
+    return area
 
 
-DFS(N)
+result = []
+for i in range(N):
+    for j in range(M):
+        if visited[i][j] == 0 and PAINT[i][j] == 1:
+            result.append(DFS(i, j))
 
-if visited[M] > 0:
-    print(visited[M])
-else:
-    print(-1)
+print(len(result))
+print(max(result)) if len(result) != 0 else print(0)
