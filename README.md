@@ -117,3 +117,4 @@
 
 > - [D1](./swea/d1.py)
 > - [D2](./swea/d2.py)
+> - [D3](./swea/d3.py)
