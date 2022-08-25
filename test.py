@@ -16,35 +16,28 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-sys.setrecursionlimit(10**9)
-delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+M = 8
+for tc in range(1, 11):
+    N = int(input())
+    arr = [list(input().strip()) for _ in range(M)]
 
+    answer = 0
+    for i in range(M):
+        for j in range(M - N + 1):
+            r = []
+            for k in range(N):
+                r.append(arr[i][j + k])
 
-def DFS(r, c, h):
+            if r == r[::-1]:
+                answer += 1
 
-    for dr, dc in delta:
-        nr = r + dr
-        nc = c + dc
+    for i in range(M - N + 1):
+        for j in range(M):
+            c = []
+            for k in range(N):
+                c.append(arr[i + k][j])
 
-        if -1 < nr < N and -1 < nc < N:
-            if visited[nr][nc] == 0 and area[nr][nc] > h:
-                visited[nr][nc] = 1
-                DFS(nr, nc, h)
+            if c == c[::-1]:
+                answer += 1
 
-
-N = int(input())
-area = [list(map(int, input().split())) for _ in range(N)]
-
-answer = 1
-for k in range(max(map(max, area))):
-    visited = [[0 for _ in range(N)] for _ in range(N)]
-    cnt = 0
-    for i in range(N):
-        for j in range(N):
-            if visited[i][j] == 0 and area[i][j] > k:
-                cnt += 1
-                visited[i][j] = 1
-                DFS(i, j, k)
-    answer = max(answer, cnt)
-
-print(answer)
+    print(f'#{tc} {answer}')
