@@ -22,3 +22,15 @@ def queen(x, n, col):
 def solution(n):
     col = [0] * n  # 각 행의 퀸의 위치를 담을 리스트
     return queen(0, n, col)
+
+
+"""📝 JadenCase 문자열 만들기"""
+# capitalize() 함수는 알파벳 단어 첫글자를 대문자로 변환하고 나머지는 소문자로 변환한다.
+
+
+def solution(s):
+    s = s.split(' ')
+    for i in range(len(s)):
+        s[i] = s[i].capitalize()
+
+    return ' '.join(s)

@@ -153,3 +153,85 @@ def solution(n):
     answer = sorted(list(str(n)), reverse=True)
 
     return int(''.join(answer))
+
+
+"""📝 자연수 뒤집어 배열로 만들기"""
+
+
+def solution(n):
+    answer = []
+
+    for i in str(n)[::-1]:
+        answer.append(int(i))
+
+    return answer
+
+
+"""📝 자릿수 더하기"""
+
+
+def solution(n):
+    answer = 0
+
+    for i in str(n):
+        answer += int(i)
+
+    return answer
+
+
+"""📝 이상한 문자 만들기"""
+
+
+def solution(s):
+    answer = []
+    s = s.split(' ')
+
+    for i in range(len(s)):
+        result = ''
+        for j in range(len(s[i])):
+            if j % 2 == 0:
+                result += s[i][j].upper()
+            else:
+                result += s[i][j].lower()
+
+        answer.append(result)
+
+    return ' '.join(answer)
+
+
+"""📝 약수의 합"""
+
+
+def solution(n):
+    answer = 0
+
+    for i in range(1, n + 1):
+        if n % i == 0:
+            answer += i
+
+    return answer
+
+
+"""📝 시저 암호 🚨"""
+
+
+def solution(s, n):
+    s = list(s)
+
+    for i in range(len(s)):
+        if s[i].isupper():  # 모든 문자열이 대문자이면 True
+            s[i] = chr((ord(s[i]) - ord('A') + n) % 26 + ord('A'))
+        elif s[i].islower():  # 모든 문자열이 소문자이면 True
+            s[i] = chr((ord(s[i]) - ord('a') + n) % 26 + ord('a'))
+
+    return ''.join(s)
+
+# 아스키코드로 치환 후 거리 계산 후 다시 문자로 반환한다.
+# %26은 범위를 벗어나지 않게 한다.(알파벳은 총 25글자)
+
+
+"""📝 문자열을 정수로 바꾸기"""
+
+
+def solution(s):
+    return int(s)
