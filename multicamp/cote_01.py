@@ -235,3 +235,67 @@ def solution(s, n):
 
 def solution(s):
     return int(s)
+
+
+"""📝 수박수박수?"""
+
+
+def solution(n):
+    answer = ''
+    for i in range(1, n + 1):
+        if i % 2 == 0:
+            answer += '박'
+        else:
+            answer += '수'
+    return answer
+
+
+"""📝 서울에서 김서방 찾기"""
+
+
+def solution(seoul):
+    answer = ''
+    for i in range(len(seoul)):
+        if seoul[i] == 'Kim':
+            answer = f'김서방은 {i}에 있다'
+    return answer
+
+
+"""📝 문자열 다루기 기본🚨"""
+# isnumeric() -> 숫자로만 구성된 문자열로, 문자열에 숫자만 있다면 True, 아니면 False을 반환
+
+
+def solution(s):
+    answer = True
+    s = list(s)
+
+    for i in s:
+        if i.isnumeric() and (len(s) == 4 or len(s) == 6):  # 숫자이면서 길이가 4 또는 6인 경우
+            pass
+        else:   # 그외는 False 후 종료
+            answer = False
+            break
+
+    return answer
+
+
+"""📝 문자열 내림차순으로 배치하기"""
+
+
+def solution(s):
+    answer = ''
+    answer = s[::-1]
+    return answer
+
+
+"""📝 문자열 내 p와 y의 개수"""
+
+
+def solution(s):
+    p = s.count('P') + s.count('p')
+    y = s.count('Y') + s.count('y')
+
+    if p == y:
+        return True
+    else:
+        return False
