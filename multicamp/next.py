@@ -1,3 +1,5 @@
+from collections import deque
+
 """📝 팩토리얼"""
 # 0이면 1, 아니라면 -1씩한 값을 곱한다.
 
@@ -103,3 +105,45 @@ print(2**N - 1)  # 하노이 탑 완성 횟수
 
 if N <= 20:  # 20이하일 때만 실행
     hanoi(1, 2, 3, N)
+
+
+"""📝 토마토"""
+# 시작좌표 1을 찾아 BFS를 실행한다.
+# 4방위로 다음 좌표를 탐색하면서 익지 않은 토마토라면 기준 좌표에 + 1을 더하면서 익히고, 좌표는 리스트에 저장한다.
+# 그렇게 완성된 토마토 밭에 0이 있다면 -1을 출력하고, 아니라면 최대값에서 -1한 값을 출력한다.
+
+m, n = map(int, input().split())
+tomato = [list(map(int, input().split())) for _ in range(n)]
+
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+
+queue = deque([])
+for i in range(n):
+    for j in range(m):
+        if tomato[i][j] == 1:
+            queue.append([i, j])
+
+
+def BFS():
+    while queue:
+        r, c = queue.popleft()
+
+        for dr, dc in delta:
+            nr, nc = r + dr, c + dc
+
+            if -1 < nr < n and -1 < nc < m:
+                if tomato[nr][nc] == 0:
+                    tomato[nr][nc] = tomato[r][c] + 1
+                    queue.append([nr, nc])
+
+
+BFS()
+answer = 0
+for i in tomato:
+    for j in i:
+        if j == 0:
+            print(-1)
+            exit(0)
+    answer = max(answer, max(i))
+
+print(answer - 1)

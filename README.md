@@ -84,6 +84,7 @@
 >   - [등산로 조성](./multicamp/project/0812/등산로조성.py)
 > - [그외 💭]()
 >   - [기초 능력](./multicamp/base.py)
+>   - [DFS 이후](./multicamp/next.py)
 >   - [코딩 테스트 필수 풀이]()
 >     - [Lv1 /](./multicamp/cote_01.py) [Lv2 ](./multicamp/cote_02.py)
 

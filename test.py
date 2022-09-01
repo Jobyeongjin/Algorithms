@@ -16,37 +16,41 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-dr = [-1, 0, 0, 1]
-dc = [0, -1, 1, 0]
+m, n = map(int, input().split())
+tomato = [list(map(int, input().split())) for _ in range(n)]
 
-for _ in range(int(input())):
-    M, N, K = map(int, input().split())
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
 
-    land = [[0] * M for _ in range(N)]
-    visited = [[0] * M for _ in range(N)]
+queue = deque([])
+for i in range(n):
+    for j in range(m):
+        if tomato[i][j] == 1:
+            queue.append([i, j])
 
-    for _ in range(K):
-        x, y = map(int, input().split())
-        land[y][x] = 1
+print(tomato)
 
-    cnt = 0
-    for i in range(N):
-        for j in range(M):
-            if land[i][j] == 1 and visited[i][j] == 0:
-                cnt += 1
-                stack = [(i, j)]
-                visited[i][j] = 1
 
-                while stack:
-                    cur = stack.pop()
+def BFS():
+    while queue:
+        r, c = queue.popleft()
 
-                    for k in range(4):
-                        nr = cur[0] + dr[k]
-                        nc = cur[1] + dc[k]
+        for dr, dc in delta:
+            nr, nc = r + dr, c + dc
 
-                        if -1 < nr < N and -1 < nc < M:
-                            if land[nr][nc] == 1 and visited[nr][nc] == 0:
-                                visited[nr][nc] = 1
-                                stack.append((nr, nc))
+            if -1 < nr < n and -1 < nc < m:
+                if tomato[nr][nc] == 0:
+                    tomato[nr][nc] = tomato[r][c] + 1
+                    queue.append([nr, nc])
 
-    print(cnt)
+
+BFS()
+pprint(tomato)
+answer = 0
+for i in tomato:
+    for j in i:
+        if j == 0:
+            print(-1)
+            exit(0)
+    answer = max(answer, max(i))
+
+print(answer - 1)
