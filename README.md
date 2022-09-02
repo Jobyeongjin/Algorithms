@@ -121,6 +121,7 @@
 > - [집합과 맵](./baekjoon/map.py)
 > - [기하](./baekjoon/giha.py)
 > - [스택](./baekjoon/stack.py)
+> - [큐, 덱](./baekjoon/deque.py)
 
 <br />
 
