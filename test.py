@@ -16,22 +16,14 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = map(int, input().split())
+n = int(input())
 arr = list(map(int, input().split()))
-q = deque([i for i in range(1, n + 1)])
+o = [-1] * n
+stack = []
 
-cnt = 0
-for i in arr:
-    while True:
-        if q[0] == i:
-            q.popleft()
-            break
-        else:
-            if q.index(i) < len(q) // 2:
-                q.rotate(-1)
-                cnt += 1
-            else:
-                q.rotate(1)
-                cnt += 1
+for i in range(n):
+    while stack and arr[stack[-1]] < arr[i]:
+        o[stack.pop()] = arr[i]
+    stack.append(i)
 
-print(cnt)
+print(o)

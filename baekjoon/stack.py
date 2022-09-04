@@ -1,4 +1,4 @@
-'''괄호 '''
+'''📝 괄호'''
 # 스택에 추가하면서 괄호 짝을 만나면 제거한다.
 
 N = int(input())
@@ -82,7 +82,7 @@ for _ in range(N):
     solve()
 
 
-'''제로'''
+'''📝 제로'''
 # 스택에 추가하면서 0이 나오고 스택에 다른 수가 있을 경우 지워준다.
 
 S = [int(input()) for _ in range(int(input()))]
@@ -105,7 +105,7 @@ else:
     print(sum(stack))
 
 
-'''균형잡힌 세상'''
+'''📝 균형잡힌 세상'''
 # 여는 괄호를 스텍에 넣으면서 닫는 괄호를 만나면 제거한다. 단, 마지막 요소와 짝이 맞을 경우만 해당하며 아니면 스택에 추가한다.
 
 while True:
@@ -134,7 +134,7 @@ while True:
     print('no' if stack else 'yes')
 
 
-'''스택'''
+'''📝 스택'''
 # 조건에 맞게 조건문을 작성한다. 이렇게 하면 시간초과가 뜨는데 readline으로 하니 통과했다.
 
 N = int(input())
@@ -166,3 +166,47 @@ for _ in range(N):
             print(stack[-1])
         else:
             print(-1)
+
+
+"""📝 스택 수열"""
+
+n = int(input())
+stack = []
+answer = []
+cnt = 0
+check = True
+
+for i in range(n):
+    num = int(input())
+
+    while cnt < num:
+        cnt += 1
+        stack.append(cnt)
+        answer.append('+')
+
+    if stack[-1] == num:
+        stack.pop()
+        answer.append('-')
+    else:
+        check = False
+        break
+
+if check == False:
+    print('NO')
+else:
+    print(*answer, sep='\n')
+
+
+"""📝 오큰수"""
+
+n = int(input())
+arr = list(map(int, input().split()))
+o = [-1] * n
+stack = []
+
+for i in range(n):
+    while stack and arr[stack[-1]] < arr[i]:
+        o[stack.pop()] = arr[i]
+    stack.append(i)
+
+print(*o)
