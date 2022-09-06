@@ -1,4 +1,4 @@
-"""수 찾기"""
+"""📝 수 찾기"""
 
 n = int(input())
 card = list(map(int, input().split()))
@@ -19,7 +19,7 @@ for i in range(m):
         print(0)
 
 
-"""숫자 카드 2"""
+"""📝 숫자 카드 2"""
 
 n = int(input())
 card = list(map(int, input().split()))
@@ -40,7 +40,7 @@ for i in range(m):
         print(0, end=' ')
 
 
-"""랜선 자르기"""
+"""📝 랜선 자르기"""
 
 k, n = map(int, input().split())
 arr = [int(input()) for _ in range(k)]
@@ -59,3 +59,34 @@ while start <= end:
         end = mid - 1  # 아니라면 절반에서 1을 뺀 값을 끝점으로 정해 다시 시작
 
 print(end)
+
+
+"""📝 공유기 설치"""
+
+
+n, c = map(int, input().split())
+
+arr = [int(input()) for _ in range(n)]
+arr.sort()
+
+start = 1
+end = arr[-1] - arr[0]
+answer = 0
+
+while start <= end:
+    mid = (start + end) // 2
+    old = arr[0]
+    cnt = 1
+
+    for i in range(1, len(arr)):
+        if arr[i] >= old + mid:
+            cnt += 1
+            old = arr[i]
+
+    if cnt >= c:
+        start = mid + 1
+        answer = mid
+    else:
+        end = mid - 1
+
+print(answer)

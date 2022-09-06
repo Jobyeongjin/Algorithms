@@ -16,20 +16,44 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-k, n = map(int, input().split())
-arr = [int(input()) for _ in range(k)]
+n = int(input())
 
-start = 1
-end = max(arr)
+graph = [list(map(int, input().strip())) for _ in range(n)]
+visited = [[0 for _ in range(n)] for _ in range(n)]
 
-while start <= end:
-    mid = (start + end) // 2  # 중간 위치
-    cnt = 0  # 랜선 수
-    for i in arr:
-        cnt += i // mid  # 분할된 랜선 수
-    if cnt >= n:
-        start = mid + 1  # 랜선 수가 목표치보다 크다면 절반에서 1을 더한 값을 시작점으로 두고 다시 시작
-    else:
-        end = mid - 1  # 아니라면 절반에서 1을 뺀 값을 끝점으로 정해 다시 시작
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
 
-print(end)
+
+def dfs(r, c):
+    stack = []
+    stack.append((r, c))
+
+    area = 0
+    while stack:
+        pr, pc = stack.pop()
+
+        if visited[pr][pc] == 0 and graph[pr][pc] == 1:
+            visited[pr][pc] = 1
+            area += 1
+
+        for dr, dc in delta:
+            nr = dr + pr
+            nc = dc + pc
+
+            if -1 < nr < n and -1 < nc < n:
+                if visited[nr][nc] == 0 and graph[nr][nc] == 1:
+                    stack.append((nr, nc))
+
+    return area
+
+
+answer = []
+for i in range(n):
+    for j in range(n):
+        if visited[i][j] == 0 and graph[i][j] == 1:
+            answer.append(dfs(i, j))
+answer.sort()
+
+print(len(answer))
+for i in answer:
+    print(i)
