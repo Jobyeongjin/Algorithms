@@ -1,3 +1,5 @@
+from collections import deque
+
 """📝 바이러스"""
 
 n = int(input())
@@ -110,3 +112,120 @@ answer.sort()
 print(len(answer))
 for i in answer:
     print(i)
+
+
+"""📝 깊이 우선 탐색 2"""
+
+n, m, r = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+visited = [0 for _ in range(n + 1)]
+answer = [0] * (n + 1)
+cnt = 1
+
+
+def DFS(v):
+    global cnt
+    visited[v] = 1
+
+    answer[v] = cnt
+    graph[v].sort(reverse=True)
+
+    for i in graph[v]:
+        if not visited[i]:
+            cnt += 1
+            DFS(i)
+
+
+DFS(r)
+
+for i in answer[1:]:
+    print(i)
+
+
+"""📝 너비 우선 탐색 1"""
+
+n, m, r = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+visited = [0] * (n + 1)
+answer = [0] * (n + 1)
+cnt = 1
+
+for i in graph:
+    i.sort()
+
+
+def BFS(s):
+    global cnt
+    visited[s] = 1
+    queue = deque([s])
+
+    while queue:
+        v = queue.popleft()
+        answer[v] = cnt
+        cnt += 1
+        for i in graph[v]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = 1
+
+
+BFS(r)
+
+for i in answer[1:]:
+    print(i)
+
+
+"""📝 DFS와 BFS"""
+
+n, m, v = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+visited = [0] * (n + 1)
+answer = [0] * (n + 1)
+
+for i in graph:
+    i.sort()
+
+
+def BFS(s):
+    answer[s] = 1
+    queue = deque([s])
+
+    while queue:
+        v = queue.popleft()
+        print(v, end=' ')
+        for i in graph[v]:
+            if not answer[i]:
+                queue.append(i)
+                answer[i] = 1
+
+
+def DFS(s):
+    visited[s] = 1
+    print(s, end=' ')
+
+    for i in graph[s]:
+        if not visited[i]:
+            DFS(i)
+
+
+DFS(v)
+print()
+BFS(v)
