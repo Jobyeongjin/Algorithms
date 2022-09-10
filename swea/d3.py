@@ -153,3 +153,34 @@ for tc in range(1, 11):
                 answer += 1
 
     print(f'#{tc} {answer}')
+
+
+"""📝 거듭 제곱"""
+
+t = 10
+for tc in range(1, t + 1):
+    n = int(input())
+    a, b = map(int, input().split())
+
+    print(f'#{tc} {a ** b}')
+
+
+"""📝 Magnetic"""
+
+t = 10
+for tc in range(1, t + 1):
+    n = int(input())
+    arr = list(map(int, input().split()) for _ in range(n))
+
+    cnt = 0
+    for i in range(n):
+        stack = []
+        check = False
+        for j in range(n):
+            if arr[j][i] == 1:
+                stack.append(1)
+            if stack and arr[j][i] == 2:
+                stack.clear()
+                cnt += 1
+
+    print(f'#{tc} {cnt}')
