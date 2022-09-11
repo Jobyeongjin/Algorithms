@@ -229,3 +229,41 @@ def DFS(s):
 DFS(v)
 print()
 BFS(v)
+
+
+"""📝 너비 우선 탐색 2"""
+
+n, m, r = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+visited = [0] * (n + 1)
+answer = [0] * (n + 1)
+cnt = 1
+
+for i in graph:
+    i.sort(reverse=True)
+
+
+def BFS(s):
+    global cnt
+    visited[s] = 1
+    q = deque([s])
+
+    while q:
+        v = q.popleft()
+        answer[v] = cnt
+        cnt += 1
+        for i in graph[v]:
+            if not visited[i]:
+                q.append(i)
+                visited[i] = 1
+
+
+BFS(r)
+
+print(*answer[1:], sep='\n')
