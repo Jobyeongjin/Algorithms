@@ -184,3 +184,81 @@ for tc in range(1, t + 1):
                 cnt += 1
 
     print(f'#{tc} {cnt}')
+
+
+"""📝 GNS"""
+
+t = int(input())
+alpha = ['ZRO', 'ONE', 'TWO', 'THR', 'FOR', 'FIV', 'SIX', 'SVN', 'EGT', 'NIN']
+
+for _ in range(1, t + 1):
+    tc, n = input().split()
+    s = input().split()
+
+    dic = {}
+    for i in range(len(alpha)):
+        dic[alpha[i]] = 0
+
+    for i in s:
+        dic[i] += 1
+
+    print(tc)
+    for i in alpha:
+        print(' '.join([i] * dic[i]), end=' ')
+    print()
+
+
+"""📝 암호생성기"""
+
+t = 10
+for _ in range(t):
+    tc = int(input())
+    n = list(map(int, input().split()))
+
+    i = 1
+    while True:
+        move = n.pop(0) - i
+        n.append(move)
+        i += 1
+
+        if i > 5:
+            i = 1
+
+        if n[-1] <= 0:
+            n[-1] = 0
+            break
+
+    print(f'#{tc}', end=' ')
+    print(*n)
+
+
+"""📝 암호문1 🚨"""
+
+for tc in range(1, 11):
+    n = int(input())
+    base = list(map(int, input().split()))
+    o = int(input())
+    order = list(input().split())
+
+    type = ''
+    pos = -1
+    cnt = -1
+    for i in range(len(order)):  # 인덱스 접근
+        if order[i] == 'I':  # I라면 해당값 리셋
+            type = order[i]
+            pos = -1
+            cnt = -1
+        else:  # 숫자라면
+            if type == 'I' and pos == -1:  # I인데, 위치값이 지정되지 않았다면
+                pos = int(order[i])
+                continue
+            else:
+                if cnt == -1:  # 위치는 지정되었는데, 삽입할 개수가 지정되지 않았다면
+                    cnt = int(order[i])
+                    continue
+
+                base.insert(pos, order[i])  # 해당 위치에 값 입력
+                pos += 1
+
+    print(f'#{tc}', end=' ')
+    print(*base[:10])

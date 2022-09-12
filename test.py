@@ -17,16 +17,31 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
+for tc in range(1, 11):
+    n = int(input())
+    base = list(map(int, input().split()))
+    o = int(input())
+    order = list(input().split())
 
-heap = []
-for _ in range(n):
-    num = int(input())
-
-    if num == 0:
-        if heap:
-            print(heapq.heappop(heap)[1])
+    type = ''
+    pos = -1
+    cnt = -1
+    for i in range(len(order)):
+        if order[i] == 'I':
+            type = order[i]
+            pos = -1
+            cnt = -1
         else:
-            print(0)
-    else:
-        heapq.heappush(heap, (abs(num), num))
+            if type == 'I' and pos == -1:
+                pos = int(order[i])
+                continue
+            else:
+                if cnt == -1:
+                    cnt = int(order[i])
+                    continue
+
+                base.insert(pos, order[i])
+                pos += 1
+
+    print(f'#{tc}', end=' ')
+    print(*base[:10])
