@@ -17,31 +17,28 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-for tc in range(1, 11):
-    n = int(input())
-    base = list(map(int, input().split()))
-    o = int(input())
-    order = list(input().split())
+s = input()
+check = 0
+answer = ''
+stack = ''
 
-    type = ''
-    pos = -1
-    cnt = -1
-    for i in range(len(order)):
-        if order[i] == 'I':
-            type = order[i]
-            pos = -1
-            cnt = -1
+for i in s:
+    if check == 0:
+        if i == '<':
+            check = 1
+            stack += i
+        elif i == ' ':
+            stack += i
+            answer += stack
+            stack = ''
         else:
-            if type == 'I' and pos == -1:
-                pos = int(order[i])
-                continue
-            else:
-                if cnt == -1:
-                    cnt = int(order[i])
-                    continue
+            stack = i + stack
 
-                base.insert(pos, order[i])
-                pos += 1
+    elif check == 1:
+        stack += i
+        if i == '>':
+            check = 0
+            answer += stack
+            stack = ''
 
-    print(f'#{tc}', end=' ')
-    print(*base[:10])
+print(answer + stack)

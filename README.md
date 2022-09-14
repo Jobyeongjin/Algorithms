@@ -124,6 +124,7 @@
 > - [큐, 덱](./baekjoon/deque.py)
 > - [우선순위 큐](./baekjoon/heap.py)
 > - [그래프와 순회](./baekjoon/graph.py)
+> - [스터디](./baekjoon/stude.py)
 
 <br />
 
