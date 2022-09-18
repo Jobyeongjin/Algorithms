@@ -1,4 +1,4 @@
-"""10870 - 피보나치 수 5"""
+"""📝 10870 - 피보나치 수 5"""
 # 인덱스 접근
 # 앞에 두자리를 더해서 리스트에 추가
 # 마지막 값 출력
@@ -13,7 +13,7 @@ for i in range(2, n + 1):
 print(answer[n])
 
 
-"""10250 - ACM 호텔"""
+"""📝 10250 - ACM 호텔"""
 # 층수와 룸 번호를 구해서 더하기 -> 층수 = 나눈 나머지, 룸 번호 = 나눈 몫 +1
 # 예외는 찾을 방과 층 높이가 같은 경우 -> 층수 = 높이, 룸 번호 = -1
 
@@ -31,7 +31,7 @@ for _ in range(1, t + 1):
     print(floor * 100 + room)
 
 
-"""17413 - 단어 뒤집기 2"""
+"""📝 17413 - 단어 뒤집기 2"""
 # 문자열을 반복하면서 <> 구간에서는 스위칭하면서 그대로 스택에 입력
 # 공백을 제외한 나머지는 반대로 입력
 
@@ -62,7 +62,7 @@ for i in s:
 print(answer + stack)
 
 
-"""10973 - 이전 순열 """
+"""📝 10973 - 이전 순열 """
 
 n = int(input())
 arr = list(map(int, input().split()))
@@ -88,7 +88,7 @@ else:
     print(*answer)
 
 
-"""16935 - 배열 돌리기 3"""
+"""📝 16935 - 배열 돌리기 3"""
 # zip() -> 길이가 같은(순회가능한) 객체의 인자를 받아서 인덱스끼리 묶어준다
 
 
@@ -159,3 +159,121 @@ for i in ope:
 
 for i in arr:
     print(*i)
+
+
+"""1138 - 한 줄로 서기"""
+
+
+"""3986 - 좋은 단어"""
+# 단어를 하나씩 스택에 추가하면서 마지막 요소와 동일하다면 스택에서 제거
+# 스택에 비었다면 카운팅
+
+n = int(input())
+
+cnt = 0
+for _ in range(n):
+    s = input().strip()
+    stack = []
+
+    for i in range(len(s)):
+        if stack and s[i] == stack[-1]:
+            stack.pop()
+        else:
+            stack.append(s[i])
+
+    if not stack:
+        cnt += 1
+
+print(cnt)
+
+
+"""2+1 세일"""
+# 비싼 제품을 무료로 받아야 최소비용이 가능하니 오름차순으로 정렬
+# 3번째 요소는 무료이니 패스
+
+n = int(input())
+price = [int(input()) for _ in range(n)]
+price.sort(reverse=True)
+
+answer = 0
+cnt = 0
+for i in range(n):
+    cnt += 1
+    if cnt == 3:
+        cnt = 0
+        continue
+    answer += price[i]
+
+print(answer)
+
+
+"""섬의 개수"""
+# 입력 마지막은 제외
+# 완전 탐색으로 1을 만나면 DFS 실행
+
+while True:
+    w, h = map(int, input().split())
+    maps = [list(map(int, input().split())) for _ in range(h)]
+
+    if w == 0 and h == 0:
+        break
+
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
+             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+
+    cnt = 0
+    for i in range(h):
+        for j in range(w):
+            if maps[i][j] == 1:
+                stack = []
+                stack.append((i, j))
+
+                while stack:
+                    (c, r) = stack.pop()
+                    if maps[c][r] == 1:
+                        maps[c][r] = 0
+
+                        for dr, dc in delta:
+                            nr = dr + r
+                            nc = dc + c
+
+                            if -1 < nc < h and -1 < nr < w:
+                                if maps[nc][nr] == 1:
+                                    stack.append((nc, nr))
+                cnt += 1
+
+    print(cnt)
+
+
+#
+
+def DFS(c, r):
+    maps[c][r] = 0
+
+    for dr, dc in delta:
+        nr = dr + r
+        nc = dc + c
+
+        if -1 < nc < h and -1 < nr < w and maps[nc][nr] == 1:
+            maps[nc][nr] = 0
+            DFS(nc, nr)
+
+
+while True:
+    w, h = map(int, input().split())
+    maps = [list(map(int, input().split())) for _ in range(h)]
+
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
+             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+
+    if w == 0 and h == 0:
+        break
+
+    cnt = 0
+    for i in range(h):
+        for j in range(w):
+            if maps[i][j] == 1:
+                DFS(i, j)
+                cnt += 1
+
+    print(cnt)
