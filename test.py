@@ -17,32 +17,11 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-def DFS(c, r):
-    for dr, dc in delta:
-        nr = dr + r
-        nc = dc + c
+n = int(input())
+arr = list(map(int, input().split()))
+answer = []
 
-        if -1 < nc < h and -1 < nr < w and maps[nc][nr] == 1:
-            maps[nc][nr] = 0
-            DFS(nc, nr)
+for i in range(len(arr)-1, -1, -1):
+    answer.insert(arr[i], i + 1)
 
-
-while True:
-    w, h = map(int, input().split())
-    maps = [list(map(int, input().split())) for _ in range(h)]
-
-    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
-             (0, 1), (-1, 1), (-1, 0), (-1, -1))
-
-    if w == 0 and h == 0:
-        break
-
-    cnt = 0
-    for i in range(h):
-        for j in range(w):
-            if maps[i][j] == 1:
-                maps[i][j] = 0
-                DFS(i, j)
-                cnt += 1
-
-    print(cnt)
+print(*answer)

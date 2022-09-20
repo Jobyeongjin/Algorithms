@@ -1,3 +1,5 @@
+from collections import deque
+
 """📝 10870 - 피보나치 수 5"""
 # 인덱스 접근
 # 앞에 두자리를 더해서 리스트에 추가
@@ -161,10 +163,20 @@ for i in arr:
     print(*i)
 
 
-"""1138 - 한 줄로 서기"""
+"""📝 1138 - 한 줄로 서기"""
+# 거꾸로 접근해 리스트에 추가 -> 입력의 수는 점점 작아지기 때문에 원하는 인덱스에 추가 가능
+
+n = int(input())
+arr = list(map(int, input().split()))
+answer = []
+
+for i in range(len(arr)-1, -1, -1):
+    answer.insert(arr[i], i + 1)
+
+print(*answer)
 
 
-"""3986 - 좋은 단어"""
+"""📝 3986 - 좋은 단어"""
 # 단어를 하나씩 스택에 추가하면서 마지막 요소와 동일하다면 스택에서 제거
 # 스택에 비었다면 카운팅
 
@@ -187,7 +199,7 @@ for _ in range(n):
 print(cnt)
 
 
-"""2+1 세일"""
+"""📝 2+1 세일"""
 # 비싼 제품을 무료로 받아야 최소비용이 가능하니 오름차순으로 정렬
 # 3번째 요소는 무료이니 패스
 
@@ -207,9 +219,9 @@ for i in range(n):
 print(answer)
 
 
-"""섬의 개수"""
+"""📝 섬의 개수"""
 # 입력 마지막은 제외
-# 완전 탐색으로 1을 만나면 DFS 실행
+# 완전 탐색으로 1을 만나면 DFS, BFS 실행
 
 while True:
     w, h = map(int, input().split())
@@ -246,19 +258,6 @@ while True:
 
 
 #
-
-def DFS(c, r):
-    maps[c][r] = 0
-
-    for dr, dc in delta:
-        nr = dr + r
-        nc = dc + c
-
-        if -1 < nc < h and -1 < nr < w and maps[nc][nr] == 1:
-            maps[nc][nr] = 0
-            DFS(nc, nr)
-
-
 while True:
     w, h = map(int, input().split())
     maps = [list(map(int, input().split())) for _ in range(h)]
@@ -269,6 +268,20 @@ while True:
     if w == 0 and h == 0:
         break
 
+    def DFS(c, r):
+        stack = []
+        stack.append((c, r))
+
+        while stack:
+            (c, r) = stack.pop()
+            maps[c][r] = 0
+            for dr, dc in delta:
+                nr = dr + r
+                nc = dc + c
+
+                if -1 < nc < h and -1 < nr < w and maps[nc][nr] == 1:
+                    stack.append((nc, nr))
+
     cnt = 0
     for i in range(h):
         for j in range(w):
@@ -277,3 +290,73 @@ while True:
                 cnt += 1
 
     print(cnt)
+
+
+#
+while True:
+    w, h = map(int, input().split())
+    maps = [list(map(int, input().split())) for _ in range(h)]
+
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
+             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+
+    if w == 0 and h == 0:
+        break
+
+    def BFS(c, r):
+        queue = deque()
+        queue.append([c, r])
+
+        while queue:
+            c, r = queue.popleft()
+            for dr, dc in delta:
+                nr = dr + r
+                nc = dc + c
+
+                if -1 < nc < h and -1 < nr < w and maps[nc][nr] == 1:
+                    maps[nc][nr] = 0
+                    queue.append([nc, nr])
+
+    cnt = 0
+    for i in range(h):
+        for j in range(w):
+            if maps[i][j] == 1:
+                maps[i][j] = 0
+                BFS(i, j)
+                cnt += 1
+
+    print(cnt)
+
+
+"""swea 14413 - 격자판 칠하기"""
+# 좌표 값을 각각(짝수, 홀수별로) 누적해 비교
+# ex)
+# - # 짝수에 값이 있으면 # 홀수에는 값이 없어야 한다.
+# - . 짝수에 값이 있으면 . 홀수에는 값이 없어야 한다.
+# - # 짝수에 값이 있으면 . 짝수에는 값이 없어야 한다.
+
+
+t = int(input())
+
+for tc in range(1, t + 1):
+    r, c = map(int, input().split())
+    board = [list(input().strip()) for _ in range(r)]
+    arr = [0, 0, 0, 0]
+
+    for x in range(r):
+        for y in range(c):
+            if board[x][y] == '#':
+                if (x + y) % 2 == 0:
+                    arr[0] += 1
+                elif (x + y) % 2 == 1:
+                    arr[1] += 1
+            elif board[x][y] == '.':
+                if (x + y) % 2 == 0:
+                    arr[2] += 1
+                elif (x + y) % 2 == 1:
+                    arr[3] += 1
+
+    if (arr[0] and arr[1]) or (arr[2] and arr[3]) or (arr[0] and arr[2]) or (arr[1] and arr[3]):
+        print(f'#{tc} impossible')
+    else:
+        print(f'#{tc} possible')
