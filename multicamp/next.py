@@ -147,3 +147,46 @@ for i in tomato:
     answer = max(answer, max(i))
 
 print(answer - 1)
+
+
+"""📝 직사각형 네개의 합집합의 면적 구하기"""
+# 노트에다가 직사각형의 크기만큼 순회하면서 값을 추가하고 총합(면적) 구하기
+
+note = [[0] * 101 for _ in range(101)]
+for _ in range(4):
+    x1, y1, x2, y2 = map(int, input().split())
+
+    for i in range(x1, x2):
+        for j in range(y1, y2):
+            note[i][j] = 1
+
+answer = 0
+for i in note:
+    answer += sum(i)
+
+print(answer)
+
+
+"""📝 수 이어가기"""
+# 조건에 맞는 수를 리스트에 저장하고, 최대 길이를 가진 결과 출력
+
+n = int(input())
+
+answer = []  # 최대 길이를 가진 변수 리스트
+for i in range(1, n + 1):
+    arr = [n]
+    arr.append(i)  # 두번째 수 입력
+    idx = 1
+
+    while True:
+        next_n = arr[idx - 1] - arr[idx]
+        if next_n < 0:  # 다음 수가 음수라면 종료
+            break
+        arr.append(next_n)
+        idx += 1
+
+    if len(answer) < len(arr):  # 최대 길이를 가진 리스트 비교하기
+        answer = arr
+
+print(len(answer))
+print(*answer)

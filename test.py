@@ -18,10 +18,22 @@ def pprint(list_):
 
 
 n = int(input())
-arr = list(map(int, input().split()))
+
 answer = []
+for i in range(1, n + 1):
+    arr = [n]
+    arr.append(i)
 
-for i in range(len(arr)-1, -1, -1):
-    answer.insert(arr[i], i + 1)
+    idx = 1
+    while True:
+        next_n = arr[idx - 1] - arr[idx]
+        if next_n < 0:
+            break
+        arr.append(next_n)
+        idx += 1
 
+    if len(answer) < len(arr):
+        answer = arr
+
+print(len(answer))
 print(*answer)
