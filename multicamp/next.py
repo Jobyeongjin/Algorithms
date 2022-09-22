@@ -1,4 +1,5 @@
 from collections import deque
+from collections import Counter
 
 """📝 팩토리얼"""
 # 0이면 1, 아니라면 -1씩한 값을 곱한다.
@@ -190,3 +191,92 @@ for i in range(1, n + 1):
 
 print(len(answer))
 print(*answer)
+
+
+"""📝 스위치 켜고 끄기"""
+
+
+def change(num):
+    if switch[num] == 0:
+        switch[num] = 1
+    else:
+        switch[num] = 0
+    return
+
+
+n = int(input())
+switch = [-1] + list(map(int, input().split()))
+m = int(input())
+
+for _ in range(m):
+    gender, number = map(int, input().split())
+
+    if gender == 1:
+        for i in range(number, n + 1, number):
+            change(i)
+    else:
+        change(number)
+        for i in range(n // 2):
+            if number + i > n or number - i < 1:
+                break
+            if switch[number + i] == switch[number - i]:
+                change(number + i)
+                change(number - i)
+            else:
+                break
+
+
+for i in range(1, n + 1):
+    print(switch[i], end=' ')
+    if i % 20 == 0:
+        print()
+
+
+"""📝 종이자르기"""
+
+c, r = map(int, input().split())
+n = int(input())
+
+row = [0, r]
+col = [0, c]
+for _ in range(n):
+    cut, line = map(int, input().split())
+    if cut == 0:
+        row.append(line)
+    else:
+        col.append(line)
+
+row.sort()
+col.sort()
+
+answer = 0
+for i in range(len(row) - 1):
+    for j in range(len(col) - 1):
+        answer = max(answer, (col[j + 1] - col[j]) * (row[i + 1] - row[i]))
+
+print(answer)
+
+# 또는
+c, r = map(int, input().split())
+paper = [[0] * c for _ in range(r)]
+n = int(input())
+
+for _ in range(n):
+    cut, line = map(int, input().split())
+    for i in range(r):
+        for j in range(c):
+            if cut == 0:
+                if i >= line:
+                    paper[i][j] += 1
+            if cut == 1:
+                if j >= line:
+                    paper[i][j] += 100
+
+answer = {}
+answer = Counter(answer)
+for i in range(r):
+    dic = {}
+    dic = Counter(paper[i])
+    answer += dic
+
+print(max(answer.values()))
