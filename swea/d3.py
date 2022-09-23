@@ -262,3 +262,21 @@ for tc in range(1, 11):
 
     print(f'#{tc}', end=' ')
     print(*base[:10])
+
+
+"""비밀번호"""
+
+t = 10
+for tc in range(1, t + 1):
+    n, m = map(str, input().split())
+
+    stack = []
+    for i in m:
+        if stack and i == stack[-1]:
+            stack.pop()
+        else:
+            stack.append(i)
+
+    answer = ''.join(stack)
+
+    print(f'#{tc} {answer}')
