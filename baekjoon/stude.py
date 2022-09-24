@@ -170,9 +170,8 @@ n = int(input())
 arr = list(map(int, input().split()))
 answer = []
 
-for i in range(len(arr)-1, -1, -1):
+for i in range(n-1, -1, -1):
     answer.insert(arr[i], i + 1)
-
 print(*answer)
 
 
@@ -328,7 +327,7 @@ while True:
     print(cnt)
 
 
-"""swea 14413 - 격자판 칠하기"""
+"""📝 swea 14413 - 격자판 칠하기"""
 # 좌표 값을 각각(짝수, 홀수별로) 누적해 비교
 # ex)
 # - # 짝수에 값이 있으면 # 홀수에는 값이 없어야 한다.
@@ -360,3 +359,90 @@ for tc in range(1, t + 1):
         print(f'#{tc} impossible')
     else:
         print(f'#{tc} possible')
+
+
+"""단지번호붙이기"""
+# 방문처리하면서 카운팅하고 그 카운팅한 수를 출력
+
+n = int(input())
+
+dangi = [list(map(int, input().strip())) for _ in range(n)]
+visited = [[0 for _ in range(n)] for _ in range(n)]
+
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+
+
+def DFS(r, c):
+    stack = []
+    stack.append((r, c))
+
+    cnt = 0
+    while stack:
+        r, c = stack.pop()
+
+        if visited[r][c] == 0 and dangi[r][c] == 1:
+            visited[r][c] = 1
+            cnt += 1
+
+        for dr, dc in delta:
+            nr = dr + r
+            nc = dc + c
+            if -1 < nr < n and -1 < nc < n:
+                if visited[nr][nc] == 0 and dangi[nr][nc] == 1:
+                    stack.append((nr, nc))
+
+    return cnt
+
+
+answer = []
+for i in range(n):
+    for j in range(n):
+        if visited[i][j] == 0 and dangi[i][j] == 1:
+            answer.append(DFS(i, j))
+
+answer.sort()
+print(len(answer))
+for i in answer:
+    print(i)
+
+
+"""덱"""
+# 조건에 맞게 출력하는 조건문 작성
+
+n = int(input())
+q = deque([])
+
+for _ in range(n):
+    s = input().split()
+
+    if s[0] == 'push_front':
+        q.appendleft(s[1])
+    elif s[0] == 'push_back':
+        q.append(s[1])
+    elif s[0] == 'pop_front':
+        if q:
+            print(q.popleft())
+        else:
+            print(-1)
+    elif s[0] == 'pop_back':
+        if q:
+            print(q.pop())
+        else:
+            print(-1)
+    elif s[0] == 'size':
+        print(len(q))
+    elif s[0] == 'empty':
+        if not q:
+            print(1)
+        else:
+            print(0)
+    elif s[0] == 'front':
+        if q:
+            print(q[0])
+        else:
+            print(-1)
+    elif s[0] == 'back':
+        if q:
+            print(q[len(q) - 1])
+        else:
+            print(-1)
