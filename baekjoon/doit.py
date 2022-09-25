@@ -1,22 +1,21 @@
-# 파일 불러오기
-from collections import deque
-from collections import Counter
-import sys
-import math
-import heapq
+"""구간 합 구하기 4"""
+# 더한 값을 누적하는 리스트를 만들고, 구하고자 한 구간과 구하지 않을 구간을 뺀다.
 
-sys.stdin = open("input.txt", "r")
+n, m = map(int, input().split())
+numbers = list(map(int, input().split()))
 
-input = sys.stdin.readline
+sum_ = [0]
+cnt = 0
+for i in numbers:
+    cnt += i
+    sum_.append(cnt)
 
-
-def pprint(list_):
-    for row in list_:
-        print(row)
-
-# 문제풀이는 여기에
+for _ in range(m):
+    a, b = map(int, input().split())
+    print(sum_[b] - sum_[a-1])
 
 
+"""구간 합 구하기 5"""
 n, m = map(int, input().split())
 
 a = [[0] * (n + 1)]
