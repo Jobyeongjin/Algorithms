@@ -39,27 +39,27 @@ for _ in range(1, t + 1):
 
 s = input()
 check = 0
-answer = ''
-stack = ''
+answer = ""
+stack = ""
 
 for i in s:
     if check == 0:
-        if i == '<':
+        if i == "<":
             check = 1
             stack += i
-        elif i == ' ':
+        elif i == " ":
             stack += i
             answer += stack
-            stack = ''
+            stack = ""
         else:
             stack = i + stack
 
     elif check == 1:
         stack += i
-        if i == '>':
+        if i == ">":
             check = 0
             answer += stack
-            stack = ''
+            stack = ""
 
 print(answer + stack)
 
@@ -83,9 +83,9 @@ else:
 
     arr[k], arr[m] = arr[m], arr[k]
 
-    temp = arr[k + 1:]
+    temp = arr[k + 1 :]
     temp.sort(reverse=True)
-    answer = arr[:k + 1] + temp
+    answer = arr[: k + 1] + temp
 
     print(*answer)
 
@@ -170,7 +170,7 @@ n = int(input())
 arr = list(map(int, input().split()))
 answer = []
 
-for i in range(n-1, -1, -1):
+for i in range(n - 1, -1, -1):
     answer.insert(arr[i], i + 1)
 print(*answer)
 
@@ -229,8 +229,7 @@ while True:
     if w == 0 and h == 0:
         break
 
-    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
-             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1))
 
     cnt = 0
     for i in range(h):
@@ -261,8 +260,7 @@ while True:
     w, h = map(int, input().split())
     maps = [list(map(int, input().split())) for _ in range(h)]
 
-    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
-             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1))
 
     if w == 0 and h == 0:
         break
@@ -296,8 +294,7 @@ while True:
     w, h = map(int, input().split())
     maps = [list(map(int, input().split())) for _ in range(h)]
 
-    delta = ((0, -1), (1, -1), (1, 0), (1, 1),
-             (0, 1), (-1, 1), (-1, 0), (-1, -1))
+    delta = ((0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1))
 
     if w == 0 and h == 0:
         break
@@ -344,21 +341,26 @@ for tc in range(1, t + 1):
 
     for x in range(r):
         for y in range(c):
-            if board[x][y] == '#':
+            if board[x][y] == "#":
                 if (x + y) % 2 == 0:
                     arr[0] += 1
                 elif (x + y) % 2 == 1:
                     arr[1] += 1
-            elif board[x][y] == '.':
+            elif board[x][y] == ".":
                 if (x + y) % 2 == 0:
                     arr[2] += 1
                 elif (x + y) % 2 == 1:
                     arr[3] += 1
 
-    if (arr[0] and arr[1]) or (arr[2] and arr[3]) or (arr[0] and arr[2]) or (arr[1] and arr[3]):
-        print(f'#{tc} impossible')
+    if (
+        (arr[0] and arr[1])
+        or (arr[2] and arr[3])
+        or (arr[0] and arr[2])
+        or (arr[1] and arr[3])
+    ):
+        print(f"#{tc} impossible")
     else:
-        print(f'#{tc} possible')
+        print(f"#{tc} possible")
 
 
 """단지번호붙이기"""
@@ -406,6 +408,24 @@ for i in answer:
     print(i)
 
 
+"""요세푸스 문제"""
+# deque 활용 문제 -> rotate 함수를 사용하여 왼쪽으로 회전하며, 첫번째 요소 빼기
+
+n, k = map(int, input().split())
+
+arr = [i for i in range(1, n + 1)]
+q = deque(arr)
+answer = []
+
+while q:
+    q.rotate(-(k - 1))
+    answer.append(q.popleft())
+
+print("<", end="")
+print(*answer, sep=", ", end="")
+print(">")
+
+
 """덱"""
 # 조건에 맞게 출력하는 조건문 작성
 
@@ -415,33 +435,33 @@ q = deque([])
 for _ in range(n):
     s = input().split()
 
-    if s[0] == 'push_front':
+    if s[0] == "push_front":
         q.appendleft(s[1])
-    elif s[0] == 'push_back':
+    elif s[0] == "push_back":
         q.append(s[1])
-    elif s[0] == 'pop_front':
+    elif s[0] == "pop_front":
         if q:
             print(q.popleft())
         else:
             print(-1)
-    elif s[0] == 'pop_back':
+    elif s[0] == "pop_back":
         if q:
             print(q.pop())
         else:
             print(-1)
-    elif s[0] == 'size':
+    elif s[0] == "size":
         print(len(q))
-    elif s[0] == 'empty':
+    elif s[0] == "empty":
         if not q:
             print(1)
         else:
             print(0)
-    elif s[0] == 'front':
+    elif s[0] == "front":
         if q:
             print(q[0])
         else:
             print(-1)
-    elif s[0] == 'back':
+    elif s[0] == "back":
         if q:
             print(q[len(q) - 1])
         else:
@@ -500,12 +520,12 @@ answer.append(cnt5)
 print(answer)
 min_ = min(answer)
 if min_ == answer[4]:
-    print('Youngki')
+    print("Youngki")
 elif min_ == answer[3]:
-    print('Jinwoo')
+    print("Jinwoo")
 elif min_ == answer[2]:
-    print('Jungwoo')
+    print("Jungwoo")
 elif min_ == answer[1]:
-    print('Junsuk')
+    print("Junsuk")
 elif min_ == answer[0]:
-    print('Inseo')
+    print("Inseo")
