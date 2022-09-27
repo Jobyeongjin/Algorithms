@@ -363,49 +363,54 @@ for tc in range(1, t + 1):
         print(f"#{tc} possible")
 
 
-"""단지번호붙이기"""
-# 방문처리하면서 카운팅하고 그 카운팅한 수를 출력
-
-n = int(input())
-
-dangi = [list(map(int, input().strip())) for _ in range(n)]
-visited = [[0 for _ in range(n)] for _ in range(n)]
-
-delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
-
-
-def DFS(r, c):
-    stack = []
-    stack.append((r, c))
-
-    cnt = 0
-    while stack:
-        r, c = stack.pop()
-
-        if visited[r][c] == 0 and dangi[r][c] == 1:
-            visited[r][c] = 1
-            cnt += 1
-
-        for dr, dc in delta:
-            nr = dr + r
-            nc = dc + c
-            if -1 < nr < n and -1 < nc < n:
-                if visited[nr][nc] == 0 and dangi[nr][nc] == 1:
-                    stack.append((nr, nc))
-
-    return cnt
+"""로봇 청소기"""
+# 회전할 때마다 좌표 변경
+# 4번 회전했다면 후진하는데 만약 후진할 수 없다면 종료
+# 방문처리하면서 카운팅
+def turn_left():
+    global arrow
+    arrow -= 1
+    if arrow == -1:
+        arrow = 3
 
 
-answer = []
-for i in range(n):
-    for j in range(n):
-        if visited[i][j] == 0 and dangi[i][j] == 1:
-            answer.append(DFS(i, j))
+n, m = map(int, input().split())
+r, c, arrow = map(int, input().split())
+room = [list(map(int, input().split())) for _ in range(n)]
 
-answer.sort()
-print(len(answer))
-for i in answer:
-    print(i)
+visited = [[0] * m for _ in range(n)]
+visited[r][c] = 1
+
+# 북 동 남 서
+dr = [-1, 0, 1, 0]
+dc = [0, 1, 0, -1]
+
+clean = 1
+turn = 0
+while True:
+    turn_left()
+
+    nr = r + dr[arrow]
+    nc = c + dc[arrow]
+    if visited[nr][nc] == 0 and room[nr][nc] == 0:
+        visited[nr][nc] = 1
+        clean += 1
+        r, c = nr, nc
+        turn = 0
+        continue
+    else:
+        turn += 1
+
+    if turn == 4:
+        nr = r - dr[arrow]
+        nc = c - dc[arrow]
+        if room[nr][nc] == 0:
+            r, c = nr, nc
+            turn = 0
+        else:
+            break
+
+print(clean)
 
 
 """요세푸스 문제"""
@@ -424,48 +429,6 @@ while q:
 print("<", end="")
 print(*answer, sep=", ", end="")
 print(">")
-
-
-"""덱"""
-# 조건에 맞게 출력하는 조건문 작성
-
-n = int(input())
-q = deque([])
-
-for _ in range(n):
-    s = input().split()
-
-    if s[0] == "push_front":
-        q.appendleft(s[1])
-    elif s[0] == "push_back":
-        q.append(s[1])
-    elif s[0] == "pop_front":
-        if q:
-            print(q.popleft())
-        else:
-            print(-1)
-    elif s[0] == "pop_back":
-        if q:
-            print(q.pop())
-        else:
-            print(-1)
-    elif s[0] == "size":
-        print(len(q))
-    elif s[0] == "empty":
-        if not q:
-            print(1)
-        else:
-            print(0)
-    elif s[0] == "front":
-        if q:
-            print(q[0])
-        else:
-            print(-1)
-    elif s[0] == "back":
-        if q:
-            print(q[len(q) - 1])
-        else:
-            print(-1)
 
 
 """돌려막기"""
@@ -529,3 +492,90 @@ elif min_ == answer[1]:
     print("Junsuk")
 elif min_ == answer[0]:
     print("Inseo")
+
+
+"""덱"""
+# 조건에 맞게 출력하는 조건문 작성
+
+n = int(input())
+q = deque([])
+
+for _ in range(n):
+    s = input().split()
+
+    if s[0] == "push_front":
+        q.appendleft(s[1])
+    elif s[0] == "push_back":
+        q.append(s[1])
+    elif s[0] == "pop_front":
+        if q:
+            print(q.popleft())
+        else:
+            print(-1)
+    elif s[0] == "pop_back":
+        if q:
+            print(q.pop())
+        else:
+            print(-1)
+    elif s[0] == "size":
+        print(len(q))
+    elif s[0] == "empty":
+        if not q:
+            print(1)
+        else:
+            print(0)
+    elif s[0] == "front":
+        if q:
+            print(q[0])
+        else:
+            print(-1)
+    elif s[0] == "back":
+        if q:
+            print(q[len(q) - 1])
+        else:
+            print(-1)
+
+
+"""단지번호붙이기"""
+# 방문처리하면서 단지 내 건물도 같이 카운팅
+
+n = int(input())
+
+dangi = [list(map(int, input().strip())) for _ in range(n)]
+visited = [[0 for _ in range(n)] for _ in range(n)]
+
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+
+
+def DFS(r, c):
+    stack = []
+    stack.append((r, c))
+
+    cnt = 0
+    while stack:
+        r, c = stack.pop()
+
+        if visited[r][c] == 0 and dangi[r][c] == 1:
+            visited[r][c] = 1
+            cnt += 1
+
+        for dr, dc in delta:
+            nr = dr + r
+            nc = dc + c
+            if -1 < nr < n and -1 < nc < n:
+                if visited[nr][nc] == 0 and dangi[nr][nc] == 1:
+                    stack.append((nr, nc))
+
+    return cnt
+
+
+answer = []
+for i in range(n):
+    for j in range(n):
+        if visited[i][j] == 0 and dangi[i][j] == 1:
+            answer.append(DFS(i, j))
+
+answer.sort()
+print(len(answer))
+for i in answer:
+    print(i)
