@@ -367,6 +367,8 @@ for tc in range(1, t + 1):
 # 회전할 때마다 좌표 변경
 # 4번 회전했다면 후진하는데 만약 후진할 수 없다면 종료
 # 방문처리하면서 카운팅
+
+
 def turn_left():
     global arrow
     arrow -= 1

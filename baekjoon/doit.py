@@ -1,3 +1,5 @@
+import heapq
+
 """구간 합 구하기 4"""
 # 더한 값을 누적하는 리스트를 만들고, 구하고자 한 구간과 구하지 않을 구간을 뺀다.
 
@@ -131,3 +133,135 @@ for i in range(p, s):
         result += 1
 
 print(result)
+
+
+"""스택 수열"""
+# 스택에 순서대로 넣으면서 배열의 수와 같은지 확인하며 +,- 입력
+
+n = int(input())
+arr = [int(input()) for _ in range(n)]
+stack = []
+cnt = 1
+check = True
+answer = ""
+
+for i in range(n):
+    s = arr[i]
+    if s >= cnt:  # 배열의 번호가 오름차순 수보다 작다면
+        while s >= cnt:
+            stack.append(cnt)  # 스택에 순차적으로 번호 입력하면서 + 입력
+            cnt += 1
+            answer += "+\n"
+        stack.pop()  # 번호보다 커졌다면 - 입력
+        answer += "-\n"
+    else:  # 배열의 번호보다 크다면
+        p = stack.pop()  # 스택에서 제거한 오름차순 수와 배열의 수를 비교
+        if p > s:
+            print("NO")
+            check = False
+            break
+        else:
+            answer += "-\n"
+
+if result:
+    print(answer)
+
+
+"""절대값 힙"""
+# 힙은 최소값 또는 최대값을 빠르게 찾을 수 있다. 느슨한 정렬 상태를 유지하고 있다.
+# 파이썬의 heapq 모듈은 최소값이 우선으로 적용한다.
+
+n = int(input())
+heap = []
+
+for _ in range(n):
+    num = int(input())
+
+    if num != 0:
+        heapq.heappush(heap, (abs(num), num))
+    else:
+        if not heap:
+            print(0)
+        else:
+            print(heapq.heappop(heap)[1])
+
+
+"""수 정렬하기 1"""
+# 두 수를 비교하면서 앞의 수가 더 크다면 템프를 이용하여 위치 변경
+
+n = int(input())
+arr = [0] * n
+
+for i in range(n):
+    arr[i] = int(input())
+
+for i in range(n - 1):
+    for j in range(n - 1 - i):
+        if arr[j] > arr[j + 1]:
+            temp = arr[j]
+            arr[j] = arr[j + 1]
+            arr[j + 1] = temp
+
+
+for i in range(n):
+    print(arr[i])
+
+
+"""ATM"""
+n = int(input())
+time = list(map(int, input().split()))
+arr = [0] * n
+
+for i in range(1, n):
+    point = i
+    value = time[i]
+
+    for j in range(i - 1, -1, -1):
+        if time[j] < time[i]:
+            point = j + 1
+            break
+        if j == 0:
+            point = 0
+    for j in range(i, point, -1):
+        time[j] = time[j - 1]
+    time[point] = value
+
+arr[0] = time[0]
+
+for i in range(1, n):
+    arr[i] = arr[i - 1] + time[i]
+
+print(sum(arr))
+
+# 또는
+n = int(input())
+time = list(map(int, input().split()))
+time.sort()
+
+answer = 0
+for i in range(1, n + 1):
+    answer += sum(time[0:i])
+
+print(answer)
+
+
+"""K번째 수 구하기"""
+n, m = map(int, input().split())
+numbers = list(map(int, input().split()))
+
+print(sorted(numbers)[m - 1])
+
+
+"""수 정렬하기 3"""
+n = int(input())
+m = 10001
+arr = [0] * m
+
+for i in range(n):
+    arr[int(input())] += 1
+
+for i in range(m):
+    if arr[i] != 0:
+        for _ in range(arr[i]):
+            print(i)
+print(arr)
