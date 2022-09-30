@@ -500,7 +500,7 @@ elif min_ == answer[0]:
 # 조건에 맞게 출력하는 조건문 작성
 
 n = int(input())
-q = deque([])
+q = deque()
 
 for _ in range(n):
     s = input().split()

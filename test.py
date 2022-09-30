@@ -17,15 +17,29 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n = int(input())
-m = 10001
-arr = [0] * m
 
-for i in range(n):
-    arr[int(input())] += 1
+n, m = map(int, input().split())
 
-for i in range(m):
-    if arr[i] != 0:
-        for _ in range(arr[i]):
-            print(i)
-print(arr)
+arr = [[] for _ in range(n + 1)]
+for _ in range(m):
+    u, v = map(int, input().split())
+    arr[u].append(v)
+    arr[v].append(u)
+
+visited = [0] * (n + 1)
+
+
+def DFS(v):
+    visited[v] = 1
+    for i in arr[v]:
+        if not visited[i]:
+            DFS(i)
+
+
+cnt = 0
+for i in range(1, n + 1):
+    if not visited[i]:
+        cnt += 1
+        DFS(i)
+
+print(cnt)
