@@ -1,4 +1,5 @@
 import heapq
+import operator
 
 """구간 합 구하기 4"""
 # 더한 값을 누적하는 리스트를 만들고, 구하고자 한 구간과 구하지 않을 구간을 뺀다.
@@ -294,3 +295,41 @@ for i in range(1, n + 1):
         DFS(i)
 
 print(cnt)
+
+
+"""수강신청"""
+# 딕셔너리에 값을 인덱스 기준으로 넣으면서 중복된 목록 삭제
+# 값을 기준으로 정렬하기
+# operator() -> 연산처리를 빠르게 처리
+# itemgetter() -> 튜플 리스트 생성 (인덱스 1번을 기준으로 정렬한다)
+
+k, l = map(int, input().split())
+
+dic = {}
+for i in range(l):
+    s = input().strip()
+    dic[s] = i
+
+dics = sorted(dic.items(), key=operator.itemgetter(1))
+
+cnt = 0
+for i in dics:
+    print(i[0])
+    cnt += 1
+    if cnt == k:
+        break
+
+
+"""숫자 카드"""
+# 시간초과로 인해 pypy3로 진행
+
+n = int(input())
+cards = set(map(int, input().split()))
+m = int(input())
+check = list(map(int, input().split()))
+
+for i in check:
+    if i in cards:
+        print(1, end=" ")
+    else:
+        print(0, end=" ")

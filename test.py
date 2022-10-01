@@ -4,6 +4,7 @@ from collections import Counter
 import sys
 import math
 import heapq
+import operator
 
 sys.stdin = open("input.txt", "r")
 
@@ -17,29 +18,13 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
+n = int(input())
+cards = list(map(int, input().split()))
+m = int(input())
+check = list(map(int, input().split()))
 
-n, m = map(int, input().split())
-
-arr = [[] for _ in range(n + 1)]
-for _ in range(m):
-    u, v = map(int, input().split())
-    arr[u].append(v)
-    arr[v].append(u)
-
-visited = [0] * (n + 1)
-
-
-def DFS(v):
-    visited[v] = 1
-    for i in arr[v]:
-        if not visited[i]:
-            DFS(i)
-
-
-cnt = 0
-for i in range(1, n + 1):
-    if not visited[i]:
-        cnt += 1
-        DFS(i)
-
-print(cnt)
+for i in check:
+    if i in cards:
+        print(1, end=" ")
+    else:
+        print(0, end=" ")
