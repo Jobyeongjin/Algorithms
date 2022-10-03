@@ -1,6 +1,7 @@
 # 파일 불러오기
 from collections import deque
 from collections import Counter
+from curses import KEY_LEFT
 import sys
 import math
 import heapq
@@ -18,13 +19,17 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n = int(input())
-cards = list(map(int, input().split()))
-m = int(input())
-check = list(map(int, input().split()))
+n, m = map(int, input().split())
+a = list(input().strip())[::-1]
+b = list(input().strip())
+t = int(input())
+ant = a + b
 
-for i in check:
-    if i in cards:
-        print(1, end=" ")
-    else:
-        print(0, end=" ")
+for _ in range(t):
+    for i in range(len(ant) - 1):
+        if ant[i] in a and ant[i + 1] in b:
+            ant[i], ant[i + 1] = ant[i + 1], ant[i]
+            if ant[i + 1] == a[n - 1]:
+                break
+
+print(*ant, sep="")

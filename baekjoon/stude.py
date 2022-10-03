@@ -581,3 +581,90 @@ answer.sort()
 print(len(answer))
 for i in answer:
     print(i)
+
+
+"""수들의 합 2"""
+# 투 포인터
+# 끝점을 이동하면서 카운팅
+# 카운팅한 값이 k라면 경우의 수 1 추가
+
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+
+answer = 0
+e, sum = 0, 0
+
+for s in range(n):
+    while sum < k and e < n:
+        sum += arr[e]
+        e += 1
+
+    if sum == k:
+        answer += 1
+    sum -= arr[s]
+
+print(answer)
+
+# 또는
+n, k = map(int, input().split())
+arr = list(map(int, input().split()))
+
+answer = 0
+s, e, sum = 0, 1, arr[0]
+
+
+while s < n:
+    if sum == k:
+        answer += 1
+        sum -= arr[s]
+        s += 1
+    elif e == n and sum < k:
+        break
+    elif sum > k:
+        sum -= arr[s]
+        s += 1
+    else:
+        sum += arr[e]
+        e += 1
+
+
+print(answer)
+
+
+"""알람 시계"""
+# 45분 이상이면 45분을 빼주고, 45분 이하라면 1시간을 빼고, 15분(60 - 45)을 더하기
+# 단, 0시일 경우에만 23시로 지정
+
+h, m = map(int, input().split())
+
+if m < 45:
+    if h == 0:
+        h = 23
+        m += 15
+    else:
+        h -= 1
+        m += 15
+else:
+    m -= 45
+
+print(h, m)
+
+
+"""개미"""
+# 이동할 개미와 다음 개미의 그룹이 다르다면 위치 변경
+# 이동한 개미가 그룹의 첫번째 개미라면 종료
+
+n, m = map(int, input().split())
+a = list(input().strip())[::-1]
+b = list(input().strip())
+t = int(input())
+ant = a + b
+
+for _ in range(t):
+    for i in range(len(ant) - 1):
+        if ant[i] in a and ant[i + 1] in b:
+            ant[i], ant[i + 1] = ant[i + 1], ant[i]
+            if ant[i + 1] == a[n - 1]:
+                break
+
+print(*ant, sep="")
