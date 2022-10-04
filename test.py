@@ -19,17 +19,19 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n, m = map(int, input().split())
-a = list(input().strip())[::-1]
-b = list(input().strip())
-t = int(input())
-ant = a + b
 
-for _ in range(t):
-    for i in range(len(ant) - 1):
-        if ant[i] in a and ant[i + 1] in b:
-            ant[i], ant[i + 1] = ant[i + 1], ant[i]
-            if ant[i + 1] == a[n - 1]:
-                break
+n, w, l = map(int, input().split())
+truck = deque(list(map(int, input().split())))
 
-print(*ant, sep="")
+bg = deque([0] * w)
+cnt = 0
+
+bg.popleft()
+while truck:
+    if sum(bg) + truck[0] < l:
+        bg.append(truck.popleft())
+        cnt += 1
+    else:
+        bg.popleft()
+        cnt += 1
+print(cnt)

@@ -668,3 +668,61 @@ for _ in range(t):
                 break
 
 print(*ant, sep="")
+
+
+"""적록색약"""
+# BFS 사용 - 방문처리
+# 방문 조건에서 다음 좌표가 이전 좌표와 같은지를 확인
+# 색약인 사람은 조건에 맞게 rgb를 변형하고,
+# 방문처리도 리셋하고 BFS 실행
+
+n = int(input())
+rgb = [list(input().strip()) for _ in range(n)]
+visited = [[0] * n for _ in range(n)]
+
+delta = ((0, -1), (1, 0), (0, 1), (-1, 0))
+
+
+def BFS(r, c):
+    q = deque()
+    q.append((r, c))
+
+    while q:
+        r, c = q.popleft()
+
+        for dr, dc in delta:
+            nr = r + dr
+            nc = c + dc
+
+            if (
+                -1 < nr < n
+                and -1 < nc < n
+                and visited[nr][nc] == 0
+                and rgb[nr][nc] == rgb[r][c]
+            ):
+                q.append((nr, nc))
+                visited[nr][nc] = 1
+
+
+one = 0
+for i in range(n):
+    for j in range(n):
+        if not visited[i][j]:
+            BFS(i, j)
+            one += 1
+
+for l in rgb:
+    for i, v in enumerate(l):
+        if v == "G":
+            l[i] = "R"
+
+visited = [[0] * n for _ in range(n)]
+
+two = 0
+for i in range(n):
+    for j in range(n):
+        if not visited[i][j]:
+            BFS(i, j)
+            two += 1
+
+print(one, two)
