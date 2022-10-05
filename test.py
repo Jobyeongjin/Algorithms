@@ -26,12 +26,22 @@ truck = deque(list(map(int, input().split())))
 bg = deque([0] * w)
 cnt = 0
 
-bg.popleft()
-while truck:
-    if sum(bg) + truck[0] < l:
-        bg.append(truck.popleft())
-        cnt += 1
-    else:
-        bg.popleft()
-        cnt += 1
+while bg:
+    cnt += 1
+    bg.popleft()
+    if truck:
+        if sum(bg) + truck[0] <= l:
+            bg.append(truck.popleft())
+        else:
+            bg.append(0)
+    # if len(bg) == 1 and bg[0] != 0:
+    #     bg.extend([0] * (w - 1))
+    #     if truck:
+    #         bg.append(truck.popleft())
+    #     bg.popleft()
+    #     cnt += 1
+    # if not bg:
+    #     break
+
+
 print(cnt)

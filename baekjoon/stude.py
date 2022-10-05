@@ -363,7 +363,7 @@ for tc in range(1, t + 1):
         print(f"#{tc} possible")
 
 
-"""로봇 청소기"""
+"""📝 로봇 청소기"""
 # 회전할 때마다 좌표 변경
 # 4번 회전했다면 후진하는데 만약 후진할 수 없다면 종료
 # 방문처리하면서 카운팅
@@ -415,7 +415,7 @@ while True:
 print(clean)
 
 
-"""요세푸스 문제"""
+"""📝 요세푸스 문제"""
 # deque 활용 문제 -> rotate 함수를 사용하여 왼쪽으로 회전하며, 첫번째 요소 빼기
 
 n, k = map(int, input().split())
@@ -433,7 +433,7 @@ print(*answer, sep=", ", end="")
 print(">")
 
 
-"""돌려막기"""
+"""📝 돌려막기"""
 
 arr1 = [list(map(int, input().split())) for _ in range(5)]
 arr2 = [list(map(int, input().split())) for _ in range(5)]
@@ -496,7 +496,7 @@ elif min_ == answer[0]:
     print("Inseo")
 
 
-"""덱"""
+"""📝 덱"""
 # 조건에 맞게 출력하는 조건문 작성
 
 n = int(input())
@@ -538,7 +538,7 @@ for _ in range(n):
             print(-1)
 
 
-"""단지번호붙이기"""
+"""📝 단지번호붙이기"""
 # 방문처리하면서 단지 내 건물도 같이 카운팅
 
 n = int(input())
@@ -668,6 +668,38 @@ for _ in range(t):
                 break
 
 print(*ant, sep="")
+
+
+"""트럭"""
+# deque 사용 - 해당 길이의 다리 생성
+# 시간은 계속 흐르니 while문을 활용해 조건 작성
+# 하중 = 다리 위에 있는 트럭의 무게 + 다음 트럭
+# 무게가 작거나 같다면 트럭을 다리위에 추가, 아니면 0 추가
+
+n, w, l = map(int, input().split())
+truck = deque(list(map(int, input().split())))
+
+bg = deque([0] * w)
+cnt = 0
+
+while bg:
+    cnt += 1
+    bg.popleft()
+    if truck:
+        if sum(bg) + truck[0] <= l:
+            bg.append(truck.popleft())
+        else:
+            bg.append(0)
+    # if len(bg) == 1 and bg[0] != 0:
+    #     bg.extend([0] * (w - 1))
+    #     if truck:
+    #         bg.append(truck.popleft())
+    #     bg.popleft()
+    #     cnt += 1
+    # if not bg:
+    #     break
+
+print(cnt)
 
 
 """적록색약"""
