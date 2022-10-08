@@ -333,3 +333,23 @@ for i in check:
         print(1, end=" ")
     else:
         print(0, end=" ")
+
+
+"""동전 0"""
+# 동전 리스트를 거꾸로 뒤집어서 값이 크다면 넘어간다.
+# 값이 작으면 나눈 몫을 구하고, k는 나눈 나머지를 저장한다.
+# k가 0이라면 종료
+
+n, k = map(int, input().split())
+coin = [int(input()) for _ in range(n)][::-1]
+
+cnt = 0
+for i in coin:
+    if k == 0:
+        break
+    if i > k:
+        continue
+    cnt += k // i
+    k %= i
+
+print(cnt)

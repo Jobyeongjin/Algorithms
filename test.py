@@ -20,28 +20,16 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, w, l = map(int, input().split())
-truck = deque(list(map(int, input().split())))
+n, k = map(int, input().split())
+coin = [int(input()) for _ in range(n)][::-1]
 
-bg = deque([0] * w)
 cnt = 0
-
-while bg:
-    cnt += 1
-    bg.popleft()
-    if truck:
-        if sum(bg) + truck[0] <= l:
-            bg.append(truck.popleft())
-        else:
-            bg.append(0)
-    # if len(bg) == 1 and bg[0] != 0:
-    #     bg.extend([0] * (w - 1))
-    #     if truck:
-    #         bg.append(truck.popleft())
-    #     bg.popleft()
-    #     cnt += 1
-    # if not bg:
-    #     break
-
+for i in coin:
+    if k == 0:
+        break
+    if i > k:
+        continue
+    cnt += k // i
+    k %= i
 
 print(cnt)
