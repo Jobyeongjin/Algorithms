@@ -353,3 +353,37 @@ for i in coin:
     k %= i
 
 print(cnt)
+
+
+"""저울"""
+# 저울을 이용하는데 무거운 것부터 올릴 수는 없으니 오름차순으로 정렬하고 누적합으로 풀이
+
+n = int(input())
+arr = list(map(int, input().split()))
+arr.sort()
+
+cnt = 1
+for i in range(n):
+    if cnt < arr[i]:
+        break
+    cnt += arr[i]
+
+print(cnt)
+
+
+"""회의실 배정"""
+# 시간을 오름차순으로 정렬 / 람다를 사용하여 우선순위 지정
+# 입실이 퇴실보다 크다면 퇴실 업데이트 후 카운팅
+
+n = int(input())
+time = [list(map(int, input().split())) for _ in range(n)]
+time = sorted(time, key=lambda x: (x[1], x[0]))
+
+end = 0
+cnt = 0
+for s, e in time:
+    if s >= end:
+        end = e
+        cnt += 1
+
+print(cnt)

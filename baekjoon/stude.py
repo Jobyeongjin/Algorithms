@@ -758,3 +758,45 @@ for i in range(n):
             two += 1
 
 print(one, two)
+
+
+"""신입 사원"""
+# 오름차순으로 정렬(서류) 후 가장 작은 수인 첫번째 요소를 기준으로 설정
+# 다음 수와 비교(면접)하면서 더 크다면 카운팅
+
+t = int(input())
+
+for tc in range(t):
+    n = int(input())
+    rank = [list(map(int, input().split())) for _ in range(n)]
+    rank.sort()
+
+    one = rank[0][1]
+    cnt = 1
+    for i in range(1, n):
+        if rank[i][1] < one:
+            one = rank[i][1]
+            cnt += 1
+
+    print(cnt)
+
+
+"""4와 7"""
+# 시간 초과 코드 ⁉
+n = int(input())
+
+answer = 0
+cnt = 0
+while True:
+    if answer == n:
+        break
+    cnt += 1
+    word = str(cnt)
+    if "4" in word:
+        if word.count("4") + word.count("7") == len(word):
+            answer += 1
+    if "7" in word:
+        if word.count("7") == len(word):
+            answer += 1
+
+print(cnt)

@@ -20,16 +20,20 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, k = map(int, input().split())
-coin = [int(input()) for _ in range(n)][::-1]
+n = int(input())
 
+answer = 0
 cnt = 0
-for i in coin:
-    if k == 0:
+while True:
+    if answer == n:
         break
-    if i > k:
-        continue
-    cnt += k // i
-    k %= i
+    cnt += 1
+    word = str(cnt)
+    if "4" in word:
+        if word.count("4") + word.count("7") == len(word):
+            answer += 1
+    if "7" in word:
+        if word.count("7") == len(word):
+            answer += 1
 
 print(cnt)
