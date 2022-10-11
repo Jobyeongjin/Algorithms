@@ -800,3 +800,143 @@ while True:
             answer += 1
 
 print(cnt)
+
+
+# n = int(input())
+
+
+# two = 0
+# i = 0
+# while True:
+#     i += 1
+#     two += 2**i
+#     if two >= n:
+#         break
+
+# print(i, two)
+# arr = [0, 1]
+# for j in range(i):
+#     arr = list(permutations(arr, i))
+#     print(arr)
+
+
+"""패션왕 신해빈"""
+# 입을 것들을 딕셔너리에 담기
+# 입을 아이템이 하나라면 값의 개수를 출력
+# 여럿이라면 곱한 값을 누적
+t = int(input())
+
+for tc in range(t):
+    n = int(input())
+    dic = {}
+    for i in range(n):
+        item, wear = input().split()
+        if wear in dic:
+            dic[wear] += [item]
+        else:
+            dic[wear] = [item]
+
+    if len(dic) == 1:
+        print(len(*dic.values()))
+    else:
+        cnt = 1
+        for i in dic.values():
+            cnt *= len(i) + 1
+
+        print(cnt - 1)
+
+# 또는
+
+t = int(input())
+
+for tc in range(t):
+    n = int(input())
+
+    dic = {}
+    for i in range(n):
+        item, wear = input().split()
+        if wear in dic:
+            dic[wear] += 1
+        else:
+            dic[wear] = 1
+
+    cnt = 1
+    for i in dic:
+        cnt *= dic[i] + 1
+    print(cnt - 1)
+
+# 오답처리 코드 ‼️
+# t = int(input())
+
+# for tc in range(t):
+#     n = int(input())
+#     if n == 0:
+#         break
+#     dic = {}
+#     for i in range(n):
+#         item, wear = input().split()
+#         if wear in dic:
+#             dic[wear] += 1
+#         else:
+#             dic[wear] = 1
+
+#     if len(dic) == 1:
+#         print(n)
+#     else:
+#         cnt = 1
+#         for i in dic:
+#             cnt *= dic[i]
+#         print(cnt + n)
+
+
+"""프린터 큐"""
+# 주어진 인덱스(m)에 있는 문서가 중요도에 따라 언제 나가는지 확인하는 문제
+# 마지막 예제 케이스에 같은 수가 여럿이기 때문에 인덱스로 접근
+# -> 인덱스를 표시할 배열을 만들고, 수 배열과 똑같이 돌리고 제거하기를 반복
+# 큰 수(중요도)부터 빠져나가니 배열에서 가장 큰 값을 제거하면서 카운팅
+
+t = int(input())
+
+for _ in range(t):
+    n, m = map(int, input().split())
+    arr = deque(list(map(int, input().split())))
+
+    idx = []
+    for i in range(len(arr)):
+        idx.append(i)
+    idx = deque(idx)
+    idx[m] = "temp"
+
+    cnt = 0
+    while True:
+        if arr[0] == max(arr):
+            cnt += 1
+            if idx[0] == "temp":
+                print(cnt)
+                break
+            else:
+                arr.popleft()
+                idx.popleft()
+        else:
+            arr.rotate(-1)
+            idx.rotate(-1)
+
+
+"""설탕 배달"""
+# 정해진 무게에서 최소한의 봉지를 구하는 문제
+# 5로 나눠지면 몫을 구하고, 아니면 3을 빼면서 카운팅
+# 5로 나뉘지 않고 3을 빼다가 0보다 작아지면 -1을 출력
+
+n = int(input())
+
+cnt = 0
+while n >= 0:
+    if n % 5 == 0:
+        cnt += n // 5
+        print(cnt)
+        break
+    n -= 3
+    cnt += 1
+
+else:
+    print(-1)

@@ -2,6 +2,7 @@
 from collections import deque
 from collections import Counter
 from curses import KEY_LEFT
+from itertools import permutations
 import sys
 import math
 import heapq
@@ -23,17 +24,13 @@ def pprint(list_):
 n = int(input())
 
 answer = 0
-cnt = 0
-while True:
-    if answer == n:
+while n >= 0:
+    if n % 5 == 0:
+        answer += n // 5
+        print(answer)
         break
-    cnt += 1
-    word = str(cnt)
-    if "4" in word:
-        if word.count("4") + word.count("7") == len(word):
-            answer += 1
-    if "7" in word:
-        if word.count("7") == len(word):
-            answer += 1
+    n -= 3
+    answer += 1
 
-print(cnt)
+else:
+    print(-1)
