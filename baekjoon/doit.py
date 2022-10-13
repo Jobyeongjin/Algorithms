@@ -387,3 +387,32 @@ for s, e in time:
         cnt += 1
 
 print(cnt)
+
+
+"""보물"""
+# 최소값은 가장 큰 수와 가장 작은 수를 곱해야 함
+# 정렬 후 zip() 함수를 사용하여 같은 인덱스끼리 묶어준 후 반복해서 곱하고 그 값들을 더하기
+
+n = int(input())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+a.sort()
+b.sort(reverse=True)
+
+print(sum(x * y for x, y in zip(a, b)))
+
+
+"""잃어버린 괄호"""
+# 최소값이 나오게 괄호를 만드는 건 - 기호가 기준이 되고, +값은 값을 누적하기
+
+s = input().split("-")
+
+answer = 0
+for i in s[0].split("+"):
+    answer += int(i)
+
+for i in s[1:]:
+    for j in i.split("+"):
+        answer -= int(j)
+
+print(answer)

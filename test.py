@@ -21,16 +21,14 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
+s = input().split("-")
 
 answer = 0
-while n >= 0:
-    if n % 5 == 0:
-        answer += n // 5
-        print(answer)
-        break
-    n -= 3
-    answer += 1
+for i in s[0].split("+"):
+    answer += int(i)
 
-else:
-    print(-1)
+for i in s[1:]:
+    for j in i.split("+"):
+        answer -= int(j)
+
+print(answer)
