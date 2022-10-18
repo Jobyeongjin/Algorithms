@@ -20,15 +20,44 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
+n, m, v = map(int, input().split())
 
-s = input().split("-")
+arr = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    arr[v1].append(v2)
+    arr[v2].append(v1)
 
-answer = 0
-for i in s[0].split("+"):
-    answer += int(i)
+visited = [0] * (n + 1)
 
-for i in s[1:]:
-    for j in i.split("+"):
-        answer -= int(j)
+for i in arr:
+    i.sort()
 
-print(answer)
+
+def DFS(v):
+    visited[v] = 1
+    print(v, end=" ")
+
+    for i in arr[v]:
+        if visited[i] != 1:
+            DFS(i)
+
+
+def BFS(v):
+    visited[v] = 1
+    q = deque([v])
+
+    while q:
+        qp = q.popleft()
+        print(qp, end=" ")
+
+        for i in arr[qp]:
+            if visited[i] != 1:
+                q.append(i)
+                visited[i] = 1
+
+
+DFS(v)
+visited = [0] * (n + 1)
+print()
+BFS(v)

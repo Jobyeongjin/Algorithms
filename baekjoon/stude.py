@@ -782,48 +782,41 @@ for tc in range(t):
 
 
 """4와 7"""
-# 시간 초과 코드 ⁉
-n = int(input())
-
-answer = 0
-cnt = 0
-while True:
-    if answer == n:
+K = int(input())
+n = 0
+while 1:
+    i = (2**n) - 1
+    j = (2 ** (n + 1)) - 2
+    if i <= K and K <= j:
+        print(bin((i + 1) + K - i)[3:].replace("0", "4").replace("1", "7"))
         break
-    cnt += 1
-    word = str(cnt)
-    if "4" in word:
-        if word.count("4") + word.count("7") == len(word):
-            answer += 1
-    if "7" in word:
-        if word.count("7") == len(word):
-            answer += 1
+    n += 1
 
-print(cnt)
-
-
+# 시간 초과 코드 ⁉
 # n = int(input())
 
-
-# two = 0
-# i = 0
+# answer = 0
+# cnt = 0
 # while True:
-#     i += 1
-#     two += 2**i
-#     if two >= n:
+#     if answer == n:
 #         break
+#     cnt += 1
+#     word = str(cnt)
+#     if "4" in word:
+#         if word.count("4") + word.count("7") == len(word):
+#             answer += 1
+#     if "7" in word:
+#         if word.count("7") == len(word):
+#             answer += 1
 
-# print(i, two)
-# arr = [0, 1]
-# for j in range(i):
-#     arr = list(permutations(arr, i))
-#     print(arr)
+# print(cnt)
 
 
 """패션왕 신해빈"""
 # 입을 것들을 딕셔너리에 담기
 # 입을 아이템이 하나라면 값의 개수를 출력
 # 여럿이라면 곱한 값을 누적
+
 t = int(input())
 
 for tc in range(t):
@@ -940,3 +933,64 @@ while n >= 0:
 
 else:
     print(-1)
+
+
+"""로프"""
+# 로프가 버틸 수 있는 최대 중량 구하는 문제
+# 버틸 수 있는 최대 중량 = 로프 개수 * 가벼운 중량
+# 작은 수가 마지막 인덱스가 되도록 내림차순 정렬
+# n = 로프의 개수(i+1)
+
+n = int(input())
+
+rope = list(int(input()) for _ in range(n))
+rope.sort(reverse=True)
+
+answer = list(rope[i] * (i + 1) for i in range(n))
+print(max(answer))
+
+
+"""DFS와 BFS"""
+# DFS, BFS 문제
+
+n, m, v = map(int, input().split())
+
+arr = [[] for _ in range(n + 1)]  # 인접 리스트 생성
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    arr[v1].append(v2)
+    arr[v2].append(v1)
+
+visited = [0] * (n + 1)  # 방문 처리 리스트
+
+for i in arr:  # 정점 번호 오름차순 정렬
+    i.sort()
+
+
+def DFS(v):
+    visited[v] = 1
+    print(v, end=" ")
+
+    for i in arr[v]:
+        if visited[i] != 1:
+            DFS(i)
+
+
+def BFS(v):
+    visited[v] = 1
+    q = deque([v])
+
+    while q:
+        qp = q.popleft()
+        print(qp, end=" ")
+
+        for i in arr[qp]:
+            if visited[i] != 1:
+                q.append(i)
+                visited[i] = 1
+
+
+DFS(v)
+visited = [0] * (n + 1)  # BFS 실행을 위한 방문 처리 초기화
+print()
+BFS(v)
