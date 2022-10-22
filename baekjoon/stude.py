@@ -939,7 +939,6 @@ else:
 # 로프가 버틸 수 있는 최대 중량 구하는 문제
 # 버틸 수 있는 최대 중량 = 로프 개수 * 가벼운 중량
 # 작은 수가 마지막 인덱스가 되도록 내림차순 정렬
-# n = 로프의 개수(i+1)
 
 n = int(input())
 
@@ -955,13 +954,13 @@ print(max(answer))
 
 n, m, v = map(int, input().split())
 
-arr = [[] for _ in range(n + 1)]  # 인접 리스트 생성
+arr = [[] for _ in range(n + 1)]  # 인접 리스트 생성 = [[], [2,3,4], [1,4], [1,4] [1,2,3]]
 for _ in range(m):
     v1, v2 = map(int, input().split())
     arr[v1].append(v2)
     arr[v2].append(v1)
 
-visited = [0] * (n + 1)  # 방문 처리 리스트
+visited = [0] * (n + 1)  # 방문 처리 리스트 = [[], [], [], [], []]
 
 for i in arr:  # 정점 번호 오름차순 정렬
     i.sort()
@@ -994,3 +993,38 @@ DFS(v)
 visited = [0] * (n + 1)  # BFS 실행을 위한 방문 처리 초기화
 print()
 BFS(v)
+
+
+"""코스튬 파티"""
+# 투 포인터 문제
+# -> 코스튬을 입는 소의 인덱스 = (0,2), (0,3), (1,3), (2,3)
+# pypy3 통과
+
+n, c = map(int, input().split())
+
+cow = [int(input()) for _ in range(n)]
+
+cnt = 0
+for i in range(n - 1):
+    for j in range(i + 1, n):
+        if cow[i] + cow[j] <= c:
+            cnt += 1
+
+print(cnt)
+
+
+"""ATM"""
+# 각 사람이 돈을 뽑는데 필요한 시간이 있고, 그 시간 합의 최소값 구하는 문제
+# 최소값을 구하기 위해 오름차순 정렬
+# 슬라이싱을 통해 배열의 합을 더하기
+# -> 총합 = (0), (0~1), (0~2), (0~3), (0~4) 누적값
+
+n = int(input())
+time = list(map(int, input().split()))
+time.sort()
+
+answer = 0
+for i in range(1, n + 1):
+    answer += sum(time[:i])
+
+print(answer)
