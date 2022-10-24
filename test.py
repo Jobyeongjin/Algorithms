@@ -21,10 +21,29 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
+n, l = map(int, input().split())
+position = list(map(int, input().split()))
+position.sort()
 
-rope = list(int(input()) for _ in range(n))
-rope.sort(reverse=True)
+end = position[-1]
+num = 0
+answer = 0
+while end >= num:
+    if position:
+        if num == position[0]:
+            del position[0]
+            answer += 1
+            if ((num - 1) + l) in position:
+                idx = position.index((num - 1) + l)
+                del position[: idx + 1]
+                num = (num - 1) + l
+                continue
+    else:
+        break
+    num += 1
 
-answer = list(rope[i] * (i + 1) for i in range(n))
-print(max(answer))
+print(answer)
+# if answer % l == 0:
+#     print(answer // l)
+# else:
+#     print((answer // l) + 1)

@@ -1028,3 +1028,30 @@ for i in range(1, n + 1):
     answer += sum(time[:i])
 
 print(answer)
+
+
+"""수리공 항승"""
+
+# 실패, 반례 찾는중
+n, l = map(int, input().split())
+position = list(map(int, input().split()))
+position.sort()
+
+end = position[-1]
+num = 0
+answer = 0
+while end >= num:
+    if position:
+        if num == position[0]:
+            del position[0]
+            answer += 1
+            if ((num - 1) + l) in position:
+                idx = position.index((num - 1) + l)
+                del position[: idx + 1]
+                num = (num - 1) + l
+                continue
+    else:
+        break
+    num += 1
+
+print(answer)
