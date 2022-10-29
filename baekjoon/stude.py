@@ -1,4 +1,5 @@
 from collections import deque
+import heapq
 
 """📝 10870 - 피보나치 수 5"""
 # 인덱스 접근
@@ -1028,6 +1029,80 @@ for i in range(1, n + 1):
     answer += sum(time[:i])
 
 print(answer)
+
+"""콘센트"""
+# 힙 문제
+# 오래 걸리는 기기부터 시작하고, 충전자리가 비었다면 기기를 추가
+# 다음 충전에 들어갈 기기는 적게 걸리는 기기의 시간을 더해 추가
+# -> heap을 사용하는 이유(모듈이 Minheap으로 구현)!!
+# -> 오래 걸리는 기기는 어떻게든 시간을 할애하게 됨
+
+n, m = map(int, input().split())
+time = list(map(int, input().split()))
+time.sort(reverse=True)
+
+heap = []
+for i in time:
+    if len(heap) < m:
+        heapq.heappush(heap, i)
+    else:
+        out = heapq.heappop(heap)
+        heapq.heappush(heap, out + i)
+
+print(max(heap))
+
+
+# 실패 코드
+n, m = map(int, input().split())
+time = list(map(int, input().split()))
+time.sort(reverse=True)
+
+answer = 0
+for i in range(n):
+    if time[i] >= m:
+        if time[i] % m == 0:
+            answer += time[i] // m
+        else:
+            answer += time[i] // m
+            time[i + 1] += time[i] % m
+    else:
+        if time[i] > m:
+            if time[i] % m == 0:
+                answer += time[i] // m
+            else:
+                answer += (time[i] // m) + 1
+        else:
+            answer += 1
+
+print(answer)
+
+
+"""꿍의 여친 만들기"""
+# 만날 수 있는 조합과 걸리는 시간을 딕셔너리에 저장하기
+# 조건(단어)들을 반복하면서 딕셔너리에서 값을 찾아 배열에 넣고, 배열 중 가장 큰 값을 또다른 상위 배열에 저장
+# 그중 가장 작은 수(최소 시간)를 출력
+
+tc = int(input())
+
+for _ in range(tc):
+    a = input().strip().split(",")
+    b = input().strip().split("|")
+
+    answer = []
+
+    dic = {}
+    for i in a:
+        c, t = i.split(":")
+        dic[c] = t
+
+    for i in b:
+        i = i.split("&")
+        box = []
+        for j in i:
+            box.append(int(dic[j]))
+        answer.append(max(box))
+
+    print(min(answer))
 
 
 """수리공 항승"""

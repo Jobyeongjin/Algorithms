@@ -1,5 +1,6 @@
 import heapq
 import operator
+from collections import deque
 
 """구간 합 구하기 4"""
 # 더한 값을 누적하는 리스트를 만들고, 구하고자 한 구간과 구하지 않을 구간을 뺀다.
@@ -416,3 +417,102 @@ for i in s[1:]:
         answer -= int(j)
 
 print(answer)
+
+
+"""거스름돈 """
+# 2, 5원 동전으로 최소 거스름돈 구하는 문제
+# 5로 나눠지면 나눈 몫을 카운팅, 아니면 2를 빼주고 카운팅, 0보다 작으면 종료
+# 나눌 수 없다면 -1을 출력하기
+
+n = int(input())
+
+answer = 0
+while True:
+    if n % 5 == 0:
+        answer += n // 5
+        break
+    else:
+        n -= 2
+        answer += 1
+
+    if n < 0:
+        break
+
+if n < 0:
+    print(-1)
+else:
+    print(answer)
+
+
+"""DFS와 BFS"""
+n, m, s = map(int, input().split())
+
+arr = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    arr[v1].append(v2)
+    arr[v2].append(v1)
+
+for i in range(n + 1):
+    arr[i].sort()
+
+
+def DFS(v):
+    print(v, end=" ")
+    visited[v] = 1
+
+    for i in arr[v]:
+        if visited[i] != 1:
+            DFS(i)
+
+
+visited = [0] * (n + 1)
+DFS(s)
+
+
+def BFS(v):
+    q = deque()
+    q.append(v)
+    visited[v] = 1
+
+    while q:
+        p = q.popleft()
+        print(p, end=" ")
+
+        for i in arr[p]:
+            if visited[i] != 1:
+                visited[i] = 1
+                q.append(i)
+
+
+print()
+visited = [0] * (n + 1)
+BFS(s)
+
+
+"""미로 탐색"""
+n, m = map(int, input().split())
+arr = [list(map(int, input().rstrip())) for _ in range(n)]
+
+delta = ((0, -1), (1, 0), (0, 1), (-1, 0))
+
+
+def BFS(i, j):
+    q = deque()
+    q.append((i, j))
+
+    while q:
+        r, c = q.popleft()
+
+        for dr, dc in delta:
+            nr = r + dr
+            nc = c + dc
+            print(nr, nc)
+            if -1 < nr < n and -1 < nc < m and arr[nr][nc] == 1:
+                arr[nr][nc] = arr[r][c] + 1
+                q.append((nr, nc))
+
+    return arr[n - 1][m - 1]
+
+
+print(BFS(0, 0))
