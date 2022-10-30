@@ -516,3 +516,51 @@ def BFS(i, j):
 
 
 print(BFS(0, 0))
+
+
+"""강의실 배정"""
+# 끝나는 시간과 시작 시간을 비교해서 강의실 추가
+# -> 다음 강의 시작 시간이 현재 강의의 끝나는 시간보다 빠르면 동시 강의 진행
+# -> 그게 아니라면 새로운 강의 시간으로 배정
+
+n = int(input())
+
+lecture = []
+for _ in range(n):
+    s, t = map(int, input().split())
+    lecture.append([s, t])
+
+lecture.sort()
+
+heap = []
+heapq.heappush(heap, lecture[0][1])
+for i in range(1, n):
+    if lecture[i][0] < heap[0]:
+        heapq.heappush(heap, lecture[i][1])
+    else:
+        heapq.heappop(heap)
+        heapq.heappush(heap, lecture[i][1])
+
+print(len(heap))
+
+
+# 답은 맞지만 실패 코드
+n = int(input())
+
+lecture = []
+for _ in range(n):
+    s, t = map(int, input().split())
+    lecture.append([s, t])
+
+lecture.sort()
+
+e = lecture[0][1]
+s = lecture[0][0]
+answer = 1
+for i in range(n):
+    if lecture[i][1] >= s and lecture[i][0] >= e:
+        s = lecture[i][0]
+        e = lecture[i][1]
+        answer += 1
+
+print(answer)

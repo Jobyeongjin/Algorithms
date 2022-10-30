@@ -1106,8 +1106,26 @@ for _ in range(tc):
 
 
 """수리공 항승"""
+n, l = map(int, input().split())
+position = list(map(int, input().split()))
+position.sort()
 
-# 실패, 반례 찾는중
+start = position[0]  # 시작지점
+tape = position[0] + l  # 테이프 길이
+answer = 1  # 길이가 1일 수도 있으니 1부터 시작
+
+for i in range(n):
+    if start <= position[i] < tape:
+        continue
+    else:
+        start = position[i]
+        tape = position[i] + l
+        answer += 1
+
+print(answer)
+
+
+# 실패
 n, l = map(int, input().split())
 position = list(map(int, input().split()))
 position.sort()

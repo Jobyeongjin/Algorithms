@@ -20,28 +20,24 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = map(int, input().split())
-arr = [list(map(int, input().rstrip())) for _ in range(n)]
+n = int(input())
 
-delta = ((0, -1), (1, 0), (0, 1), (-1, 0))
+lecture = []
+for _ in range(n):
+    s, t = map(int, input().split())
+    lecture.append([s, t])
 
+lecture.sort()
 
-def BFS(i, j):
-    q = deque()
-    q.append((i, j))
+heap = []
+heapq.heappush(heap, lecture[0][1])
+answer = 1
+for i in range(1, n):
+    if lecture[i][0] < heap[0]:
+        heapq.heappush(heap, lecture[i][1])
+        answer += 1
+    else:
+        heapq.heappop(heap)
+        heapq.heappush(heap, lecture[i][1])
 
-    while q:
-        r, c = q.popleft()
-
-        for dr, dc in delta:
-            nr = r + dr
-            nc = c + dc
-            print(nr, nc)
-            if -1 < nr < n and -1 < nc < m and arr[nr][nc] == 1:
-                arr[nr][nc] = arr[r][c] + 1
-                q.append((nr, nc))
-
-    return arr[n - 1][m - 1]
-
-
-print(BFS(0, 0))
+print(answer)
