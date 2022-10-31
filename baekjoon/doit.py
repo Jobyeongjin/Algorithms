@@ -564,3 +564,53 @@ for i in range(n):
         answer += 1
 
 print(answer)
+
+
+"""스네이크버드"""
+n, l = map(int, input().split())
+apple = list(map(int, input().split()))
+apple.sort()
+
+for i in range(n):
+    if l >= apple[i]:
+        l += 1
+
+print(l)
+
+
+"""등수 매기기"""
+n = int(input())
+
+rank = [int(input()) for _ in range(n)]
+rank.sort()
+
+answer = 0
+for i in range(1, n + 1):
+    answer += abs(i - rank[i - 1])
+
+print(answer)
+
+
+"""사과 담기 게임"""
+n, m = map(int, input().split())
+j = int(input())
+
+s = 1
+next = m
+cnt = 0
+
+for _ in range(j):
+    position = int(input())
+
+    if s <= position and next >= position:
+        continue
+    elif s < position:
+        cnt += position - next
+        s += position - next
+        next = position
+    else:
+        cnt += s - position
+        next -= s - position
+        s = position
+
+print(cnt)

@@ -20,24 +20,25 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
+n, m = map(int, input().split())
+j = int(input())
 
-lecture = []
-for _ in range(n):
-    s, t = map(int, input().split())
-    lecture.append([s, t])
+s = 1
+next = m
+cnt = 0
 
-lecture.sort()
+for _ in range(j):
+    position = int(input())
 
-heap = []
-heapq.heappush(heap, lecture[0][1])
-answer = 1
-for i in range(1, n):
-    if lecture[i][0] < heap[0]:
-        heapq.heappush(heap, lecture[i][1])
-        answer += 1
+    if s <= position and next >= position:
+        continue
+    elif s < position:
+        cnt += position - next
+        s += position - next
+        next = position
     else:
-        heapq.heappop(heap)
-        heapq.heappush(heap, lecture[i][1])
+        cnt += s - position
+        next -= s - position
+        s = position
 
-print(answer)
+print(cnt)
