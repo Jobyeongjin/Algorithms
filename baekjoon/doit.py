@@ -614,3 +614,44 @@ for _ in range(j):
         s = position
 
 print(cnt)
+
+
+"""컵홀더"""
+n = int(input())
+arr = list(input())
+
+s = 0
+l = 0
+for i in arr:
+    if i == "S":
+        s += 1
+    else:
+        l += 1
+
+answer = s
+if l > 0:
+    answer += int(l // 2) + 1
+
+print(answer)
+
+
+"""안테나"""
+n = int(input())
+house = list(map(int, input().split()))
+house.sort()
+
+print(house[(n - 1) // 2])
+
+
+"""캠핑"""
+i = 1
+while True:
+    l, p, v = map(int, input().split())
+    if l + p + v == 0:
+        break
+
+    answer = (v // p) * l
+    answer += min((v % p), l)
+
+    print(f"Case {i}: {answer}")
+    i += 1

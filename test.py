@@ -20,25 +20,14 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = map(int, input().split())
-j = int(input())
+i = 1
+while True:
+    l, p, v = map(int, input().split())
+    if l + p + v == 0:
+        break
 
-s = 1
-next = m
-cnt = 0
+    answer = (v // p) * l
+    answer += min((v % p), l)
 
-for _ in range(j):
-    position = int(input())
-
-    if s <= position and next >= position:
-        continue
-    elif s < position:
-        cnt += position - next
-        s += position - next
-        next = position
-    else:
-        cnt += s - position
-        next -= s - position
-        s = position
-
-print(cnt)
+    print(f"Case {i}: {answer}")
+    i += 1
