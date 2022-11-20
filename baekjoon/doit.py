@@ -655,3 +655,113 @@ while True:
 
     print(f"Case {i}: {answer}")
     i += 1
+
+
+"""박 터뜨리기"""
+n, k = map(int, input().split())
+
+if k * (k + 1) > 2 * n:
+    print(-1)
+elif (n - k * (k + 1) / 2) % k == 0:
+    print(k - 1)
+else:
+    print(k)
+
+
+"""방 번호"""
+s = input()
+
+answer = [0] * 10
+for i in range(len(s)):
+    num = int(s[i])
+    if num == 6 or num == 9:
+        if answer[6] <= answer[9]:
+            answer[6] += 1
+        else:
+            answer[9] += 1
+    else:
+        answer[num] += 1
+
+print(max(answer))
+
+
+"""홀수"""
+numbers = [int(input()) for _ in range(7)]
+
+arr = []
+for i in numbers:
+    if i % 2 != 0:
+        arr.append(i)
+
+if arr:
+    print(sum(arr))
+    print(min(arr))
+else:
+    print(-1)
+
+
+"""색종이"""
+n = int(input())
+
+board = [[0] * 100 for _ in range(100)]
+
+for _ in range(n):
+    x, y = map(int, input().split())
+
+    for i in range(y, y + 10):
+        for j in range(x, x + 10):
+            board[i][j] = 1
+
+cnt = 0
+for i in range(100):
+    for j in range(100):
+        if board[i][j]:
+            cnt += 1
+
+print(cnt)
+
+
+"""점수 집계"""
+n = int(input())
+
+for _ in range(n):
+    score = list(map(int, input().split()))
+    score.sort()
+    score.pop(0)
+    score.pop(-1)
+    if score[2] - score[0] >= 4:
+        print("KIN")
+    else:
+        print(sum(score))
+
+
+"""행렬 덧셈"""
+# EOFE Error 발생!
+# -> 리스트 안에 반복문에서 행의 수 n이 아닌 열인 m으로 제출...
+
+n, m = map(int, input().split())
+
+a = [list(map(int, input().split())) for _ in range(n)]
+b = [list(map(int, input().split())) for _ in range(n)]
+
+for i, j in zip(a, b):
+    print(*list(x + y for x, y in zip(i, j)))
+<<<<<<< HEAD
+
+
+"""윷놀이"""
+for _ in range(3):
+    arr = list(map(int, input().split()))
+    yut = arr.count(0)
+    if yut == 1:
+        print("A")
+    elif yut == 2:
+        print("B")
+    elif yut == 3:
+        print("C")
+    elif yut == 4:
+        print("D")
+    else:
+        print("E")
+=======
+>>>>>>> 9fabf71 (Add: bj - doit)

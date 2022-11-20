@@ -19,15 +19,30 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
+<<<<<<< HEAD
+for _ in range(3):
+    arr = list(map(int, input().split()))
+    yut = arr.count(0)
+    if yut == 1:
+        print("A")
+    elif yut == 2:
+        print("B")
+    elif yut == 3:
+        print("C")
+    elif yut == 4:
+        print("D")
+    else:
+        print("E")
+=======
+n = int(input())
 
-i = 1
-while True:
-    l, p, v = map(int, input().split())
-    if l + p + v == 0:
-        break
-
-    answer = (v // p) * l
-    answer += min((v % p), l)
-
-    print(f"Case {i}: {answer}")
-    i += 1
+for _ in range(n):
+    score = list(map(int, input().split()))
+    score.sort()
+    score.pop(0)
+    score.pop(-1)
+    if score[2] - score[0] >= 4:
+        print("KIN")
+    else:
+        print(sum(score))
+>>>>>>> 9fabf71 (Add: bj - doit)
