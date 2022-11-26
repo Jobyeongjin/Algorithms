@@ -19,7 +19,6 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-<<<<<<< HEAD
 for _ in range(3):
     arr = list(map(int, input().split()))
     yut = arr.count(0)
@@ -33,16 +32,3 @@ for _ in range(3):
         print("D")
     else:
         print("E")
-=======
-n = int(input())
-
-for _ in range(n):
-    score = list(map(int, input().split()))
-    score.sort()
-    score.pop(0)
-    score.pop(-1)
-    if score[2] - score[0] >= 4:
-        print("KIN")
-    else:
-        print(sum(score))
->>>>>>> 9fabf71 (Add: bj - doit)

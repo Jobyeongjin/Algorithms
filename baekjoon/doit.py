@@ -746,7 +746,6 @@ b = [list(map(int, input().split())) for _ in range(n)]
 
 for i, j in zip(a, b):
     print(*list(x + y for x, y in zip(i, j)))
-<<<<<<< HEAD
 
 
 """윷놀이"""
@@ -763,5 +762,3 @@ for _ in range(3):
         print("D")
     else:
         print("E")
-=======
->>>>>>> 9fabf71 (Add: bj - doit)
