@@ -762,3 +762,49 @@ for _ in range(3):
         print("D")
     else:
         print("E")
+
+
+"""10부제"""
+n = input().strip()
+cars = list(map(str, input().split()))
+
+cnt = 0
+for i in cars:
+    if i in n:
+        cnt += 1
+
+print(cnt)
+
+
+"""크냐?"""
+while True:
+    n, m = map(int, input().split())
+
+    if n == 0 and m == 0:
+        break
+    else:
+        if n > m:
+            print("Yes")
+        elif n == m:
+            print("No")
+        else:
+            print("No")
+
+
+"""막대기"""
+n = int(input())
+
+sticks = list()
+for _ in range(n):
+    stick = int(input())
+    sticks.append(stick)
+
+start = sticks[-1]
+
+cnt = 0
+for i in range(len(sticks) - 1, -1, -1):
+    if sticks[i] > start:
+        cnt += 1
+        start = sticks[i]
+
+print(cnt + 1)

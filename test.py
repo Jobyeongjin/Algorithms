@@ -19,16 +19,20 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-for _ in range(3):
-    arr = list(map(int, input().split()))
-    yut = arr.count(0)
-    if yut == 1:
-        print("A")
-    elif yut == 2:
-        print("B")
-    elif yut == 3:
-        print("C")
-    elif yut == 4:
-        print("D")
-    else:
-        print("E")
+
+n = int(input())
+
+sticks = list()
+for _ in range(n):
+    stick = int(input())
+    sticks.append(stick)
+
+start = sticks[-1]
+
+cnt = 0
+for i in range(len(sticks) - 1, -1, -1):
+    if sticks[i] > start:
+        cnt += 1
+        start = sticks[i]
+
+print(cnt + 1)
