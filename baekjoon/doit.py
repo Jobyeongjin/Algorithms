@@ -808,3 +808,34 @@ for i in range(len(sticks) - 1, -1, -1):
         start = sticks[i]
 
 print(cnt + 1)
+
+
+"""바닥 장식"""
+n, m = map(int, input().split())
+floor = [list(input().strip()) for _ in range(n)]
+
+answer = 0
+cnt = 0
+for r in range(n):
+    for c in range(m):
+        if floor[r][c] == "-":
+            cnt += 1
+        elif floor[r][c] != "-" and cnt > 0:
+            answer += 1
+            cnt = 0
+    if cnt > 0:
+        answer += 1
+        cnt = 0
+
+for c in range(m):
+    for r in range(n):
+        if floor[r][c] == "|":
+            cnt += 1
+        elif floor[r][c] != "|" and cnt > 0:
+            answer += 1
+            cnt = 0
+    if cnt > 0:
+        answer += 1
+        cnt = 0
+
+print(answer)
