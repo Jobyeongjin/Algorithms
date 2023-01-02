@@ -20,31 +20,29 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = map(int, input().split())
-floor = [list(input().strip()) for _ in range(n)]
+n = int(input())
+numbers = [int(input()) for _ in range(n)]
+numbers.sort()
 
-answer = 0
-cnt = 0
-for r in range(n):
-    for c in range(m):
-        if floor[r][c] == "-":
-            cnt += 1
-        elif floor[r][c] != "-" and cnt > 0:
-            answer += 1
-            cnt = 0
-    if cnt > 0:
-        answer += 1
-        cnt = 0
+def average(arr):
+    return round(sum(arr) / n)
+print(average(numbers))
 
-for c in range(m):
-    for r in range(n):
-        if floor[r][c] == "|":
-            cnt += 1
-        elif floor[r][c] != "|" and cnt > 0:
-            answer += 1
-            cnt = 0
-    if cnt > 0:
-        answer += 1
-        cnt = 0
+def center(arr):
+    return arr[n // 2]
+print(center(numbers))
 
-print(answer)
+def more(arr):
+    list = Counter(arr).most_common()
+    if len(arr) > 1:
+        if list[0][1] == list[1][1]:
+            return list[1][0]
+        else:
+            return list[0][0]
+    else:
+        return list[0][0]
+print(more(numbers))
+
+def scope(arr):
+    return max(arr) - min(arr)
+print(scope(numbers))

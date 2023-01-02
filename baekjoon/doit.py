@@ -839,3 +839,96 @@ for c in range(m):
         cnt = 0
 
 print(answer)
+
+
+"""괄호의 값"""
+text = list(input())
+
+stack = []
+answer = 0
+temp = 1
+
+for i in range(len(text)):
+
+    if text[i] == "(":
+        stack.append(text[i])
+        temp *= 2
+
+    elif text[i] == "[":
+        stack.append(text[i])
+        temp *= 3
+
+    elif text[i] == ")":
+        if not stack or stack[-1] == "[":
+            answer = 0
+            break
+        if text[i - 1] == "(":
+            answer += temp
+        stack.pop()
+        temp //= 2
+
+    else:
+        if not stack or stack[-1] == "(":
+            answer = 0
+            break
+        if text[i - 1] == "[":
+            answer += temp
+        stack.pop()
+        temp //= 3
+
+if stack:
+    print(0)
+else:
+    print(answer)
+
+
+"""숫자 정사각형"""
+# 모든 좌표를 확인하면서 같은 축에 같은 수가 있다면
+# 정사각형를 만들어 꼭지좌표의 수가 같은 수인지 확인
+# 나머지 두 좌표가 같은 수라면 길이의 제곱값을 저장
+n, m = map(int, input().split())
+arr = [list(input().strip()) for _ in range(n)]
+
+answer = []
+for i in range(n):
+    for j in range(m):
+        spot = arr[i][j]
+        for k in range(j, m):
+            if arr[i][k] == spot and i + k - j < n and k < m:
+                if arr[i + k - j][j] == spot and arr[i + k - j][k] == spot:
+                    answer.append((k - j + 1) ** 2)
+
+print(max(answer))
+
+
+"""통계학"""
+# 평균값 : 리스트의 합 나누기 n
+# 중앙값 : 리스트 인덱스가 n으로 나눈 몫
+# 최빈수 : Counter().most_common() 사용 - 가장 많이 나온 데이터 순으로 정렬
+# 범위 : 최대값 - 최소값
+n = int(input())
+numbers = [int(input()) for _ in range(n)]
+numbers.sort()
+
+def average(arr):
+    return round(sum(arr) / n)
+print(average(numbers))
+
+def center(arr):
+    return arr[n // 2]
+print(center(numbers))
+
+def more(arr):
+    list = Counter(arr).most_common()
+    if len(arr) > 1:
+        if list[0][1] == list[1][1]:
+            return list[1][0]
+        else:
+            return list[0][0]
+    else:
+        return list[0][0]
+print(more(numbers))
+
+def scope(arr):
+    return max(arr) - min(arr)
+print(scope(numbers))
