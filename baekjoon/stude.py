@@ -1,4 +1,4 @@
-from collections import deque
+from collections import deque, Counter
 import heapq
 
 """📝 10870 - 피보나치 수 5"""
@@ -1147,4 +1147,86 @@ while end >= num:
         break
     num += 1
 
+print(answer)
+
+
+"""통계학"""
+# 평균값 : 리스트의 합 나누기 n
+# 중앙값 : 리스트 인덱스가 n으로 나눈 몫
+# 최빈수 : Counter().most_common() 사용 - 가장 많이 나온 데이터 순으로 정렬
+# 범위 : 최대값 - 최소값
+n = int(input())
+numbers = [int(input()) for _ in range(n)]
+numbers.sort()
+
+def average(arr):
+    return round(sum(arr) / n)
+print(average(numbers))
+
+def center(arr):
+    return arr[n // 2]
+print(center(numbers))
+
+def more(arr):
+    list = Counter(arr).most_common()
+    if len(arr) > 1:
+        if list[0][1] == list[1][1]:
+            return list[1][0]
+        else:
+            return list[0][0]
+    else:
+        return list[0][0]
+print(more(numbers))
+
+def scope(arr):
+    return max(arr) - min(arr)
+print(scope(numbers))
+
+
+"""좋다"""
+# 오름차순 정렬 
+# 판별할 수를 제외한 나머지 수를 투포인터 타겟으로 설정
+# 더한 값이 좋은 수라면 참, 아니면 거짓을 리턴 
+n = int(input())
+numbers = list(map(int, input().split()))
+numbers.sort()
+
+def twopo(i, point):
+    target = numbers[:i] + numbers[i+1:]
+    start, end = 0, n - 2
+    while start < end:
+        sum_ = target[start] + target[end]
+        if point < sum_:
+            end -= 1
+        elif point > sum_:
+            start += 1
+        else:
+            return True
+    return False
+
+good = 0
+for i in range(n):
+    if twopo(i, numbers[i]):
+        good += 1
+print(good)
+
+
+"""보석 도둑"""
+# 보석과 가방 모두 오름차순 정렬
+# 가방에 넣을 수 있는 보석 찾기
+# - HEAP을 사용하고, 내가 찾는 보석은 비싼 보석이기 때문에 
+# - 기본적으로 구현된 최소힙에서 음수값으로 처리해 최대힙으로 찾기
+n, k = map(int, input().split())
+gems = [list(map(int, input().split())) for _ in range(n)]
+gems.sort()
+bags = [int(input()) for _ in range(k)]
+bags.sort()
+
+answer = 0
+temp = []
+for bag in bags:
+    while gems and gems[0][0] <= bag:
+        heapq.heappush(temp, -heapq.heappop(gems)[1])
+    if temp:
+        answer -= heapq.heappop(temp)
 print(answer)

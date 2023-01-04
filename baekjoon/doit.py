@@ -899,36 +899,3 @@ for i in range(n):
                     answer.append((k - j + 1) ** 2)
 
 print(max(answer))
-
-
-"""통계학"""
-# 평균값 : 리스트의 합 나누기 n
-# 중앙값 : 리스트 인덱스가 n으로 나눈 몫
-# 최빈수 : Counter().most_common() 사용 - 가장 많이 나온 데이터 순으로 정렬
-# 범위 : 최대값 - 최소값
-n = int(input())
-numbers = [int(input()) for _ in range(n)]
-numbers.sort()
-
-def average(arr):
-    return round(sum(arr) / n)
-print(average(numbers))
-
-def center(arr):
-    return arr[n // 2]
-print(center(numbers))
-
-def more(arr):
-    list = Counter(arr).most_common()
-    if len(arr) > 1:
-        if list[0][1] == list[1][1]:
-            return list[1][0]
-        else:
-            return list[0][0]
-    else:
-        return list[0][0]
-print(more(numbers))
-
-def scope(arr):
-    return max(arr) - min(arr)
-print(scope(numbers))

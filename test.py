@@ -20,29 +20,17 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
-numbers = [int(input()) for _ in range(n)]
-numbers.sort()
+n, k = map(int, input().split())
+gems = [list(map(int, input().split())) for _ in range(n)]
+gems.sort()
+bags = [int(input()) for _ in range(k)]
+bags.sort()
 
-def average(arr):
-    return round(sum(arr) / n)
-print(average(numbers))
-
-def center(arr):
-    return arr[n // 2]
-print(center(numbers))
-
-def more(arr):
-    list = Counter(arr).most_common()
-    if len(arr) > 1:
-        if list[0][1] == list[1][1]:
-            return list[1][0]
-        else:
-            return list[0][0]
-    else:
-        return list[0][0]
-print(more(numbers))
-
-def scope(arr):
-    return max(arr) - min(arr)
-print(scope(numbers))
+answer = 0
+temp = []
+for bag in bags:
+    while gems and gems[0][0] <= bag:
+        heapq.heappush(temp, -heapq.heappop(gems)[1])
+    if temp:
+        answer -= heapq.heappop(temp)
+print(answer)
