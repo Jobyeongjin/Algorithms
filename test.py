@@ -20,17 +20,20 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, k = map(int, input().split())
-gems = [list(map(int, input().split())) for _ in range(n)]
-gems.sort()
-bags = [int(input()) for _ in range(k)]
-bags.sort()
+n = int(input())
+numbers = sorted(list(map(int, input().split())))
+x = int(input())
 
 answer = 0
-temp = []
-for bag in bags:
-    while gems and gems[0][0] <= bag:
-        heapq.heappush(temp, -heapq.heappop(gems)[1])
-    if temp:
-        answer -= heapq.heappop(temp)
+for i in range(1):
+    start, end = 0, n - 1
+    while start < end:
+        sum_ = numbers[start] + numbers[end]
+        if x < sum_:
+            end -= 1
+        elif x > sum_:
+            start += 1
+        else:
+            answer += 1
+            start += 1
 print(answer)

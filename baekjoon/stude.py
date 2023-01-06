@@ -1230,3 +1230,36 @@ for bag in bags:
     if temp:
         answer -= heapq.heappop(temp)
 print(answer)
+
+
+"""통나무 건너뛰기"""
+# 통나무 오름차순 정렬
+# 넘을 수 있는 최소 난이도는 인덱스로 볼 때 2차이가 남
+# - 정렬된 리스트와 테스트케이스와 비교
+for _ in range(int(input())):
+    n = int(input())
+    nums = sorted(list(map(int, input().split())))
+    answer = 0
+    for i in range(2, n):
+        answer = max(answer, abs(nums[i] - nums[i-2]))
+    print(answer)
+
+
+"""두 수의 합"""
+# 투포인터, 오름차순 정렬
+# 더한 값이 x값이라면 카운팅
+n = int(input())
+numbers = sorted(list(map(int, input().split())))
+x = int(input())
+
+answer, start, end = 0, 0, n - 1
+while start < end:
+    sum_ = numbers[start] + numbers[end]
+    if x < sum_:
+        end -= 1
+    elif x > sum_:
+        start += 1
+    else:
+        answer += 1
+        start += 1
+print(answer)
