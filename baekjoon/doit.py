@@ -899,3 +899,39 @@ for i in range(n):
                     answer.append((k - j + 1) ** 2)
 
 print(max(answer))
+
+
+"""좌표 압축"""
+# 중복되는 수를 없애고 정렬
+# 딕셔너리에 수(Key)와 인덱스(Value) 값을 입력
+# 리스트를 반복하면서 수가 동일하다면 딕셔너리의 인덱스 값 출력
+n = int(input())
+nums = list(map(int, input().split()))
+nums_set = sorted(list(set(nums)))
+
+answer = {}
+for i in range(len(nums_set)):
+    answer[nums_set[i]] = i
+
+for i in nums:
+    print(answer[i], end=' ')
+
+
+"""N번째 큰 수"""
+# heapq 모듈 사용
+# 첫번째 리스트 추가(5개의 수)
+# 가장 작은 데이터보다 큰 수라면, 작은 데이터는 나가고 다음 수가 들어오는 로직
+n = int(input())
+heap = []
+for _ in range(n):
+    nums = list(map(int, input().split()))
+    if not heap:
+        for num in nums:
+            heapq.heappush(heap, num)
+    else:
+        for num in nums:
+            if heap[0] < num:
+                heapq.heappush(heap, num)
+                heapq.heappop(heap)
+
+print(heap[0])

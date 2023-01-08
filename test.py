@@ -19,21 +19,17 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-
 n = int(input())
-numbers = sorted(list(map(int, input().split())))
-x = int(input())
+heap = []
+for _ in range(n):
+    nums = list(map(int, input().split()))
+    if not heap:
+        for num in nums:
+            heapq.heappush(heap, num)
+    else:
+        for num in nums:
+            if heap[0] < num:
+                heapq.heappush(heap, num)
+                heapq.heappop(heap)
 
-answer = 0
-for i in range(1):
-    start, end = 0, n - 1
-    while start < end:
-        sum_ = numbers[start] + numbers[end]
-        if x < sum_:
-            end -= 1
-        elif x > sum_:
-            start += 1
-        else:
-            answer += 1
-            start += 1
-print(answer)
+print(heap[0])
