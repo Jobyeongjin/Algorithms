@@ -1159,17 +1159,17 @@ n = int(input())
 numbers = [int(input()) for _ in range(n)]
 numbers.sort()
 
-def average(arr):
-    return round(sum(arr) / n)
+def average(nums):
+    return round(sum(nums) / n)
 print(average(numbers))
 
-def center(arr):
-    return arr[n // 2]
+def center(nums):
+    return nums[n // 2]
 print(center(numbers))
 
-def more(arr):
-    list = Counter(arr).most_common()
-    if len(arr) > 1:
+def more(nums):
+    list = Counter(nums).most_common()
+    if len(nums) > 1:
         if list[0][1] == list[1][1]:
             return list[1][0]
         else:
@@ -1178,27 +1178,27 @@ def more(arr):
         return list[0][0]
 print(more(numbers))
 
-def scope(arr):
-    return max(arr) - min(arr)
+def scope(nums):
+    return max(nums) - min(nums)
 print(scope(numbers))
 
 
 """좋다"""
 # 오름차순 정렬 
-# 판별할 수를 제외한 나머지 수를 투포인터 타겟으로 설정
+# 판별할 수를 제외한 나머지 수를 투포인터 범위로 설정
 # 더한 값이 좋은 수라면 참, 아니면 거짓을 리턴 
 n = int(input())
 numbers = list(map(int, input().split()))
 numbers.sort()
 
-def twopo(i, point):
-    target = numbers[:i] + numbers[i+1:]
+def twopo(i, target):
+    scope = numbers[:i] + numbers[i+1:]
     start, end = 0, n - 2
     while start < end:
-        sum_ = target[start] + target[end]
-        if point < sum_:
+        sum_ = scope[start] + scope[end]
+        if target < sum_:
             end -= 1
-        elif point > sum_:
+        elif target > sum_:
             start += 1
         else:
             return True
@@ -1212,7 +1212,7 @@ print(good)
 
 
 """보석 도둑"""
-# 보석과 가방 모두 오름차순 정렬
+# 보석(무게, 가격)과 가방(무게) 모두 오름차순 정렬
 # 가방에 넣을 수 있는 보석 찾기
 # - HEAP을 사용하고, 내가 찾는 보석은 비싼 보석이기 때문에 
 # - 기본적으로 구현된 최소힙에서 음수값으로 처리해 최대힙으로 찾기
@@ -1241,7 +1241,7 @@ for _ in range(int(input())):
     nums = sorted(list(map(int, input().split())))
     answer = 0
     for i in range(2, n):
-        answer = max(answer, abs(nums[i] - nums[i-2]))
+        answer = max(answer, nums[i] - nums[i-2])
     print(answer)
 
 
@@ -1263,3 +1263,46 @@ while start < end:
         answer += 1
         start += 1
 print(answer)
+
+
+"""신입 사원"""
+# 신입사원의 성적 순위를 오름차순으로 정렬
+# - 서류 점수가 1등이라면 절대 떨어지지 않는다.
+# - 2등은 1등과 비교했을 때 면접 점수만 비교하게 되고, 당연하게도 순위가 높아야만 통과할 수 있다.
+# - 통과했다면 카운팅
+for _ in range(int(input())):
+    n = int(input())
+    ranking = [list(map(int, input().split())) for _ in range(n)]
+    ranking.sort()
+    
+    target = ranking[0][1]
+    answer = 1
+    for i in range(1, n):
+        if ranking[i][1] < target:
+            target = ranking[i][1]
+            answer += 1
+    
+    print(answer)
+
+
+"""시간 관리하기"""
+# 작업 시간을 내림차순으로 정렬하기
+# - 리스트의 두번째 값인 끝내야하는 시간으로 정렬하기 위해 람다 함수 사용
+# - 가장 먼저 작업해야 하는 일 == 끝내야 하는 시간이 가장 작은 수
+# - 제한 시간 == 끝내야 하는 시간이 가장 큰 수
+# 제한 시간부터 작업시 필요한 시간을 빼기 == 일을 할 수 있는 마지막 시간
+n = int(input())
+working = [list(map(int, input().split())) for _ in range(n)]
+working.sort(key=lambda x: x[1], reverse=True)
+
+limit = working[0][1]
+for i in range(n):
+    if working[i][1] <= limit:
+        limit = working[i][1] - working[i][0]
+    else:
+        limit -= working[i][0]
+
+if limit < 0:
+    print(-1)
+else:
+    print(limit)

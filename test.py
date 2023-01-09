@@ -20,16 +20,17 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 n = int(input())
-heap = []
-for _ in range(n):
-    nums = list(map(int, input().split()))
-    if not heap:
-        for num in nums:
-            heapq.heappush(heap, num)
-    else:
-        for num in nums:
-            if heap[0] < num:
-                heapq.heappush(heap, num)
-                heapq.heappop(heap)
+working = [list(map(int, input().split())) for _ in range(n)]
+working.sort(key=lambda x: x[1], reverse=True)
 
-print(heap[0])
+limit = working[0][1]
+for i in range(n):
+    if working[i][1] <= limit:
+        limit = working[i][1] - working[i][0]
+    else:
+        limit -= working[i][0]
+
+if limit < 0:
+    print(-1)
+else:
+    print(limit)
