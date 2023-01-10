@@ -935,3 +935,49 @@ for _ in range(n):
                 heapq.heappop(heap)
 
 print(heap[0])
+
+
+"""좋은 구간"""
+n = int(input())
+nums = sorted(list(map(int, input().split())))
+target = int(input())
+
+if target in nums:
+    print(0)
+else:
+    min_ = 0
+    max_ = 0
+    for num in nums:
+        if num < target:
+            min_ = num
+        elif num > target:
+            max_ = num
+            break
+    
+    answer = 0
+    for i in range(min_ + 1, max_):
+        for j in range(i + 1, max_):
+            if i <= target and j >= target:
+                answer += 1
+    
+    print(answer)
+
+
+"""팀 이름 정하기"""
+name = input().strip()
+n = int(input())
+teams = [input().strip() for _ in range(n)]
+
+answer = []
+for team in teams:
+    sum_ = name + team
+    L = sum_.count('L')
+    O = sum_.count('O')
+    V = sum_.count('V')
+    E = sum_.count('E')
+    score = ((L+O) * (L+V) * (L+E) * (O+V) * (O+E) * (V+E)) % 100
+    answer.append((team, score))
+
+answer.sort(key=lambda x: (-x[1], x[0]))
+
+print(answer[0][0])
