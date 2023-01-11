@@ -1159,13 +1159,20 @@ n = int(input())
 numbers = [int(input()) for _ in range(n)]
 numbers.sort()
 
+
 def average(nums):
     return round(sum(nums) / n)
+
+
 print(average(numbers))
+
 
 def center(nums):
     return nums[n // 2]
+
+
 print(center(numbers))
+
 
 def more(nums):
     list = Counter(nums).most_common()
@@ -1176,23 +1183,29 @@ def more(nums):
             return list[0][0]
     else:
         return list[0][0]
+
+
 print(more(numbers))
+
 
 def scope(nums):
     return max(nums) - min(nums)
+
+
 print(scope(numbers))
 
 
 """좋다"""
-# 오름차순 정렬 
+# 오름차순 정렬
 # 판별할 수를 제외한 나머지 수를 투포인터 범위로 설정
-# 더한 값이 좋은 수라면 참, 아니면 거짓을 리턴 
+# 더한 값이 좋은 수라면 참, 아니면 거짓을 리턴
 n = int(input())
 numbers = list(map(int, input().split()))
 numbers.sort()
 
+
 def twopo(i, target):
-    scope = numbers[:i] + numbers[i+1:]
+    scope = numbers[:i] + numbers[i + 1 :]
     start, end = 0, n - 2
     while start < end:
         sum_ = scope[start] + scope[end]
@@ -1204,6 +1217,7 @@ def twopo(i, target):
             return True
     return False
 
+
 good = 0
 for i in range(n):
     if twopo(i, numbers[i]):
@@ -1214,7 +1228,7 @@ print(good)
 """보석 도둑"""
 # 보석(무게, 가격)과 가방(무게) 모두 오름차순 정렬
 # 가방에 넣을 수 있는 보석 찾기
-# - HEAP을 사용하고, 내가 찾는 보석은 비싼 보석이기 때문에 
+# - HEAP을 사용하고, 내가 찾는 보석은 비싼 보석이기 때문에
 # - 기본적으로 구현된 최소힙에서 음수값으로 처리해 최대힙으로 찾기
 n, k = map(int, input().split())
 gems = [list(map(int, input().split())) for _ in range(n)]
@@ -1241,7 +1255,7 @@ for _ in range(int(input())):
     nums = sorted(list(map(int, input().split())))
     answer = 0
     for i in range(2, n):
-        answer = max(answer, nums[i] - nums[i-2])
+        answer = max(answer, nums[i] - nums[i - 2])
     print(answer)
 
 
@@ -1274,14 +1288,14 @@ for _ in range(int(input())):
     n = int(input())
     ranking = [list(map(int, input().split())) for _ in range(n)]
     ranking.sort()
-    
+
     target = ranking[0][1]
     answer = 1
     for i in range(1, n):
         if ranking[i][1] < target:
             target = ranking[i][1]
             answer += 1
-    
+
     print(answer)
 
 
@@ -1291,6 +1305,8 @@ for _ in range(int(input())):
 # - 가장 먼저 작업해야 하는 일 == 끝내야 하는 시간이 가장 작은 수
 # - 제한 시간 == 끝내야 하는 시간이 가장 큰 수
 # 제한 시간부터 작업시 필요한 시간을 빼기 == 일을 할 수 있는 마지막 시간
+# - 제한 시간이 일을 끝내는 시간보다 크다면
+#   - 제한 시간이 아닌 일을 마치는 시간에서 빼야 한다.
 n = int(input())
 working = [list(map(int, input().split())) for _ in range(n)]
 working.sort(key=lambda x: x[1], reverse=True)
@@ -1306,3 +1322,51 @@ if limit < 0:
     print(-1)
 else:
     print(limit)
+
+
+"""저울"""
+# 오름차순 정렬
+# 측정할 수 없는 수를 대입 ex) 1이 아닌 2부터 시작이라면 1은 측정 불가
+# 마찬가지로 3이 아닌 8을 대입 ex) 4까지는 측정 가능하고, 5는 측정할 수 없음, 6 7 8은 가능
+n = int(input())
+weights = sorted(list(map(int, input().split())))
+
+answer = 1
+for i in range(n):
+    if answer < weights[i]:
+        break
+    answer += weights[i]
+print(answer)
+
+
+"""공주님의 정원"""
+n = int(input())
+flowers = []
+for _ in range(n):
+    date = list(map(int, input().split()))
+    start = date[0] * 100 + date[1]
+    end = date[2] * 100 + date[3]
+    flowers.append((start, end))
+
+flowers.sort(key=lambda x: (x[0], x[1]))
+
+target = 301
+end = 0
+answer = 0
+while flowers:
+    if target >= 1201 or target < flowers[0][0]:
+        break
+    for _ in range(len(flowers)):
+        if target >= flowers[0][0]:
+            if end <= flowers[0][1]:
+                end = flowers[0][1]
+            flowers.remove(flowers[0])
+        else:
+            break
+    target = end
+    answer += 1
+
+if target < 1201:
+    print(0)
+else:
+    print(answer)

@@ -19,20 +19,18 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-name = input().strip()
 n = int(input())
-teams = [input().strip() for _ in range(n)]
+working = [list(map(int, input().split())) for _ in range(n)]
+working.sort(key=lambda x: x[1], reverse=True)
 
-answer = []
-for team in teams:
-    sum_ = name + team
-    L = sum_.count('L')
-    O = sum_.count('O')
-    V = sum_.count('V')
-    E = sum_.count('E')
-    result = ((L+O) * (L+V) * (L+E) * (O+V) * (O+E) * (V+E)) % 100
-    answer.append((team, result))
+limit = working[0][1]
+for i in range(n):
+    if working[i][1] <= limit:
+        limit = working[i][1] - working[i][0]
+    else:
+        limit -= working[i][0]
 
-answer.sort(key=lambda x: (-x[1], x[0]))
-
-print(answer[0][0])
+if limit < 0:
+    print(-1)
+else:
+    print(limit)
