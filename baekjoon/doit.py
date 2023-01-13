@@ -914,7 +914,7 @@ for i in range(len(nums_set)):
     answer[nums_set[i]] = i
 
 for i in nums:
-    print(answer[i], end=' ')
+    print(answer[i], end=" ")
 
 
 """N번째 큰 수"""
@@ -953,13 +953,13 @@ else:
         elif num > target:
             max_ = num
             break
-    
+
     answer = 0
     for i in range(min_ + 1, max_):
         for j in range(i + 1, max_):
             if i <= target and j >= target:
                 answer += 1
-    
+
     print(answer)
 
 
@@ -971,13 +971,34 @@ teams = [input().strip() for _ in range(n)]
 answer = []
 for team in teams:
     sum_ = name + team
-    L = sum_.count('L')
-    O = sum_.count('O')
-    V = sum_.count('V')
-    E = sum_.count('E')
-    score = ((L+O) * (L+V) * (L+E) * (O+V) * (O+E) * (V+E)) % 100
+    L = sum_.count("L")
+    O = sum_.count("O")
+    V = sum_.count("V")
+    E = sum_.count("E")
+    score = ((L + O) * (L + V) * (L + E) * (O + V) * (O + E) * (V + E)) % 100
     answer.append((team, score))
 
 answer.sort(key=lambda x: (-x[1], x[0]))
 
 print(answer[0][0])
+
+
+"""단어 나누기"""
+s = list(input())
+
+words = []
+for i in range(1, len(s) - 1):
+    for j in range(i + 1, len(s)):
+        a = s[:i]
+        b = s[i:j]
+        c = s[j:]
+        a.reverse()
+        b.reverse()
+        c.reverse()
+        words.append(a + b + c)
+
+answer = []
+for word in words:
+    answer.append("".join(word))
+
+print(sorted(answer)[0])

@@ -1370,3 +1370,34 @@ if target < 1201:
     print(0)
 else:
     print(answer)
+
+
+"""회의실 배정"""
+n = int(input())
+times = [tuple(map(int, input().split())) for _ in range(n)]
+times.sort(key=lambda x: (x[1], x[0]))
+
+lastEnd = 0
+answer = 0
+for start, end in times:
+    if start >= lastEnd:
+        lastEnd = end
+        answer += 1
+
+print(answer)
+
+
+"""전화번호 목록"""
+for _ in range(int(input())):
+    n = int(input())
+    numbers = [list(input().strip()) for _ in range(n)]
+    numbers.sort()
+
+    temp = False
+    for i in range(n - 1):
+        if numbers[i] == numbers[i + 1][: len(numbers[i])]:
+            print("NO")
+            temp = True
+            break
+    if temp == False:
+        print("YES")
