@@ -18,3 +18,23 @@ def pprint(list_):
 
 
 # 문제풀이는 여기에
+
+
+n = int(input())
+reports = []
+answer = [0] * 1001
+
+for _ in range(n):
+    day, value = map(int, input().split())
+    reports.append([-value, day, value])
+
+heapq.heapify(reports)
+
+while reports:
+    temp = heapq.heappop(reports)
+    for i in range(temp[1], 0, -1):
+        if answer[i] == 0:
+            answer[i] = temp[2]
+            break
+
+print(sum(answer))

@@ -1401,3 +1401,44 @@ for _ in range(int(input())):
             break
     if temp == False:
         print("YES")
+
+
+"""강의실"""
+n = int(input())
+rooms = []
+for _ in range(n):
+    idx, st, et = map(int, input().split())
+    heapq.heappush(rooms, [st, et, idx])
+
+target = []
+fs, fe, fi = heapq.heappop(rooms)
+heapq.heappush(target, fe)
+
+while rooms:
+    st, et, i = heapq.heappop(rooms)
+    if target[0] <= st:
+        heapq.heappop(target)
+    heapq.heappush(target, et)
+
+print(len(target))
+
+
+"""과제"""
+n = int(input())
+reports = []
+answer = [0] * 1001
+
+for _ in range(n):
+    day, value = map(int, input().split())
+    reports.append([-value, day, value])
+
+heapq.heapify(reports)
+
+while reports:
+    temp = heapq.heappop(reports)
+    for i in range(temp[1], 0, -1):
+        if answer[i] == 0:
+            answer[i] = temp[2]
+            break
+
+print(sum(answer))

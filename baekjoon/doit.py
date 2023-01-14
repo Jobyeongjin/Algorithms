@@ -1002,3 +1002,51 @@ for word in words:
     answer.append("".join(word))
 
 print(sorted(answer)[0])
+
+
+"""약수의 합 2"""
+n = int(input())
+sum_ = 0
+for i in range(1, n + 1):
+    sum_ += (n // i) * i
+
+print(sum_)
+
+
+"""멀티버스 I"""
+
+
+def planet(p1, p2):
+    temp = True
+    for i in range(n):
+        for j in range(i + 1, n):
+            if p1[i] < p1[j]:
+                if p2[i] < p2[j]:
+                    continue
+                else:
+                    temp = False
+                    break
+            elif p1[i] > p1[j]:
+                if p2[i] > p2[j]:
+                    continue
+                else:
+                    temp = False
+                    break
+            elif p1[i] == p1[j]:
+                if p2[i] == p2[j]:
+                    continue
+                else:
+                    temp = False
+                    break
+    return temp
+
+
+m, n = map(int, input().split())
+space = [list(map(int, input().split())) for _ in range(m)]
+answer = 0
+for i in range(m):
+    for j in range(i + 1, m):
+        if planet(space[i], space[j]):
+            answer += 1
+
+print(answer)
