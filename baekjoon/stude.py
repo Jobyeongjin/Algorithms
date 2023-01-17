@@ -1442,3 +1442,56 @@ while reports:
             break
 
 print(sum(answer))
+
+
+"""크리스마스 선물"""
+n = int(input())
+
+giftbox = []
+for _ in range(n):
+    area = list(map(int, input().split()))
+
+    if area[0] == 0:
+        if len(giftbox) == 0:
+            print(-1)
+        else:
+            answer = -heapq.heappop(giftbox)
+            print(answer)
+    else:
+        for i in range(area[0]):
+            heapq.heappush(giftbox, -area[i + 1])
+
+
+"""순회강연"""
+n = int(input())
+
+lectures = []
+for _ in range(n):
+    pay, day = map(int, input().split())
+    lectures.append([day, pay])
+
+lectures.sort()
+
+heap = []
+for day, pay in lectures:
+    heapq.heappush(heap, pay)
+    if day < len(heap):
+        heapq.heappop(heap)
+print(sum(heap))
+
+# 오답, 해당 일이 아니라 해당 일 안에 강연을 하는 것...!
+lectures = {}
+for _ in range(int(input())):
+    pay, day = map(int, input().split())
+    if day in lectures:
+        lectures[day].append(pay)
+    else:
+        lectures[day] = [pay]
+
+lectures = sorted(lectures.items())
+
+answer = 0
+for lecture in lectures:
+    answer += max(lecture[1])
+
+print(answer)

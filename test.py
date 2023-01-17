@@ -21,20 +21,17 @@ def pprint(list_):
 
 
 n = int(input())
-reports = []
-answer = [0] * 1001
 
+lectures = []
 for _ in range(n):
-    day, value = map(int, input().split())
-    reports.append([-value, day, value])
+    pay, day = map(int, input().split())
+    lectures.append([day, pay])
 
-heapq.heapify(reports)
+lectures.sort()
 
-while reports:
-    temp = heapq.heappop(reports)
-    for i in range(temp[1], 0, -1):
-        if answer[i] == 0:
-            answer[i] = temp[2]
-            break
-
-print(sum(answer))
+heap = []
+for day, pay in lectures:
+    heapq.heappush(heap, pay)
+    if day < len(heap):
+        heapq.heappop(heap)
+print(sum(heap))
