@@ -1495,3 +1495,16 @@ for lecture in lectures:
     answer += max(lecture[1])
 
 print(answer)
+
+
+"""중앙값 구하기"""
+for _ in range(int(input())):
+    n = int(input())
+    nums = []
+    for _ in range(n // 10 + 1):
+        nums += list(map(int, input().split()))
+
+    print(n // 2 + 1)
+    for i in range(n):
+        if i % 2 == 0:
+            print(sorted(nums[: i + 1])[i // 2], end=" ")

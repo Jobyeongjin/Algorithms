@@ -20,18 +20,13 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
+plates = list(input())
 
-lectures = []
-for _ in range(n):
-    pay, day = map(int, input().split())
-    lectures.append([day, pay])
+answer = 10
+for i in range(1, len(plates)):
+    if plates[i] == plates[i - 1]:
+        answer += 5
+    else:
+        answer += 10
 
-lectures.sort()
-
-heap = []
-for day, pay in lectures:
-    heapq.heappush(heap, pay)
-    if day < len(heap):
-        heapq.heappop(heap)
-print(sum(heap))
+print(answer)

@@ -1050,3 +1050,29 @@ for i in range(m):
             answer += 1
 
 print(answer)
+
+
+"""집합"""
+arr = set()
+for _ in range(int(input())):
+    s = list(input().split())
+
+    if len(s) == 1:
+        if s[0] == "all":
+            arr = set([i for i in range(1, 21)])
+        else:
+            arr = set()
+
+    else:
+        word, num = s[0], int(s[1])
+        if word == "add":
+            arr.add(num)
+        elif word == "remove":
+            arr.discard(num)
+        elif word == "check":
+            print(1 if num in arr else 0)
+        elif word == "toggle":
+            if num in arr:
+                arr.discard(num)
+            else:
+                arr.add(num)
