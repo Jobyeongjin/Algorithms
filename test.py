@@ -19,14 +19,18 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
+n = int(input())
+leftNums = list(map(int, input().split()))
+answer = [0] * n
 
-plates = list(input())
-
-answer = 10
-for i in range(1, len(plates)):
-    if plates[i] == plates[i - 1]:
-        answer += 5
-    else:
-        answer += 10
-
-print(answer)
+for i in range(n):
+    num = leftNums[i]
+    id = i + 1
+    left = 0
+    for j in range(n):
+        if left == num and answer[j] == 0:
+            answer[j] = id
+            break
+        elif answer[j] == 0:
+            left += 1
+print(*answer)

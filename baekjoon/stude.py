@@ -1508,3 +1508,21 @@ for _ in range(int(input())):
     for i in range(n):
         if i % 2 == 0:
             print(sorted(nums[: i + 1])[i // 2], end=" ")
+
+
+"""한 줄로 서기"""
+n = int(input())
+leftNums = list(map(int, input().split()))
+answer = [0] * n
+
+for i in range(n):
+    num = leftNums[i]
+    id = i + 1
+    left = 0
+    for j in range(n):
+        if left == num and answer[j] == 0:
+            answer[j] = id
+            break
+        elif answer[j] == 0:
+            left += 1
+print(*answer)
