@@ -1526,3 +1526,68 @@ for i in range(n):
         elif answer[j] == 0:
             left += 1
 print(*answer)
+
+
+"""ATM"""
+n = int(input())
+timers = sorted(list(map(int, input().split())))
+
+sum_ = 0
+for i in range(1, n + 1):
+    sum_ += sum(timers[:i])
+
+print(sum_)
+
+
+"""단어 수학"""
+n = int(input())
+alpha = [input().strip() for _ in range(n)]
+
+dic = {}
+for i in range(n):
+    for j in range(len(alpha[i])):
+        if alpha[i][j] in dic:
+            dic[alpha[i][j]] += 10 ** (len(alpha[i]) - j - 1)
+        else:
+            dic[alpha[i][j]] = 10 ** (len(alpha[i]) - j - 1)
+
+numbers = sorted([val for val in dic.values()], reverse=True)
+
+sum_ = 0
+numCount = 9
+for num in numbers:
+    sum_ += numCount * num
+    numCount -= 1
+
+print(sum_)
+
+
+"""뒤집기"""
+coin = input()
+
+cnt = 0
+for i in range(len(coin) - 1):
+    if coin[i] != coin[i + 1]:
+        cnt += 1
+
+print((cnt + 1) // 2)
+
+
+"""크게 만들기"""
+n, k = map(int, input().split())
+numbers = input()
+
+arr = []
+for number in numbers:
+    while arr and 0 < k:
+        if arr[-1] < number:
+            arr.pop()
+            k -= 1
+        else:
+            break
+    arr.append(number)
+
+if k > 0:
+    print("".join(arr[:-k]))
+else:
+    print("".join(arr))

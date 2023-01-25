@@ -19,18 +19,20 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n = int(input())
-leftNums = list(map(int, input().split()))
-answer = [0] * n
+n, k = map(int, input().split())
+numbers = input()
 
-for i in range(n):
-    num = leftNums[i]
-    id = i + 1
-    left = 0
-    for j in range(n):
-        if left == num and answer[j] == 0:
-            answer[j] = id
+arr = []
+for number in numbers:
+    while arr and 0 < k:
+        if arr[-1] < number:
+            arr.pop()
+            k -= 1
+        else:
             break
-        elif answer[j] == 0:
-            left += 1
-print(*answer)
+    arr.append(number)
+
+if k > 0:
+    print("".join(arr[:-k]))
+else:
+    print("".join(arr))
