@@ -19,20 +19,13 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n, k = map(int, input().split())
-numbers = input()
+n, m = map(int, input().split())
 
-arr = []
-for number in numbers:
-    while arr and 0 < k:
-        if arr[-1] < number:
-            arr.pop()
-            k -= 1
-        else:
-            break
-    arr.append(number)
-
-if k > 0:
-    print("".join(arr[:-k]))
+if n == 1:
+    print(1)
+elif n == 2:
+    print(min(4, (m + 1) // 2))
+elif m < 7:
+    print(min(4, m))
 else:
-    print("".join(arr))
+    print(m - 2)

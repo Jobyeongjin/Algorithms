@@ -1591,3 +1591,41 @@ if k > 0:
     print("".join(arr[:-k]))
 else:
     print("".join(arr))
+
+
+"""센서"""
+# index Error... ing...
+n = int(input())
+k = int(input())
+sensor = sorted(list(map(int, input().split())))
+
+gap = []
+for i in range(n - 1):
+    gap.append(sensor[i + 1] - sensor[i])
+
+gap.sort(reverse=True)
+
+for _ in range(k - 1):
+    gap.pop(0)
+
+print(sum(gap))
+
+
+"""보물"""
+n = int(input())
+a = sorted(list(map(int, input().split())))
+b = sorted(list(map(int, input().split())), reverse=True)
+print(sum(x * y for x, y in zip(a, b)))
+
+
+"""병든 나이트"""
+n, m = map(int, input().split())
+
+if n == 1:
+    print(1)
+elif n == 2:
+    print(min(4, (m + 1) // 2))
+elif m < 7:
+    print(min(4, m))
+else:
+    print(m - 2)
