@@ -1076,3 +1076,44 @@ for _ in range(int(input())):
                 arr.discard(num)
             else:
                 arr.add(num)
+
+
+"""집합의 표현"""
+import sys
+
+# 재귀함수의 한계를 10만까지 늘림
+sys.setrecursionlimit(100_000)
+
+n, m = map(int, input().split())
+
+# parent - 각각 요소마다 부모 요소를 만들어 준다.
+p = [i for i in range(n + 1)]
+
+
+def find(a):
+    # a의 부모가 본인이라면 최종 부모는 a 이다.
+    if a == p[a]:
+        return a
+    # 아니라면 최종 부모를 다시 찾아간다.
+    p[a] = find(p[a])
+    return p[a]
+
+
+def union(a, b):
+    # 각각 요소의 부모를 찾고, 부모를 하나로 만들어 준다.
+    pa = find(a)
+    pb = find(b)
+    p[pa] = pb
+
+
+for _ in range(m):
+    q, a, b = map(int, input().split())
+    # union
+    if q == 0:
+        union(a, b)
+    # find
+    else:
+        if find(a) == find(b):
+            print("YES")
+        else:
+            print("NO")

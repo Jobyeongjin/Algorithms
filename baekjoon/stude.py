@@ -1629,3 +1629,34 @@ elif m < 7:
     print(min(4, m))
 else:
     print(m - 2)
+
+
+"""공항"""
+gate = int(input())
+planes = [int(input()) for _ in range(int(input()))]
+
+parent = [i for i in range(gate + 1)]
+
+
+def find(a):
+    if a == parent[a]:
+        return a
+    parent[a] = find(parent[a])
+    return parent[a]
+
+
+def union(a, b):
+    pa = find(a)
+    pb = find(b)
+    parent[pa] = pb
+
+
+answer = 0
+for plane in planes:
+    temp = find(plane)
+    if temp == 0:
+        break
+    union(temp, temp - 1)
+    answer += 1
+
+print(answer)
