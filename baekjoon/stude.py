@@ -1660,3 +1660,79 @@ for plane in planes:
     answer += 1
 
 print(answer)
+
+
+"""동전 0"""
+n, k = map(int, input().split())
+coins = [int(input()) for _ in range(n)][::-1]
+
+answer = 0
+for i in coins:
+    if k == 0:
+        break
+    if i > k:
+        continue
+    answer += k // i
+    k %= i
+
+print(answer)
+
+
+"""DFS와 BFS"""
+n, m, v = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+for i in graph:
+    i.sort()
+
+bfsVisited = [False] * (n + 1)
+dfsVisited = [False] * (n + 1)
+
+
+def DFS(v):
+    dfsVisited[v] = True
+    print(v, end=" ")
+    for i in graph[v]:
+        if not dfsVisited[i]:
+            DFS(i)
+
+
+def BFS(v):
+    bfsVisited[v] = True
+    queue = deque([v])
+
+    while queue:
+        v = queue.popleft()
+        print(v, end=" ")
+        for i in graph[v]:
+            if not bfsVisited[i]:
+                queue.append(i)
+                bfsVisited[i] = True
+
+
+DFS(v)
+print()
+BFS(v)
+
+
+"""팔"""
+l, r = input().split()
+L, R = len(l), len(r)
+
+if L != R:
+    print(0)
+else:
+    answer = 0
+    for i in range(L):
+        if l[i] != r[i]:
+            break
+        else:
+            if l[i] == "8":
+                answer += 1
+
+    print(answer)

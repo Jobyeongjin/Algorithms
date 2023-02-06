@@ -22,31 +22,18 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-gate = int(input())
-planes = [int(input()) for _ in range(int(input()))]
+l, r = input().split()
+L, R = len(l), len(r)
 
-parent = [i for i in range(gate + 1)]
+if L != R:
+    print(0)
+else:
+    answer = 0
+    for i in range(L):
+        if l[i] != r[i]:
+            break
+        else:
+            if l[i] == "8":
+                answer += 1
 
-
-def find(a):
-    if a == parent[a]:
-        return a
-    parent[a] = find(parent[a])
-    return parent[a]
-
-
-def union(a, b):
-    pa = find(a)
-    pb = find(b)
-    parent[pa] = pb
-
-
-answer = 0
-for plane in planes:
-    temp = find(plane)
-    if temp == 0:
-        break
-    union(temp, temp - 1)
-    answer += 1
-
-print(answer)
+    print(answer)
