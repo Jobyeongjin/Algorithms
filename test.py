@@ -22,18 +22,26 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-l, r = input().split()
-L, R = len(l), len(r)
+n = int(input())
+s, e = map(int, input().split())
+m = int(input())
 
-if L != R:
-    print(0)
-else:
-    answer = 0
-    for i in range(L):
-        if l[i] != r[i]:
-            break
-        else:
-            if l[i] == "8":
-                answer += 1
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
 
-    print(answer)
+print(graph)
+visited = [0] * (n + 1)
+
+
+def DFS(s):
+    for i in graph[s]:
+        if visited[i] == 0:
+            visited[i] = visited[s] + 1
+            DFS(i)
+
+
+DFS(s)
+print(visited[e]) if visited[e] > 0 else print(-1)

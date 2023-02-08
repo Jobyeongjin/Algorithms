@@ -1736,3 +1736,58 @@ else:
                 answer += 1
 
     print(answer)
+
+
+"""촌수계산"""
+n = int(input())
+s, e = map(int, input().split())
+m = int(input())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+print(graph)
+visited = [0] * (n + 1)
+
+
+def DFS(s):
+    for i in graph[s]:
+        if visited[i] == 0:
+            visited[i] = visited[s] + 1
+            DFS(i)
+
+
+DFS(s)
+print(visited[e]) if visited[e] > 0 else print(-1)
+
+
+"""알파벳"""
+R, C = map(int, input().split())
+
+alpha = [list(map(lambda x: ord(x) - 65, input().strip())) for _ in range(R)]
+delta = ((-1, 0), (0, -1), (1, 0), (0, 1))
+visited = [False] * 26
+
+visited[alpha[0][0]] = True
+answer = 1
+
+
+def DFS(r, c, cnt):
+    global answer
+    answer = max(answer, cnt)
+
+    for dr, dc in delta:
+        nr = dr + r
+        nc = dc + c
+
+        if -1 < nr < R and -1 < nc < C and not visited[alpha[nr][nc]]:
+            visited[alpha[nr][nc]] = True
+            DFS(nr, nc, cnt + 1)
+            visited[alpha[nr][nc]] = False
+
+
+DFS(0, 0, answer)
+print(answer)
