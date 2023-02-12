@@ -22,26 +22,47 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-n = int(input())
-s, e = map(int, input().split())
-m = int(input())
+M, N, H = map(int, input().split())
+tomatoBox = [[list(map(int, input().split())) for _ in range(N)] for _ in range(H)]
 
-graph = [[] for _ in range(n + 1)]
-for _ in range(m):
-    v1, v2 = map(int, input().split())
-    graph[v1].append(v2)
-    graph[v2].append(v1)
-
-print(graph)
-visited = [0] * (n + 1)
+delta = ((0, -1, 0), (0, 0, 1), (0, 1, 0), (0, 0, -1), (-1, 0, 0), (1, 0, 0))
 
 
-def DFS(s):
-    for i in graph[s]:
-        if visited[i] == 0:
-            visited[i] = visited[s] + 1
-            DFS(i)
+def BFS():
+    while queue:
+        h, r, c = queue.popleft()
+        for dh, dr, dc in delta:
+            nh = dh + h
+            nr = dr + r
+            nc = dc + c
+
+            if (
+                -1 < nh < H
+                and -1 < nr < N
+                and -1 < nc < M
+                and not tomatoBox[nh][nr][nc]
+            ):
+                tomatoBox[nh][nr][nc] = tomatoBox[h][r][c] + 1
+                queue.append((nh, nr, nc))
 
 
-DFS(s)
-print(visited[e]) if visited[e] > 0 else print(-1)
+queue = deque()
+for h in range(H):
+    for i in range(N):
+        for j in range(M):
+            if tomatoBox[h][i][j] == 1:
+                queue.append((h, i, j))
+
+
+BFS()
+
+answer = 0
+for boxFloors in tomatoBox:
+    for days in boxFloors:
+        for day in days:
+            if day == 0:
+                print(-1)
+                exit()
+            answer = max(answer, day)
+
+print(answer - 1)

@@ -1749,7 +1749,6 @@ for _ in range(m):
     graph[v1].append(v2)
     graph[v2].append(v1)
 
-print(graph)
 visited = [0] * (n + 1)
 
 
@@ -1791,3 +1790,106 @@ def DFS(r, c, cnt):
 
 DFS(0, 0, answer)
 print(answer)
+
+
+"""정수 a를 k로 만들기"""
+a, k = map(int, input().split())
+cnt = 0
+
+while True:
+    if k == a:
+        print(cnt)
+        break
+    else:
+        if k % 2 == 0 and k >= a * 2:
+            k = k // 2
+            cnt += 1
+        else:
+            k -= 1
+            cnt += 1
+
+
+"""토마토"""
+m, n = map(int, input().split())
+tomatoBox = [list(map(int, input().split())) for _ in range(n)]
+
+delta = ((0, -1), (1, 0), (0, 1), (-1, 0))
+
+
+def BFS():
+    while queue:
+        r, c = queue.popleft()
+
+        for dr, dc in delta:
+            nr = dr + r
+            nc = dc + c
+
+            if -1 < nr < n and -1 < nc < m and not tomatoBox[nr][nc]:
+                tomatoBox[nr][nc] = tomatoBox[r][c] + 1
+                queue.append((nr, nc))
+
+
+queue = deque([])
+for i in range(n):
+    for j in range(m):
+        if tomatoBox[i][j] == 1:
+            queue.append((i, j))
+
+BFS()
+
+answer = 0
+for days in tomatoBox:
+    for day in days:
+        if day == 0:
+            print(-1)
+            exit()
+        answer = max(answer, day)
+
+print(answer - 1)
+
+
+"""토마토 - 3차원 탐색"""
+M, N, H = map(int, input().split())
+tomatoBox = [[list(map(int, input().split())) for _ in range(N)] for _ in range(H)]
+
+delta = ((0, -1, 0), (0, 0, 1), (0, 1, 0), (0, 0, -1), (-1, 0, 0), (1, 0, 0))
+
+
+def BFS():
+    while queue:
+        h, r, c = queue.popleft()
+        for dh, dr, dc in delta:
+            nh = dh + h
+            nr = dr + r
+            nc = dc + c
+
+            if (
+                -1 < nh < H
+                and -1 < nr < N
+                and -1 < nc < M
+                and not tomatoBox[nh][nr][nc]
+            ):
+                tomatoBox[nh][nr][nc] = tomatoBox[h][r][c] + 1
+                queue.append((nh, nr, nc))
+
+
+queue = deque()
+for h in range(H):
+    for i in range(N):
+        for j in range(M):
+            if tomatoBox[h][i][j] == 1:
+                queue.append((h, i, j))
+
+
+BFS()
+
+answer = 0
+for boxFloors in tomatoBox:
+    for days in boxFloors:
+        for day in days:
+            if day == 0:
+                print(-1)
+                exit()
+            answer = max(answer, day)
+
+print(answer - 1)
