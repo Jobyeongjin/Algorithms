@@ -12,7 +12,7 @@ sys.stdin = open("input.txt", "r")
 input = sys.stdin.readline
 
 # 재귀함수의 한계를 10만까지 늘림
-sys.setrecursionlimit(100_000)
+sys.setrecursionlimit(10**6)
 
 
 def pprint(list_):
@@ -22,47 +22,35 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
-M, N, H = map(int, input().split())
-tomatoBox = [[list(map(int, input().split())) for _ in range(N)] for _ in range(H)]
+n = int(input())
 
-delta = ((0, -1, 0), (0, 0, 1), (0, 1, 0), (0, 0, -1), (-1, 0, 0), (1, 0, 0))
+graph = [[] for _ in range(n + 1)]
+for _ in range(n):
+    arr = list(map(int, input().split()))
+    nodeNum = arr[0]
+    idx = 1
+    while arr[idx] != -1:
+        v, w = arr[idx], arr[idx + 1]
+        graph[nodeNum].append((v, w))
+        idx += 2
 
-
-def BFS():
-    while queue:
-        h, r, c = queue.popleft()
-        for dh, dr, dc in delta:
-            nh = dh + h
-            nr = dr + r
-            nc = dc + c
-
-            if (
-                -1 < nh < H
-                and -1 < nr < N
-                and -1 < nc < M
-                and not tomatoBox[nh][nr][nc]
-            ):
-                tomatoBox[nh][nr][nc] = tomatoBox[h][r][c] + 1
-                queue.append((nh, nr, nc))
+visited = [-1] * (n + 1)
+visited[1] = 0
 
 
-queue = deque()
-for h in range(H):
-    for i in range(N):
-        for j in range(M):
-            if tomatoBox[h][i][j] == 1:
-                queue.append((h, i, j))
+def DFS(s, wei):
+    for v, w in graph[s]:
+        if visited[v] == -1:
+            visited[v] = w + wei
+            DFS(v, w + wei)
 
 
-BFS()
+DFS(1, 0)
 
-answer = 0
-for boxFloors in tomatoBox:
-    for days in boxFloors:
-        for day in days:
-            if day == 0:
-                print(-1)
-                exit()
-            answer = max(answer, day)
+maxNode = visited.index(max(visited))
+visited = [-1] * (n + 1)
+visited[maxNode] = 0
 
-print(answer - 1)
+DFS(maxNode, 0)
+
+print(max(visited))

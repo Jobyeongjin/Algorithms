@@ -1,5 +1,6 @@
 from collections import deque, Counter
 import heapq
+import sys
 
 """📝 10870 - 피보나치 수 5"""
 # 인덱스 접근
@@ -1893,3 +1894,103 @@ for boxFloors in tomatoBox:
             answer = max(answer, day)
 
 print(answer - 1)
+
+
+"""깊이 우선 탐색 3"""
+sys.setrecursionlimit(100_000)
+
+n, m, s = map(int, input().split())
+
+graph = [[] for _ in range(n + 1)]
+# 그래프 배열을 입력을 받을 때 간선의 수를 반복해야 하는데 정점의 수를 반복하는 실수를 했다.
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+for i in graph:
+    i.sort()
+
+answer = [-1] * (n + 1)
+
+
+def DFS(s, cnt):
+    answer[s] = cnt
+
+    for i in graph[s]:
+        if answer[i] == -1:
+            DFS(i, cnt + 1)
+
+
+DFS(s, 0)
+
+for i in range(1, n + 1):
+    print(answer[i])
+
+
+"""트리의 지름"""
+n = int(input())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(n - 1):
+    v1, v2, weight = map(int, input().split())
+    graph[v1].append((v2, weight))
+    graph[v2].append((v1, weight))
+
+visited = [-1] * (n + 1)
+visited[1] = 0
+
+
+def DFS(s, wei):
+    for v, w in graph[s]:
+        if visited[v] == -1:
+            visited[v] = w + wei
+            DFS(v, w + wei)
+
+
+DFS(1, 0)
+
+
+maxNode = visited.index(max(visited))
+
+visited = [-1] * (n + 1)
+visited[maxNode] = 0
+
+DFS(maxNode, 0)
+
+print(max(visited))
+
+
+"""트리의 지름"""
+n = int(input())
+
+graph = [[] for _ in range(n + 1)]
+for _ in range(n):
+    arr = list(map(int, input().split()))
+    nodeNum = arr[0]
+    idx = 1
+    while arr[idx] != -1:
+        v, w = arr[idx], arr[idx + 1]
+        graph[nodeNum].append((v, w))
+        idx += 2
+
+visited = [-1] * (n + 1)
+visited[1] = 0
+
+
+def DFS(s, wei):
+    for v, w in graph[s]:
+        if visited[v] == -1:
+            visited[v] = w + wei
+            DFS(v, w + wei)
+
+
+DFS(1, 0)
+
+maxNode = visited.index(max(visited))
+visited = [-1] * (n + 1)
+visited[maxNode] = 0
+
+DFS(maxNode, 0)
+
+print(max(visited))
