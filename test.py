@@ -23,34 +23,32 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 n = int(input())
+solution = list(map(int, input().split()))
 
-graph = [[] for _ in range(n + 1)]
-for _ in range(n):
-    arr = list(map(int, input().split()))
-    nodeNum = arr[0]
-    idx = 1
-    while arr[idx] != -1:
-        v, w = arr[idx], arr[idx + 1]
-        graph[nodeNum].append((v, w))
-        idx += 2
+left, right = 0, n - 1
+temp = 2000000000
+a, b = 0, 0
 
-visited = [-1] * (n + 1)
-visited[1] = 0
+while left < right:
+    check = solution[left] + solution[right]
 
+    if abs(check) < temp:
+        a, b = solution[left], solution[right]
+        temp = abs(check)
 
-def DFS(s, wei):
-    for v, w in graph[s]:
-        if visited[v] == -1:
-            visited[v] = w + wei
-            DFS(v, w + wei)
+    if check < 0:
+        left += 1
+    else:
+        right -= 1
 
+print(a, b)
 
-DFS(1, 0)
+# temp = abs(solution[0] + solution[n - 1])
+# a, b = solution[0], solution[n - 1]
 
-maxNode = visited.index(max(visited))
-visited = [-1] * (n + 1)
-visited[maxNode] = 0
-
-DFS(maxNode, 0)
-
-print(max(visited))
+# for i in range(n):
+#     for j in range(i + 1, n):
+#         if abs(solution[i] + solution[j]) <= temp:
+#             temp = abs(solution[i] + solution[j])
+#             a, b = solution[i], solution[j]
+# print(a, b)

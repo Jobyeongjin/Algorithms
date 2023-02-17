@@ -1994,3 +1994,66 @@ visited[maxNode] = 0
 DFS(maxNode, 0)
 
 print(max(visited))
+
+
+"""예산"""
+n = int(input())
+areaMoneys = list(map(int, input().split()))
+money = int(input())
+
+start, end = 0, max(areaMoneys)
+
+answer = 0
+temp = 0
+while start <= end:
+    limit = (start + end) // 2
+
+    for areaMoney in areaMoneys:
+        if areaMoney < limit:
+            temp += areaMoney
+        else:
+            temp += limit
+
+    if temp <= money:
+        start = limit + 1
+        answer = limit
+    else:
+        end = limit - 1
+
+    temp = 0
+
+print(answer)
+
+
+"""용엑"""
+n = int(input())
+solution = list(map(int, input().split()))
+
+left, right = 0, n - 1
+temp = 2000000000
+a, b = 0, 0
+
+while left < right:
+    check = solution[left] + solution[right]
+
+    if abs(check) < temp:
+        a, b = solution[left], solution[right]
+        temp = abs(check)
+
+    if check < 0:
+        left += 1
+    else:
+        right -= 1
+
+print(a, b)
+
+# 시간초과 코드
+temp = abs(solution[0] + solution[n - 1])
+a, b = solution[0], solution[n - 1]
+
+for i in range(n):
+    for j in range(i + 1, n):
+        if abs(solution[i] + solution[j]) <= temp:
+            temp = abs(solution[i] + solution[j])
+            a, b = solution[i], solution[j]
+print(a, b)
