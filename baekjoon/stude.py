@@ -2057,3 +2057,35 @@ for i in range(n):
             temp = abs(solution[i] + solution[j])
             a, b = solution[i], solution[j]
 print(a, b)
+
+
+"""두 수의 합"""
+
+
+def binarySearch(nums, target):
+    cnt, temp = 0, 200000000
+    for i in range(n):
+        left, right = i + 1, n - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            sumNums = nums[i] + nums[mid]
+
+            if sumNums < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+
+            if abs(target - sumNums) < temp:
+                cnt = 1
+                temp = abs(target - sumNums)
+            elif abs(target - sumNums) == temp:
+                cnt += 1
+
+    return cnt
+
+
+for _ in range(int(input())):
+    n, k = map(int, input().split())
+    numbers = sorted(list(map(int, input().split())))
+    print(binarySearch(numbers, k))
