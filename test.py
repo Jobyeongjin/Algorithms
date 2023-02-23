@@ -26,15 +26,11 @@ def pprint(list_):
 def binarySearch(nums, target):
     cnt, temp = 0, 200000000
     for i in range(n):
-        print(i)
         left, right = i + 1, n - 1
 
         while left <= right:
             mid = (left + right) // 2
             sumNums = nums[i] + nums[mid]
-            print(nums)
-            print(left, right)
-            print(mid, sumNums, target)
 
             if sumNums < target:
                 left = mid + 1
