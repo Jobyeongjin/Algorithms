@@ -2089,3 +2089,39 @@ for _ in range(int(input())):
     n, k = map(int, input().split())
     numbers = sorted(list(map(int, input().split())))
     print(binarySearch(numbers, k))
+
+
+"""기타 레슨"""
+
+
+def blurayCount(bluraySize):
+    cnt = 0
+    sumLesson = 0
+
+    for i in range(n):
+        if sumLesson + lessons[i] > bluraySize:
+            cnt += 1
+            sumLesson = 0
+        sumLesson += lessons[i]
+
+    return cnt + 1
+
+
+def binarySearch(lessons, target):
+    left, right = max(lessons), sum(lessons)
+
+    while left <= right:
+        mid = (left + right) // 2
+        cnt = blurayCount(mid)
+
+        if cnt > target:
+            left = mid + 1
+        elif cnt <= target:
+            right = mid - 1
+
+    return left
+
+
+n, m = map(int, input().split())
+lessons = list(map(int, input().split()))
+print(binarySearch(lessons, m))

@@ -1,33 +1,34 @@
+# 두 수의 합
 def solution(num1, num2):
-    """두 수의 합"""
     return num1 + num2
 
 
+# 두 수의 차
 def solution(num1, num2):
-    """두 수의 차"""
     return num1 - num2
 
 
+# 두 수의 곱
 def solution(num1, num2):
-    """두 수의 곱"""
     return num1 * num2
 
 
+# 몫 구하기
 def solution(num1, num2):
-    """몫 구하기"""
     return num1 // num2
 
 
+# 두 수의 나눗셈
 def solution(num1, num2):
-    """두 수의 나눗셈"""
     return int(num1 / num2 * 1000)
 
 
+# 숫자 비교하기
 def solution(num1, num2):
-    """숫자 비교하기"""
     return 1 if num1 == num2 else -1
 
 
+# 분수의 덧셈
 def gcd(a, b):
     while b > 0:
         a, b = b, a % b
@@ -35,7 +36,6 @@ def gcd(a, b):
 
 
 def solution(numer1, denom1, numer2, denom2):
-    """분수의 덧셈"""
     topNum = numer2 * denom1 + numer1 * denom2
     botNum = denom1 * denom2
 
@@ -44,24 +44,24 @@ def solution(numer1, denom1, numer2, denom2):
     return ans
 
 
+# 배열 두 배 만들기
 def solution(numbers):
-    """배열 두 배 만들기"""
     return [num * 2 for num in numbers]
 
 
+# 나머지 구하기
 def solution(num1, num2):
-    """나머지 구하기"""
     return num1 % num2
 
 
+# 중앙값 구하기
 def solution(array):
-    """중앙값 구하기"""
     array.sort()
     return array[len(array) // 2]
 
 
+# 최빈값 구하기
 def solution(numbers):
-    """최빈값 구하기"""
     numCount = {}
     for num in numbers:
         if num in numCount:
@@ -76,10 +76,46 @@ def solution(numbers):
         return numItems[0][0] if numItems[0][-1] != numItems[1][-1] else -1
 
 
+# 짝수는 싫어요
 def solution(n):
-    """짝수는 싫어요"""
     answer = []
     for num in range(1, n + 1):
         if num % 2 == 1:
             answer.append(num)
     return answer
+
+
+# 피자 나눠먹기 1
+def solution(n):
+    pizza = 0
+    if n % 7 == 0:
+        pizza = n // 7
+    else:
+        pizza = n // 7 + 1
+    return pizza
+
+
+# 피자 나눠먹기 2
+def solution(n):
+    pizza = 1
+    while True:
+        if (pizza * 6) % n == 0:
+            break
+        else:
+            pizza += 1
+    return pizza
+
+
+# 피자 나눠먹기 3
+def solution(slice, n):
+    pizza = 0
+    if n % slice == 0:
+        pizza = n // slice
+    else:
+        pizza = n // slice + 1
+    return pizza
+
+
+# 평균값 구하기
+def solution(numbers):
+    return sum(numbers) / len(numbers)
