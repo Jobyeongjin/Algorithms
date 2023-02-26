@@ -23,34 +23,20 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-def blurayCount(bluraySize):
-    cnt = 0
-    sumLesson = 0
+n = int(input())
+k = int(input())
 
-    for i in range(n):
-        if sumLesson + lessons[i] > bluraySize:
-            cnt += 1
-            sumLesson = 0
-        sumLesson += lessons[i]
+start, end = 1, k
+while start <= end:
+    mid = (start + end) // 2
 
-    return cnt + 1
+    temp = 0
+    for i in range(1, n + 1):
+        temp += min(mid // i, n)
 
+    if temp >= k:
+        end = mid - 1
+    else:
+        start = mid + 1
 
-def binarySearch(lessons, target):
-    left, right = max(lessons), sum(lessons)
-
-    while left <= right:
-        mid = (left + right) // 2
-        cnt = blurayCount(mid)
-
-        if cnt > target:
-            left = mid + 1
-        elif cnt <= target:
-            right = mid - 1
-
-    return left
-
-
-n, m = map(int, input().split())
-lessons = list(map(int, input().split()))
-print(binarySearch(lessons, m))
+print(start)
