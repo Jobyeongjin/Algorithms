@@ -119,3 +119,105 @@ def solution(slice, n):
 # 평균값 구하기
 def solution(numbers):
     return sum(numbers) / len(numbers)
+
+
+# 옷가게 할인 받기
+def solution(price):
+    if 100000 <= price and price < 300000:
+        price -= price * 0.05
+    elif 300000 <= price and price < 500000:
+        price -= price * 0.1
+    elif 500000 <= price:
+        price -= price * 0.2
+    return int(price)
+
+
+# 아이스 아메리카노
+def solution(money):
+    if money % 5500 == 0:
+        return [money // 5500, 0]
+    else:
+        return [money // 5500, money - 5500 * (money // 5500)]
+
+
+# 나이 출력
+def solution(age):
+    return 2022 - age + 1
+
+
+# 배열 뒤집기
+def solution(num_list):
+    answer = []
+    for i in range(len(num_list) - 1, -1, -1):
+        answer.append(num_list[i])
+    return answer
+
+
+# 문자열 뒤집기
+def solution(string):
+    return string[::-1]
+
+
+# 직각삼각형 출력하기
+for i in range(1, int(input()) + 1):
+    print(i * "*")
+
+# 짝수 홀수 개수
+def solution(num_list):
+    answer = [0, 0]
+    for num in num_list:
+        if num % 2 == 0:
+            answer[0] += 1
+        else:
+            answer[1] += 1
+    return answer
+
+
+# 문자 반복 출력하기
+def solution(my_string, n):
+    answer = ""
+    for s in my_string:
+        answer += s * n
+    return answer
+
+
+# 특정 문자 제거하기
+def solution(my_string, letter):
+    return my_string.replace(letter, "")
+
+
+# 각도기
+def solution(angle):
+    answer = 0
+    if angle == 180:
+        answer = 4
+    elif angle > 90:
+        answer = 3
+    elif angle == 90:
+        answer = 2
+    else:
+        answer = 1
+    return answer
+
+
+# 양꼬치
+def solution(n, k):
+    answer = 0
+
+    service = 0
+    if n >= 10:
+        service = n // 10
+    k -= service
+
+    answer += n * 12000
+    answer += k * 2000
+    return answer
+
+
+# 짝수의 합
+def solution(n):
+    answer = 0
+    for num in range(1, n + 1):
+        if num % 2 == 0:
+            answer += num
+    return answer

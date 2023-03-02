@@ -2145,3 +2145,30 @@ while start <= end:
         start = mid + 1
 
 print(start)
+
+"""용돈관리"""
+n, m = map(int, input().split())
+todays = [int(input()) for _ in range(n)]
+
+left, right = min(todays), sum(todays)
+ans = 0
+
+while left <= right:
+    mid = (left + right) // 2
+
+    total = mid
+    cnt = 1
+
+    for today in todays:
+        if total < today:
+            total = mid
+            cnt += 1
+        total -= today
+
+    if cnt > m or mid < max(todays):
+        left = mid + 1
+    else:
+        right = mid - 1
+        ans = mid
+
+print(ans)

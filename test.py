@@ -23,20 +23,28 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n = int(input())
-k = int(input())
+n, m = map(int, input().split())
+todays = [int(input()) for _ in range(n)]
 
-start, end = 1, k
-while start <= end:
-    mid = (start + end) // 2
+left, right = min(todays), sum(todays)
+ans = 0
 
-    temp = 0
-    for i in range(1, n + 1):
-        temp += min(mid // i, n)
+while left <= right:
+    mid = (left + right) // 2
 
-    if temp >= k:
-        end = mid - 1
+    total = mid
+    cnt = 1
+
+    for today in todays:
+        if total < today:
+            total = mid
+            cnt += 1
+        total -= today
+
+    if cnt > m or mid < max(todays):
+        left = mid + 1
     else:
-        start = mid + 1
+        right = mid - 1
+        ans = mid
 
-print(start)
+print(ans)
