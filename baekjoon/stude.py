@@ -1,3 +1,4 @@
+from itertools import permutations, combinations
 from collections import deque, Counter
 import heapq
 import sys
@@ -2172,3 +2173,89 @@ while left <= right:
         ans = mid
 
 print(ans)
+
+
+"""연구소"""
+n, m = map(int, input().split())
+maps = [list(map(int, input().split())) for _ in range(n)]
+
+delta = ((-1, 0), (0, 1), (1, 0), (0, -1))
+answer = 0
+
+safeZoneCnt = 0
+for i in range(n):
+    for j in range(m):
+        if maps[i][j] == 0:
+            safeZoneCnt += 1
+
+
+def virus():
+    global answer
+
+    virusCnt = 0
+    visited = [[0] * m for _ in range(n)]
+
+    q = deque()
+    for i in range(n):
+        for j in range(m):
+            if maps[i][j] == 2:
+                visited[i][j] = 1
+                q.append((i, j))
+
+    while q:
+        r, c = q.popleft()
+
+        for dr, dc in delta:
+            nr = r + dr
+            nc = c + dc
+
+            if -1 < nr < n and -1 < nc < m:
+                if visited[nr][nc] == 0 and maps[nr][nc] == 0:
+                    visited[nr][nc] = 1
+                    virusCnt += 1
+                    q.append((nr, nc))
+
+    answer = max(answer, safeZoneCnt - virusCnt - 3)
+
+
+def makeWall(cnt):
+    if cnt == 3:
+        virus()
+        return
+
+    for i in range(n):
+        for j in range(m):
+            if maps[i][j] == 0:
+                maps[i][j] = 1
+                makeWall(cnt + 1)
+                maps[i][j] = 0
+
+
+makeWall(0)
+print(answer)
+
+
+"""치킨 배달"""
+n, m = map(int, input().split())
+maps = [list(map(int, input().split())) for _ in range(n)]
+
+house, chickens = [], []
+for i in range(n):
+    for j in range(n):
+        if maps[i][j] == 1:
+            house.append((i + 1, j + 1))
+        elif maps[i][j] == 2:
+            chickens.append((i + 1, j + 1))
+
+answer = 10e9
+
+for chicken in combinations(chickens, m):
+    totalRoad = 0
+    for hr, hc in house:
+        road = 10e9
+        for cr, cc in chicken:
+            road = min(road, (abs(hr - cr) + abs(hc - cc)))
+        totalRoad += road
+    answer = min(answer, totalRoad)
+
+print(answer)

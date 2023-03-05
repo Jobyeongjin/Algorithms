@@ -1,7 +1,7 @@
 # 파일 불러오기
 from collections import deque
 from collections import Counter
-from itertools import permutations
+from itertools import permutations, combinations
 import sys
 import math
 import heapq
@@ -24,27 +24,25 @@ def pprint(list_):
 
 
 n, m = map(int, input().split())
-todays = [int(input()) for _ in range(n)]
+maps = [list(map(int, input().split())) for _ in range(n)]
 
-left, right = min(todays), sum(todays)
-ans = 0
+house, chickens = [], []
+for i in range(n):
+    for j in range(n):
+        if maps[i][j] == 1:
+            house.append((i + 1, j + 1))
+        elif maps[i][j] == 2:
+            chickens.append((i + 1, j + 1))
 
-while left <= right:
-    mid = (left + right) // 2
+answer = 10e9
 
-    total = mid
-    cnt = 1
+for chicken in combinations(chickens, m):
+    totalRoad = 0
+    for hr, hc in house:
+        road = 10e9
+        for cr, cc in chicken:
+            road = min(road, (abs(hr - cr) + abs(hc - cc)))
+        totalRoad += road
+    answer = min(answer, totalRoad)
 
-    for today in todays:
-        if total < today:
-            total = mid
-            cnt += 1
-        total -= today
-
-    if cnt > m or mid < max(todays):
-        left = mid + 1
-    else:
-        right = mid - 1
-        ans = mid
-
-print(ans)
+print(answer)
