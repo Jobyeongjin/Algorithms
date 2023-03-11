@@ -2259,3 +2259,67 @@ for chicken in combinations(chickens, m):
     answer = min(answer, totalRoad)
 
 print(answer)
+
+
+"""빗물"""
+h, w = map(int, input().split())
+walls = list(map(int, input().split()))
+
+rain = 0
+
+for i in range(1, len(walls) - 1):
+    left = max(walls[:i])
+    right = max(walls[i + 1 :])
+    minHeight = min(left, right)
+
+    if walls[i] < minHeight:
+        rain += minHeight - walls[i]
+
+print(rain)
+
+
+"""달팽이"""
+
+
+def makeSnail():
+    r = c = n // 2
+    step = num = 2
+    board[r][c] = 1
+    r -= 1
+    c -= 1
+
+    delta = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    direction = 0
+
+    while True:
+        for _ in range(4):
+            dr, dc = delta[direction]
+
+            for _ in range(step):
+                r += dr
+                c += dc
+                board[r][c] = num
+
+                if num == find:
+                    ans[0], ans[1] = r + 1, c + 1
+                if num == n**2:
+                    return
+
+                num += 1
+            direction = (direction + 1) % 4
+
+        step += 2
+        r -= 1
+        c -= 1
+
+
+n = int(input())
+find = int(input())
+board = [[0] * n for _ in range(n)]
+ans = [n // 2 + 1, n // 2 + 1]
+
+makeSnail()
+
+for i in board:
+    print(*i)
+print(*ans)

@@ -23,26 +23,45 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-n, m = map(int, input().split())
-maps = [list(map(int, input().split())) for _ in range(n)]
+def makeSnail():
+    r = c = n // 2
+    step = num = 2
+    board[r][c] = 1
+    r -= 1
+    c -= 1
 
-house, chickens = [], []
-for i in range(n):
-    for j in range(n):
-        if maps[i][j] == 1:
-            house.append((i + 1, j + 1))
-        elif maps[i][j] == 2:
-            chickens.append((i + 1, j + 1))
+    delta = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    direction = 0
 
-answer = 10e9
+    while True:
+        for _ in range(4):
+            dr, dc = delta[direction]
 
-for chicken in combinations(chickens, m):
-    totalRoad = 0
-    for hr, hc in house:
-        road = 10e9
-        for cr, cc in chicken:
-            road = min(road, (abs(hr - cr) + abs(hc - cc)))
-        totalRoad += road
-    answer = min(answer, totalRoad)
+            for _ in range(step):
+                r += dr
+                c += dc
+                board[r][c] = num
 
-print(answer)
+                if num == find:
+                    ans[0], ans[1] = r + 1, c + 1
+                if num == n**2:
+                    return
+
+                num += 1
+            direction = (direction + 1) % 4
+
+        step += 2
+        r -= 1
+        c -= 1
+
+
+n = int(input())
+find = int(input())
+board = [[0] * n for _ in range(n)]
+ans = [n // 2 + 1, n // 2 + 1]
+
+makeSnail()
+
+for i in board:
+    print(*i)
+print(*ans)

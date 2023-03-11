@@ -221,3 +221,182 @@ def solution(n):
         if num % 2 == 0:
             answer += num
     return answer
+
+
+# 배열 자르기
+def solution(numbers, num1, num2):
+    return numbers[num1 : num2 + 1]
+
+
+# 외계행성의 나이
+def solution(age):
+    answer = ""
+    alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+    for i in str(age):
+        answer += alpha[int(i)]
+    return answer
+
+
+# 진료순서 정하기
+def solution(emergency):
+    answer = []
+    temp = sorted(emergency, reverse=True)
+    for i in emergency:
+        answer.append(temp.index(i) + 1)
+    return answer
+
+
+# 순서쌍의 개수
+def solution(n):
+    answer = []
+    for i in range(1, n + 1):
+        if n % i == 0:
+            answer.append((i, n // i))
+    return len(answer)
+
+
+# 개미군단
+def solution(hp):
+    answer = 0
+
+    answer += hp // 5
+    hp %= 5
+    answer += hp // 3
+    hp %= 3
+    answer += hp // 1
+    hp %= 1
+
+    return answer
+
+
+# 모스부호
+def solution(letter):
+    answer = ""
+    morse = {
+        ".-": "a",
+        "-...": "b",
+        "-.-.": "c",
+        "-..": "d",
+        ".": "e",
+        "..-.": "f",
+        "--.": "g",
+        "....": "h",
+        "..": "i",
+        ".---": "j",
+        "-.-": "k",
+        ".-..": "l",
+        "--": "m",
+        "-.": "n",
+        "---": "o",
+        ".--.": "p",
+        "--.-": "q",
+        ".-.": "r",
+        "...": "s",
+        "-": "t",
+        "..-": "u",
+        "...-": "v",
+        ".--": "w",
+        "-..-": "x",
+        "-.--": "y",
+        "--..": "z",
+    }
+
+    for i in letter.split():
+        answer += morse[i]
+
+    return answer
+
+
+# 가위바위보
+def solution(rsp):
+    answer = ""
+
+    for i in rsp:
+        if i == "2":
+            answer += "0"
+        elif i == "0":
+            answer += "5"
+        elif i == "5":
+            answer += "2"
+
+    return answer
+
+
+# 구슬을 나누는 경우의 수
+# 1차 실패 - 시간 초과
+from itertools import combinations
+
+
+def solution(balls, share):
+    answer = []
+    ballNums = [ballNum for ballNum in range(balls)]
+
+    for i in combinations(ballNums, share):
+        answer.append(i)
+
+    return len(answer)
+
+
+# 2차 실패 - 틀린 답안
+def solution(balls, share):
+    answer = 0
+
+    for i in range(balls):
+        for j in range(i + 1, balls):
+            print(i, j)
+
+    return answer
+
+
+# 3차 성공 - 1차에서 리스트가 필요없어지니 훨씬 간결해짐
+import math
+
+
+def solution(balls, share):
+    return math.comb(balls, share)
+
+
+# 4차 성공 - 알고보니 팩토리얼
+def solution(balls, share):
+    def fact(n):
+        fact = 1
+        for i in range(1, n + 1):
+            fact *= i
+        return fact
+
+    answer = fact(balls) / (fact(balls - share) * fact(share))
+
+    return answer
+
+
+# 점의 위치 구하기
+def solution(dot):
+    x, y = dot
+    if 0 < x and 0 < y:
+        return 1
+    elif 0 > x and 0 < y:
+        return 2
+    elif 0 > x and 0 > y:
+        return 3
+    else:
+        return 4
+
+
+# 2차원으로 만들기
+def solution(num_list, n):
+    return [num_list[i - n : i] for i in range(n, len(num_list) + 1, n)]
+
+
+# 공 던지기
+def solution(numbers, k):
+    return numbers[(k - 1) * 2 % len(numbers)]
+
+
+# 배열 회전시키기
+from collections import deque
+
+
+def solution(numbers, direction):
+    numbers = deque(numbers)
+    numbers.rotate(1 if direction == "right" else -1)
+    return list(numbers)
