@@ -23,45 +23,17 @@ def pprint(list_):
 # 문제풀이는 여기에
 
 
-def makeSnail():
-    r = c = n // 2
-    step = num = 2
-    board[r][c] = 1
-    r -= 1
-    c -= 1
+def solution(n):
+    i = 0
+    fact = 1
 
-    delta = ((0, 1), (1, 0), (0, -1), (-1, 0))
-    direction = 0
+    while fact <= n:
+        i += 1
+        fact *= i
 
-    while True:
-        for _ in range(4):
-            dr, dc = delta[direction]
+    answer = i - 1
 
-            for _ in range(step):
-                r += dr
-                c += dc
-                board[r][c] = num
-
-                if num == find:
-                    ans[0], ans[1] = r + 1, c + 1
-                if num == n**2:
-                    return
-
-                num += 1
-            direction = (direction + 1) % 4
-
-        step += 2
-        r -= 1
-        c -= 1
+    return answer
 
 
-n = int(input())
-find = int(input())
-board = [[0] * n for _ in range(n)]
-ans = [n // 2 + 1, n // 2 + 1]
-
-makeSnail()
-
-for i in board:
-    print(*i)
-print(*ans)
+solution(int(input()))

@@ -400,3 +400,39 @@ def solution(numbers, direction):
     numbers = deque(numbers)
     numbers.rotate(1 if direction == "right" else -1)
     return list(numbers)
+
+
+# 주사위의 개수
+def solution(box, n):
+    r, c, h = box
+    return (r // n) * (c // n) * (h // n)
+
+
+# 합성수 찾기
+def solution(n):
+    answer = 0
+    for num in range(4, n + 1):
+        cnt = 0
+        for i in range(1, num + 1):
+            if num % i == 0:
+                cnt += 1
+        if cnt >= 3:
+            answer += 1
+    return answer
+
+
+# 최댓값 만들기
+def solution(numbers):
+    numbers.sort(reverse=True)
+    return numbers[0] * numbers[1]
+
+
+# 팩토리얼
+def solution(n):
+    i = 0
+    fact = 1
+    while fact <= n:
+        i += 1
+        fact *= i
+    answer = i - 1
+    return answer

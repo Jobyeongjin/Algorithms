@@ -2323,3 +2323,55 @@ makeSnail()
 for i in board:
     print(*i)
 print(*ans)
+
+
+"""로봇 청소기"""
+N, M = map(int, input().split())
+R, C, D = map(int, input().split())
+room = [list(map(int, input().split())) for _ in range(N)]
+
+delta = ((-1, 0), (0, 1), (1, 0), (0, -1))
+cnt = 0
+
+
+def cleaningRobot(r, c, d):
+    global cnt
+    if not room[r][c]:
+        room[r][c] = 2
+        cnt += 1
+
+    for _ in range(4):
+        nd = (d + 3) % 4
+        nr = r + delta[nd][0]
+        nc = c + delta[nd][1]
+        if room[nr][nc] == 0:
+            cleaningRobot(nr, nc, nd)
+            return
+        d = nd
+
+    nd = (d + 2) % 4
+    nr = r + delta[nd][0]
+    nc = c + delta[nd][1]
+    if room[nr][nc] == 1:
+        return
+    cleaningRobot(nr, nc, d)
+
+
+cleaningRobot(R, C, D)
+print(cnt)
+
+
+"""IPv6"""
+ip = list(input().split(":"))
+
+if ip.count(""):
+    while len(ip) > 8:
+        del ip[ip.index("")]
+    while len(ip) < 8:
+        ip.insert(ip.index(""), "")
+
+for i in range(8):
+    if len(ip[i]) < 4:
+        ip[i] = "0" * (4 - len(ip[i])) + ip[i]
+
+print(*ip, sep=":")
