@@ -436,3 +436,47 @@ def solution(n):
         fact *= i
     answer = i - 1
     return answer
+
+
+# 모음 제거
+def solution(my_string):
+    string = "aeiou"
+    for i in string:
+        my_string = my_string.replace(i, "")
+    return my_string
+
+
+# 문자열 정렬하기
+def solution(my_string):
+    answer = []
+    nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    for i in my_string:
+        for num in nums:
+            if i == num:
+                answer.append(int(i))
+    answer.sort()
+    return answer
+
+
+# 숨어있는 숫자의 덧셈
+def solution(my_string):
+    answer = 0
+    nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    for i in my_string:
+        for num in nums:
+            if i == str(num):
+                answer += int(i)
+    return answer
+
+
+# 소인수분해
+def solution(n):
+    answer = []
+    i = 2
+    while i <= n:
+        if n % i == 0:
+            n = n // i
+            answer.append(i)
+        else:
+            i += 1
+    return sorted(list(set(answer)))
