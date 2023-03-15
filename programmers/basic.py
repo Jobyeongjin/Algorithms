@@ -480,3 +480,89 @@ def solution(n):
         else:
             i += 1
     return sorted(list(set(answer)))
+
+
+# 컨트롤 제트
+def solution(s):
+    answer = 0
+    for i in range(len(s.split())):
+        if s[i] == "Z":
+            answer -= int(s[i - 1])
+        else:
+            answer += int(s[i])
+    return answer
+
+
+# 배열 원소의 길이
+def solution(strlist):
+    return [len(s) for s in strlist]
+
+
+# 중복된 문자 제거
+def solution(my_string):
+    answer = ""
+    arr = []
+    for i in my_string:
+        if i in arr:
+            continue
+        arr.append(i)
+    for i in arr:
+        answer += i
+    return answer
+
+
+# 삼각형의 완성조건(1)
+def solution(sides):
+    sides = sorted(sides, reverse=True)
+    maxNum = sides[0]
+    for i in range(1, len(sides)):
+        maxNum -= sides[i]
+    if maxNum > -1:
+        return 2
+    else:
+        return 1
+
+
+# 가까운 수
+def solution(array, n):
+    answer = 0
+    gap = 10e9
+    for i in sorted(array):
+        if abs(i - n) < gap:
+            gap = abs(i - n)
+            answer = i
+    return answer
+
+
+# 369게임
+def solution(order):
+    answer = 0
+    for i in str(order):
+        if i == "3" or i == "6" or i == "9":
+            answer += 1
+    return answer
+
+
+# 암호 해독
+def solution(cipher, code):
+    answer = ""
+    i = 0
+    cnt = code - 1
+    while i < len(cipher):
+        if cnt == 0:
+            answer += cipher[i]
+            cnt = code
+        cnt -= 1
+        i += 1
+    return answer
+
+
+# 대문자와 소문자
+def solution(my_string):
+    answer = ""
+    for i in my_string:
+        if i.isupper():
+            answer += i.lower()
+        else:
+            answer += i.upper()
+    return answer

@@ -22,18 +22,20 @@ def pprint(list_):
 
 # 문제풀이는 여기에
 
+n = int(input())
+rooms = []
+for _ in range(n):
+    idx, st, et = map(int, input().split())
+    heapq.heappush(rooms, [st, et, idx])
 
-def solution(n):
-    i = 0
-    fact = 1
+target = []
+fs, fe, fi = heapq.heappop(rooms)
+heapq.heappush(target, fe)
 
-    while fact <= n:
-        i += 1
-        fact *= i
+while rooms:
+    st, et, i = heapq.heappop(rooms)
+    if target[0] <= st:
+        heapq.heappop(target)
+    heapq.heappush(target, et)
 
-    answer = i - 1
-
-    return answer
-
-
-solution(int(input()))
+print(len(target))
