@@ -566,3 +566,57 @@ def solution(my_string):
         else:
             answer += i.upper()
     return answer
+
+
+# 영어가 싫어요
+def solution(numbers):
+    nums = [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+    ]
+    for i, s in enumerate(nums):
+        numbers = numbers.replace(s, str(i))
+    return int(numbers)
+
+
+# 인덱스 바꾸기
+def solution(my_string, num1, num2):
+    answer = ""
+    for i in range(len(my_string)):
+        if i == num1:
+            answer += my_string[num2]
+        elif i == num2:
+            answer += my_string[num1]
+        else:
+            answer += my_string[i]
+    return answer
+
+
+# 한 번만 등장한 문자
+def solution(s):
+    answer = ""
+    s = sorted(s)
+    for i in s:
+        if s.count(i) > 1:
+            continue
+        answer += i
+    return answer
+
+
+# 약수 구하기
+def solution(n):
+    answer = []
+    i = 1
+    while i <= n:
+        if n % i == 0:
+            answer.append(i)
+        i += 1
+    return answer
