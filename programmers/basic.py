@@ -620,3 +620,42 @@ def solution(n):
             answer.append(i)
         i += 1
     return answer
+
+
+# 편지
+def solution(message):
+    return len(message) * 2
+
+
+# 가장 큰 수 찾기
+def solution(array):
+    maxNum = max(array)
+    return [maxNum, array.index(maxNum)]
+
+
+# 문자열 계산하기
+def solution(my_string):
+    answer = 0
+    flag = True
+    for i in my_string.split():
+        if i == "-":
+            flag = False
+            continue
+        elif i == "+":
+            flag = True
+            continue
+
+        if flag:
+            answer += int(i)
+        else:
+            answer -= int(i)
+    return answer
+
+
+# 배열의 유사도
+def solution(s1, s2):
+    answer = 0
+    for i in s1:
+        if i in s2:
+            answer += 1
+    return answer

@@ -19,23 +19,22 @@ def pprint(list_):
     for row in list_:
         print(row)
 
+    # 문제풀이는 여기에
 
-# 문제풀이는 여기에
 
-n = int(input())
-rooms = []
-for _ in range(n):
-    idx, st, et = map(int, input().split())
-    heapq.heappush(rooms, [st, et, idx])
+answer = 0
+flag = True
+for i in input().split():
+    print(i)
+    if i == "-":
+        flag = False
+        continue
+    elif i == "+":
+        flag = True
+        continue
+    if flag:
+        answer += int(i)
+    elif not flag:
+        answer -= int(i)
 
-target = []
-fs, fe, fi = heapq.heappop(rooms)
-heapq.heappush(target, fe)
-
-while rooms:
-    st, et, i = heapq.heappop(rooms)
-    if target[0] <= st:
-        heapq.heappop(target)
-    heapq.heappush(target, et)
-
-print(len(target))
+print(answer)
