@@ -659,3 +659,67 @@ def solution(s1, s2):
         if i in s2:
             answer += 1
     return answer
+
+
+# 숫자 찾기
+def solution(num, k):
+    num = str(num)
+    answer = []
+    for i in range(1, len(num) + 1):
+        if num[i - 1] == str(k):
+            answer.append(i)
+    if answer:
+        return answer[0]
+    else:
+        return -1
+
+
+# N의 배수 고르기
+def solution(n, numlist):
+    answer = []
+    for num in numlist:
+        if num % n == 0:
+            answer.append(num)
+    return answer
+
+
+# 자릿수 더하기
+def solution(n):
+    answer = 0
+    for i in str(n):
+        answer += int(i)
+    return answer
+
+
+# OX 퀴즈
+def solution(quiz):
+    answer = []
+    for i in quiz:
+        cnt = 0
+        check = True
+        result = False
+        temp = ""
+        for j in i.split():
+            if result:
+                if temp == j:
+                    answer.append("O")
+                else:
+                    answer.append("X")
+
+            if j == "-":
+                check = False
+                continue
+            elif j == "+":
+                check: True
+                continue
+
+            if j == "=":
+                temp += str(cnt)
+                result = True
+                continue
+
+            if check:
+                cnt += int(j)
+            else:
+                cnt -= int(j)
+    return answer

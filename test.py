@@ -22,19 +22,20 @@ def pprint(list_):
     # 문제풀이는 여기에
 
 
-answer = 0
-flag = True
-for i in input().split():
-    print(i)
-    if i == "-":
-        flag = False
-        continue
-    elif i == "+":
-        flag = True
-        continue
-    if flag:
-        answer += int(i)
-    elif not flag:
-        answer -= int(i)
+n = int(input())
+cards = []
 
-print(answer)
+for _ in range(n):
+    heapq.heappush(cards, int(input()))
+
+if len(cards) == 1:
+    print(0)
+else:
+    answer = 0
+    while len(cards) > 1:
+        a = heapq.heappop(cards)
+        b = heapq.heappop(cards)
+        answer += a + b
+        heapq.heappush(cards, a + b)
+
+    print(answer)

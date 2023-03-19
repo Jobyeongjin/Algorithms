@@ -2375,3 +2375,23 @@ for i in range(8):
         ip[i] = "0" * (4 - len(ip[i])) + ip[i]
 
 print(*ip, sep=":")
+
+
+"""카드 정렬하기"""
+n = int(input())
+cards = []
+
+for _ in range(n):
+    heapq.heappush(cards, int(input()))
+
+if len(cards) == 1:
+    print(0)
+else:
+    answer = 0
+    while len(cards) > 1:
+        a = heapq.heappop(cards)
+        b = heapq.heappop(cards)
+        answer += a + b
+        heapq.heappush(cards, a + b)
+
+    print(answer)
