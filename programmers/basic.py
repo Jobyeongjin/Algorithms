@@ -723,3 +723,31 @@ def solution(quiz):
             else:
                 cnt -= int(j)
     return answer
+
+
+# 문자열 안에 문자열
+def solution(str1, str2):
+    return 1 if str2 in str1 else 2
+
+
+# 제곱수 판별하기
+def solution(n):
+    answer = 2
+    cnt = 0
+    while cnt < n:
+        if cnt * cnt == n:
+            answer = 1
+        cnt += 1
+    return answer
+
+
+# 세균 증식
+def solution(n, t):
+    for _ in range(t):
+        n = n * 2
+    return n
+
+
+# 문자열 정렬하기(2)
+def solution(my_string):
+    return "".join(sorted(list(my_string.lower())))
