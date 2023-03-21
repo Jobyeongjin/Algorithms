@@ -22,20 +22,12 @@ def pprint(list_):
     # 문제풀이는 여기에
 
 
-n = int(input())
-cards = []
-
-for _ in range(n):
-    heapq.heappush(cards, int(input()))
-
-if len(cards) == 1:
-    print(0)
-else:
+def solution(numbers):
     answer = 0
-    while len(cards) > 1:
-        a = heapq.heappop(cards)
-        b = heapq.heappop(cards)
-        answer += a + b
-        heapq.heappush(cards, a + b)
+    for i in range(len(numbers)):
+        for j in range(i + 1, len(numbers)):
+            answer = max(answer, numbers[i] * numbers[j])
+    return answer
 
-    print(answer)
+
+solution([1, 2, -3, 4, -5])

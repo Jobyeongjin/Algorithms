@@ -751,3 +751,95 @@ def solution(n, t):
 # 문자열 정렬하기(2)
 def solution(my_string):
     return "".join(sorted(list(my_string.lower())))
+
+
+# 7의 개수
+def solution(nums):
+    answer = 0
+    for num in nums:
+        answer += str(num).count("7")
+    return answer
+
+
+# 잘라서 배열로 저장하기
+def solution(my_str, n):
+    answer = []
+    for i in range(0, len(my_str), n):
+        answer.append(my_str[i : i + n])
+    return answer
+
+
+# 중복된 숫자 개수
+def solution(array, n):
+    return array.count(n)
+
+
+# 머쓱이보다 키 큰 사람
+def solution(array, n):
+    return array.count(n)
+
+
+# 직사각형 넓이 구하기
+def solution(dots):
+    x = [dot[0] for dot in dots]
+    y = [dot[1] for dot in dots]
+    r = max(x) - min(x)
+    c = max(y) - min(y)
+    return r * c
+
+
+# 캐릭터의 좌표
+def solution(keyinput, board):
+    answer = [0, 0]
+    mid = [board[0] // 2, board[1] // 2]
+    for key in keyinput:
+        print(key)
+        if key == "up":
+            if answer[1] >= mid[1]:
+                answer[1] = mid[1]
+            else:
+                answer[1] += 1
+        elif key == "down":
+            if answer[1] <= -mid[1]:
+                answer[1] = -mid[1]
+            else:
+                answer[1] -= 1
+        elif key == "left":
+            if answer[0] <= -mid[0]:
+                answer[0] = -mid[0]
+            else:
+                answer[0] -= 1
+        else:
+            if answer[0] >= mid[0]:
+                answer[0] = mid[0]
+            else:
+                answer[0] += 1
+    return answer
+
+
+# 최댓값 구하기(2)
+def solution(numbers):
+    numbers.sort()
+    return max(numbers[0] * numbers[1], numbers[-1] * numbers[-2])
+
+
+# 다항식 구하기
+def solution(polynomial):
+    x, num = 0, 0
+    for i in polynomial.split(" + "):
+        if "x" in i:
+            if len(i) == 1:
+                x += 1
+            else:
+                x += int(i[:-1])
+        else:
+            num += int(i)
+    if x == 1:
+        x = ""
+    if num == 0:
+        return f"{x}x"
+    if x == 0:
+        return f"{num}"
+    if num == 0 and x == 0:
+        return "0"
+    return f"{x}x + {num}"
