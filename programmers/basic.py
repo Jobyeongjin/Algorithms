@@ -843,3 +843,71 @@ def solution(polynomial):
     if num == 0 and x == 0:
         return "0"
     return f"{x}x + {num}"
+
+
+# 숨어있는 숫자의 덧셈(2)
+def solution(my_string):
+    answer = 0
+    nums = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    open = False
+    temp = ""
+    for i in my_string:
+        if i in nums:
+            open = True
+        else:
+            open = False
+            if temp:
+                answer += int(temp)
+                temp = ""
+            continue
+        if open:
+            temp += i
+    if temp:
+        answer += int(temp)
+    return answer
+
+
+# 안전지대
+def solution(board):
+    answer = 0
+    delta = ((-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1))
+    bomb = []
+    for i in range(len(board)):
+        for j in range(len(board)):
+            if board[i][j]:
+                bomb.append((i, j))
+
+    for r, c in bomb:
+        for dr, dc in delta:
+            nr = dr + r
+            nc = dc + c
+            if -1 < nr < len(board) and -1 < nc < len(board):
+                if not board[nr][nc]:
+                    board[nr][nc] = 1
+
+    for arr in board:
+        for idx in arr:
+            if not idx:
+                answer += 1
+    return answer
+
+
+# 삼각형의 완성조건(2)
+def solution(sides):
+    return sum(sides) - max(sides) + min(sides) - 1
+
+
+# 외계어 사전
+def solution(spell, dic):
+    answer = 2
+    for i in dic:
+        cnt = len(i)
+        temp = [0] * len(spell)
+        for idx, s in enumerate(spell):
+            if s in i:
+                cnt -= 1
+                temp[idx] += 1
+        if cnt == 0:
+            if not 0 in temp:
+                answer = 1
+    return answer

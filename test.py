@@ -22,12 +22,19 @@ def pprint(list_):
     # 문제풀이는 여기에
 
 
-def solution(numbers):
+def solution(spell, dic):
     answer = 0
-    for i in range(len(numbers)):
-        for j in range(i + 1, len(numbers)):
-            answer = max(answer, numbers[i] * numbers[j])
+    for i in dic:
+        cnt = len(i)
+        temp = [0] * len(spell)
+        for idx, s in enumerate(spell):
+            if s in i:
+                cnt -= 1
+                temp[idx] += 1
+        if cnt == 0:
+            if not 0 in temp:
+                answer = 1
     return answer
 
 
-solution([1, 2, -3, 4, -5])
+solution(["s", "o", "m", "d"], ["moos", "dzx", "smm", "sunmmo", "som"])
